@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <meta property="og:title" content="Ayush Kumar — Portfolio" />
   <meta property="og:description" content="Software Engineer & QA Specialist." />
@@ -16,12 +16,17 @@
 </head>
 <body>
 
-  <!-- Canvas nebula background -->
-  <canvas id="nebula-canvas"></canvas>
+  <!-- Background -->
+  <div class="bg-base" aria-hidden="true">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+    <div class="bg-grid"></div>
+  </div>
 
   <!-- Cursor -->
-  <div id="cursor-dot"></div>
-  <div id="cursor-glow"></div>
+  <div id="c-dot"></div>
+  <div id="c-ring"></div>
 
   <!-- Scroll progress -->
   <div class="scroll-bar"></div>
@@ -29,16 +34,16 @@
   <!-- NAV -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="Home">AK</a>
-      <ul class="nav-links">
+      <a href="#hero" class="nav-logo">AK.</a>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Work</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span>
       </button>
     </div>
   </nav>
@@ -46,301 +51,280 @@
   <main>
 
     <!-- HERO -->
-    <section id="hero" class="section hero-section">
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="status-dot"></span>
-          <span>Available for work</span>
+    <section id="hero" class="hero-section">
+      <div class="hero-wrapper">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="pulse"></span> Open to opportunities
+          </div>
+          <h1 class="hero-title">
+            <span class="line" style="--i:0">Ayush</span>
+            <span class="line accent-line" style="--i:1">Kumar.</span>
+          </h1>
+          <p class="hero-sub">Software Engineer · QA Specialist · Cloud Certified</p>
+          <p class="hero-desc">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans. I ship things that work.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn-main">Let's Talk</a>
+            <a href="#projects" class="btn-outline">See My Work ↓</a>
+          </div>
         </div>
-        <h1 class="hero-name" id="hero-name">
-          <span class="name-line">AYUSH</span>
-          <span class="name-line">KUMAR</span>
-        </h1>
-        <p class="hero-role">Software Engineer · QA Specialist · Systems Builder</p>
-        <p class="hero-bio">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary">Get in touch</a>
-          <a href="#projects" class="btn-ghost">View Projects</a>
-        </div>
-        <div class="hero-chips">
-          <a href="mailto:ayushkumarh078@gmail.com" class="mini-chip">ayushkumarh078@gmail.com</a>
-          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="mini-chip">LinkedIn</a>
-          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="mini-chip">GitHub</a>
-        </div>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="orb-container">
-          <div class="orb orb-1"></div>
-          <div class="orb orb-2"></div>
-          <div class="orb orb-3"></div>
-          <svg class="orb-ring" viewBox="0 0 300 300">
-            <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="1" stroke-dasharray="8 6"/>
-            <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(99,102,241,0.12)" stroke-width="1" stroke-dasharray="4 8"/>
-            <circle cx="150" cy="150" r="58" fill="none" stroke="rgba(236,72,153,0.1)" stroke-width="1"/>
-            <text x="150" y="146" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10" font-family="Space Mono" letter-spacing="2">SYSTEM</text>
-            <text x="150" y="162" text-anchor="middle" fill="rgba(168,85,247,0.9)" font-size="10" font-family="Space Mono" letter-spacing="2">ONLINE</text>
-          </svg>
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-card-stack">
+            <div class="h-card hc-1">
+              <div class="hc-label">LATEST ROLE</div>
+              <div class="hc-value">QA Intern @ FSSAI</div>
+              <div class="hc-sub">Delhi HQ · 2026</div>
+            </div>
+            <div class="h-card hc-2">
+              <div class="hc-label">CERTIFICATION</div>
+              <div class="hc-value">Azure DP-900 · AWS</div>
+              <div class="hc-sub">Cloud Certified</div>
+            </div>
+            <div class="h-card hc-3">
+              <div class="hc-label">EDUCATION</div>
+              <div class="hc-value">B.Tech CSE</div>
+              <div class="hc-sub">VIT-AP · 2026</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section about-section" data-animate>
-      <div class="section-header">
-        <span class="section-tag">01 — About</span>
-        <h2 class="section-heading">Who I Am</h2>
-      </div>
-      <div class="about-grid">
+    <section id="about" class="section" data-animate>
+      <div class="sec-label">01 · About</div>
+      <h2 class="sec-title">A little about me</h2>
+      <div class="about-layout">
         <div class="about-text">
-          <p>Computer Science undergraduate at <strong>VIT Bhopal</strong> specializing in QA engineering and full-stack development. Just completed a QA internship at <strong>FSSAI Headquarters</strong> where I architected test plans for national food safety platforms.</p>
-          <p>Cloud-certified engineer who ships end-to-end projects solo, from conception through deployment. I don't just build things — I make sure they don't break.</p>
+          <p>Computer Science undergraduate at <strong>VIT-AP University</strong>, specializing in QA engineering and full-stack development. I just completed a QA internship at <strong>FSSAI Headquarters, Delhi</strong> — architecting test plans for national food safety platforms used across India.</p>
+          <p>I'm a cloud-certified engineer who builds end-to-end systems solo — from hardware (Raspberry Pi trash cans) to cloud-backed web platforms. I believe in making software that's both functional and unbreakable.</p>
+          <div class="tag-row">
+            <span>QA Engineering</span>
+            <span>Full-Stack Dev</span>
+            <span>Cloud Architecture</span>
+            <span>IoT</span>
+            <span>Machine Learning</span>
+          </div>
         </div>
-        <div class="about-stats">
-          <div class="stat-card magnetic">
-            <span class="stat-num" data-count="200">0</span><span class="stat-unit">+</span>
-            <span class="stat-label">Test Cases</span>
+        <div class="about-numbers">
+          <div class="num-card">
+            <div class="num-big"><span data-count="200">0</span>+</div>
+            <div class="num-label">Test Cases Executed</div>
           </div>
-          <div class="stat-card magnetic">
-            <span class="stat-num" data-count="3">0</span>
-            <span class="stat-label">Cloud Certs</span>
+          <div class="num-card">
+            <div class="num-big"><span data-count="8">0</span>+</div>
+            <div class="num-label">Cross-functional Teams</div>
           </div>
-          <div class="stat-card magnetic">
-            <span class="stat-num" data-count="35">0</span><span class="stat-unit">%</span>
-            <span class="stat-label">Engagement ↑</span>
+          <div class="num-card">
+            <div class="num-big"><span data-count="35">0</span>%</div>
+            <div class="num-label">Engagement Increase</div>
           </div>
-          <div class="stat-card magnetic">
-            <span class="stat-num" data-count="10">0</span>
-            <span class="stat-label">Team Members Led</span>
+          <div class="num-card">
+            <div class="num-big"><span data-count="3">0</span></div>
+            <div class="num-label">Cloud Certifications</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="section experience-section" data-animate>
-      <div class="section-header">
-        <span class="section-tag">02 — Experience</span>
-        <h2 class="section-heading">Where I've Worked</h2>
-      </div>
-      <div class="exp-list">
-        <div class="exp-item tilt-card">
-          <div class="exp-meta">
-            <span class="exp-date">Jan 2026 – Jun 2026</span>
-            <span class="exp-badge">Most Recent</span>
-          </div>
-          <div class="exp-body">
-            <h3>QA & Testing Intern</h3>
-            <p class="exp-company">FSSAI Headquarters, Delhi</p>
+    <section id="experience" class="section" data-animate>
+      <div class="sec-label">02 · Experience</div>
+      <h2 class="sec-title">Where I've worked</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <div>
+                <h3>QA & Testing Intern</h3>
+                <p class="tl-company">FSSAI Headquarters · Delhi</p>
+              </div>
+              <span class="tl-date">Jan–Jun 2026</span>
+            </div>
             <ul>
               <li>Architected comprehensive test plans for FoSCoS, Consumer Grievance Portal, AMS, and AMC systems.</li>
               <li>Created workflow diagrams mapping edge cases and escalation paths across 12+ modules.</li>
-              <li>Executed manual testing coverage across 200+ test cases with systematic bug tracking.</li>
-              <li>Facilitated stakeholder validation sessions with 8+ cross-functional teams.</li>
+              <li>Executed manual testing coverage across <strong>200+ test cases</strong> with systematic bug tracking.</li>
+              <li>Facilitated stakeholder validation sessions with <strong>8+ cross-functional teams</strong>.</li>
             </ul>
-            <div class="exp-tags"><span>QA</span><span>Testing</span><span>Workflow</span><span>Bug Tracking</span></div>
+            <div class="tl-tags"><span>QA</span><span>Manual Testing</span><span>Bug Tracking</span><span>Stakeholder Mgmt</span></div>
           </div>
         </div>
 
-        <div class="exp-item tilt-card">
-          <div class="exp-meta">
-            <span class="exp-date">Jul 2024 – May 2025</span>
-          </div>
-          <div class="exp-body">
-            <h3>Tech Lead</h3>
-            <p class="exp-company">Innovators Quest Club</p>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <div>
+                <h3>Tech Lead</h3>
+                <p class="tl-company">Innovators Quest Club · VIT-AP</p>
+              </div>
+              <span class="tl-date">Jul 2024–May 2025</span>
+            </div>
             <ul>
-              <li>Led 10-person team to deliver 6 large-scale technical workshops and hackathons.</li>
-              <li>Drove 35% engagement increase across technical events.</li>
+              <li>Led a 10-person team delivering 6 large-scale technical workshops and hackathons.</li>
+              <li>Drove <strong>35% engagement increase</strong> across technical events.</li>
               <li>Achieved 25% YoY membership growth through optimized project pipelines.</li>
             </ul>
-            <div class="exp-tags"><span>Leadership</span><span>Events</span><span>Strategy</span></div>
+            <div class="tl-tags"><span>Leadership</span><span>Events</span><span>Strategy</span></div>
           </div>
         </div>
 
-        <div class="exp-item tilt-card">
-          <div class="exp-meta">
-            <span class="exp-date">Jul 2023 – May 2024</span>
-          </div>
-          <div class="exp-body">
-            <h3>Core Member & Event Organizer</h3>
-            <p class="exp-company">English Literacy Club</p>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <div>
+                <h3>Core Member & Event Organizer</h3>
+                <p class="tl-company">English Literacy Club · VIT-AP</p>
+              </div>
+              <span class="tl-date">Jul 2023–May 2024</span>
+            </div>
             <ul>
               <li>Organized 10+ literary events including debates and open mic sessions.</li>
-              <li>Optimized promotional workflows increasing event attendance by 40%.</li>
+              <li>Optimized promotional workflows, increasing event attendance by <strong>40%</strong>.</li>
             </ul>
-            <div class="exp-tags"><span>Events</span><span>Communication</span><span>Outreach</span></div>
+            <div class="tl-tags"><span>Communication</span><span>Events</span><span>Outreach</span></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="section projects-section" data-animate>
-      <div class="section-header">
-        <span class="section-tag">03 — Projects</span>
-        <h2 class="section-heading">What I've Built</h2>
-      </div>
-      <div class="projects-grid">
+    <section id="projects" class="section" data-animate>
+      <div class="sec-label">03 · Projects</div>
+      <h2 class="sec-title">What I've built</h2>
+      <div class="proj-grid">
 
-        <article class="project-card tilt-card" data-tilt>
-          <div class="project-header">
-            <div class="project-icon" style="--icon-color: #f59e0b;">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M20 6V9M20 31V34M6 20H9M31 20H34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <circle cx="20" cy="20" r="2" fill="currentColor"/>
-              </svg>
-            </div>
-            <div class="project-num">01</div>
+        <article class="proj-card" style="--accent: #f59e0b">
+          <div class="proj-num">01</div>
+          <div class="proj-icon">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="1.5" fill="currentColor"/><path d="M16 6V9M16 23V26M6 16H9M23 16H26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
-          <div class="project-body">
-            <h3>ATM Theft Detection System</h3>
-            <p>Real-time fire, forced-entry, and tampering detection via image recognition and IoT sensors. Achieved 95% detection accuracy.</p>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-val" data-count="95">0</span><span>%</span><small>Detection</small></div>
-              <div class="metric"><span class="metric-val">↓</span><small>Response Time</small></div>
-            </div>
-            <div class="project-tech"><span>Python</span><span>OpenCV</span><span>IoT</span></div>
+          <h3>ATM Theft Detection System</h3>
+          <p>Real-time fire, forced-entry & tampering detection using image recognition and IoT sensors.</p>
+          <div class="proj-stats">
+            <span><strong data-count="95">0</strong>% Accuracy</span>
+            <span>Real-time Alerts</span>
           </div>
-          <div class="card-glow" style="--glow-color: rgba(245,158,11,0.15)"></div>
+          <div class="proj-stack"><span>Python</span><span>OpenCV</span><span>IoT</span></div>
         </article>
 
-        <article class="project-card tilt-card" data-tilt>
-          <div class="project-header">
-            <div class="project-icon" style="--icon-color: #8b5cf6;">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="6" y="10" width="28" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M6 16H34" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="20" cy="24" r="4" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M12 13H14M16 13H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="project-num">02</div>
+        <article class="proj-card" style="--accent: #8b5cf6">
+          <div class="proj-num">02</div>
+          <div class="proj-icon">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 13H28" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="21" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 10.5H11M13 10.5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
-          <div class="project-body">
-            <h3>AI-Generated Quiz Website</h3>
-            <p>NLP-based quiz generation platform with AWS and SQL backend. Reduced study prep time by 70% for 500+ users.</p>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-val" data-count="500">0</span><span>+</span><small>Users</small></div>
-              <div class="metric"><span class="metric-val" data-count="70">0</span><span>%</span><small>Less Prep</small></div>
-            </div>
-            <div class="project-tech"><span>Python</span><span>Flask</span><span>NLP</span><span>AWS</span></div>
+          <h3>AI-Generated Quiz Website</h3>
+          <p>NLP-based quiz generation platform with AWS backend — cuts study prep time by 70%.</p>
+          <div class="proj-stats">
+            <span><strong data-count="500">0</strong>+ Users</span>
+            <span>70% Less Prep</span>
           </div>
-          <div class="card-glow" style="--glow-color: rgba(139,92,246,0.15)"></div>
+          <div class="proj-stack"><span>Python</span><span>Flask</span><span>NLP</span><span>AWS</span></div>
         </article>
 
-        <article class="project-card tilt-card" data-tilt>
-          <div class="project-header">
-            <div class="project-icon" style="--icon-color: #06b6d4;">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="20" cy="4" r="2" fill="currentColor" stroke="currentColor" stroke-width="1">
-                  <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="5s" repeatCount="indefinite"/>
-                </circle>
-              </svg>
-            </div>
-            <div class="project-num">03</div>
+        <article class="proj-card" style="--accent: #06b6d4">
+          <div class="proj-num">03</div>
+          <div class="proj-icon">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M16 7V10M16 22V25M7 16H10M22 16H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="7" r="1.5" fill="currentColor"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="4s" repeatCount="indefinite"/></circle></svg>
           </div>
-          <div class="project-body">
-            <h3>Self-Aiming Smart Trash Can</h3>
-            <p>Raspberry Pi powered waste detection with motorized centering system. Runs at 20 FPS on only 10W.</p>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-val" data-count="20">0</span><span>fps</span><small>Real-time</small></div>
-              <div class="metric"><span class="metric-val" data-count="10">0</span><span>W</span><small>Power</small></div>
-            </div>
-            <div class="project-tech"><span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span></div>
+          <h3>Self-Aiming Smart Trash Can</h3>
+          <p>Raspberry Pi system with motorized centering — detects waste in real-time at 20 FPS on 10W.</p>
+          <div class="proj-stats">
+            <span>20 FPS</span>
+            <span>10W Power</span>
           </div>
-          <div class="card-glow" style="--glow-color: rgba(6,182,212,0.15)"></div>
+          <div class="proj-stack"><span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span></div>
         </article>
 
       </div>
     </section>
 
     <!-- SKILLS -->
-    <section id="skills" class="section skills-section" data-animate>
-      <div class="section-header">
-        <span class="section-tag">04 — Skills</span>
-        <h2 class="section-heading">My Stack</h2>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category">
+    <section id="skills" class="section" data-animate>
+      <div class="sec-label">04 · Skills</div>
+      <h2 class="sec-title">What I work with</h2>
+      <div class="skills-board">
+        <div class="skill-col">
           <h3>Programming & Data</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">R</span>
-            <span class="skill-pill">Java</span>
-            <span class="skill-pill">SQL</span>
-            <span class="skill-pill">NoSQL</span>
-            <span class="skill-pill">Redis</span>
+          <div class="chip-row">
+            <span>Python</span><span>R</span><span>Java</span><span>SQL</span><span>NoSQL</span><span>Redis</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-col">
           <h3>Tools & Platforms</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Excel</span>
-            <span class="skill-pill">PowerPoint</span>
-            <span class="skill-pill">Figma</span>
-            <span class="skill-pill">APIs</span>
-            <span class="skill-pill">LLMs</span>
+          <div class="chip-row">
+            <span>Excel</span><span>PowerPoint</span><span>Figma</span><span>REST APIs</span><span>LLMs</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-col">
           <h3>Cloud</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">AWS</span>
-            <span class="skill-pill">Microsoft Azure</span>
+          <div class="chip-row">
+            <span>AWS</span><span>Microsoft Azure</span>
           </div>
         </div>
-        <div class="skill-category">
-          <h3>Leadership</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Project Management</span>
-            <span class="skill-pill">Cross-functional Teams</span>
-            <span class="skill-pill">Technical Docs</span>
+        <div class="skill-col">
+          <h3>Soft Skills</h3>
+          <div class="chip-row">
+            <span>Project Management</span><span>Cross-functional Teams</span><span>Technical Docs</span>
           </div>
         </div>
       </div>
-      <div class="cert-row">
-        <div class="cert-card">
-          <div class="cert-icon">☁</div>
+      <div class="certs">
+        <div class="cert">
+          <div class="cert-ico">Az</div>
+          <div><p>Azure DP-900</p><small>Microsoft · Data Fundamentals</small></div>
+        </div>
+        <div class="cert">
+          <div class="cert-ico">Aw</div>
+          <div><p>AWS Cloud Foundations</p><small>Amazon Web Services</small></div>
+        </div>
+        <div class="cert">
+          <div class="cert-ico">Aw</div>
+          <div><p>AWS Cloud Architecting</p><small>Amazon Web Services</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEYOND -->
+    <section id="beyond" class="section beyond-sec" data-animate>
+      <div class="sec-label">05 · Beyond Work</div>
+      <h2 class="sec-title">Off the clock</h2>
+      <div class="beyond-grid">
+        <div class="beyond-item">
+          <span class="beyond-ico">⚽</span>
           <div>
-            <div class="cert-name">Azure DP-900</div>
-            <div class="cert-issuer">Microsoft</div>
+            <strong>Football Captain — Sahara FC</strong>
+            <p>Led the team on and off the field.</p>
           </div>
         </div>
-        <div class="cert-card">
-          <div class="cert-icon">☁</div>
+        <div class="beyond-item">
+          <span class="beyond-ico">🎓</span>
           <div>
-            <div class="cert-name">AWS Cloud Foundations</div>
-            <div class="cert-issuer">Amazon</div>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="cert-icon">☁</div>
-          <div>
-            <div class="cert-name">AWS Cloud Architecting</div>
-            <div class="cert-issuer">Amazon</div>
+            <strong>Community Mentor</strong>
+            <p>Technical workshops for underprivileged students.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section contact-section" data-animate>
-      <div class="contact-inner">
-        <span class="section-tag">05 — Contact</span>
-        <h2 class="contact-heading">Let's build something<br><span class="gradient-text">that doesn't break.</span></h2>
-        <a href="mailto:ayushkumarh078@gmail.com" class="contact-email magnetic">ayushkumarh078@gmail.com</a>
-        <div class="contact-links">
-          <a href="mailto:ayushkumarh078@gmail.com" class="contact-link magnetic" aria-label="Email">Email</a>
-          <a href="tel:+919876543210" class="contact-link magnetic" aria-label="Phone">Phone</a>
-          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="contact-link magnetic" aria-label="LinkedIn">LinkedIn</a>
-          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="contact-link magnetic" aria-label="GitHub">GitHub</a>
+    <section id="contact" class="section contact-sec" data-animate>
+      <div class="contact-wrap">
+        <div class="sec-label">06 · Contact</div>
+        <h2 class="contact-title">Let's build something<br><em>that doesn't break.</em></h2>
+        <a href="mailto:ayushkumarh078@gmail.com" class="contact-mail">ayushkumarh078@gmail.com</a>
+        <div class="contact-socials">
+          <a href="mailto:ayushkumarh078@gmail.com" class="soc-link">Email</a>
+          <a href="tel:+919876543210" class="soc-link">Phone</a>
+          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="soc-link">LinkedIn</a>
+          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="soc-link">GitHub</a>
         </div>
-        <p class="footer-copy">© 2026 Ayush Kumar. Designed & Built with ☕</p>
+        <p class="footer-note">© 2026 Ayush Kumar — Designed & coded with caffeine</p>
       </div>
     </section>
 
