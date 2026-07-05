@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initCustomCursor();
   initCardShine();
+  initCardTilt();
   initCountUp();
   initLetterFade();
+  initCanvasBackground();
 });
 
 function initScrollProgress() {
@@ -247,4 +249,111 @@ function initLetterFade() {
     
     observer.observe(title);
   });
+}
+
+function initCardTilt() {
+  const cards = document.querySelectorAll('.project-card, .timeline-content');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (window.innerWidth < 768) return; // Disable on mobile
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) translateY(0)`;
+    });
+  });
+}
+
+function initCanvasBackground() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 1.5 + 0.5;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 80; i++) {
+    particles.push(new Particle());
+  }
+
+  let mx = -1000, my = -1000;
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+      
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist/120 * 0.15})`;
+          ctx.stroke();
+        }
+      }
+      
+      const dxMouse = particles[i].x - mx;
+      const dyMouse = particles[i].y - my;
+      const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+      if (distMouse < 150) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mx, my);
+        ctx.strokeStyle = `rgba(255, 176, 58, ${0.3 - distMouse/150 * 0.3})`;
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
