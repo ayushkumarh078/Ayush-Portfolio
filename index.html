@@ -8,43 +8,34 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <meta property="og:title" content="Ayush Kumar — Portfolio" />
-  <meta property="og:description" content="Software Engineer & QA Specialist. Glassmorphic portfolio." />
+  <meta property="og:description" content="Software Engineer & QA Specialist." />
   <meta property="og:type" content="website" />
 </head>
 <body>
-  <!-- System Boot Sequence -->
-  <div id="boot-screen" class="boot-screen">
-    <div class="boot-text">
-      <p>> INITIALIZING SYSTEM OP_CORE...</p>
-      <p>> LOADING INTERFACE PROTOCOLS...</p>
-      <p>> ESTABLISHING NEURAL LINK...</p>
-      <p class="blink">_</p>
-    </div>
-  </div>
 
-  <!-- Cyber Grid Background -->
-  <div class="cyber-grid-bg" aria-hidden="true">
-    <div class="grid-layer"></div>
-    <div class="scanline"></div>
-  </div>
-  <canvas id="starfield" aria-hidden="true"></canvas>
+  <!-- Canvas nebula background -->
+  <canvas id="nebula-canvas"></canvas>
 
-  <div class="scroll-progress" aria-hidden="true"></div>
+  <!-- Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-glow"></div>
 
-  <div class="scroll-progress" aria-hidden="true"></div>
+  <!-- Scroll progress -->
+  <div class="scroll-bar"></div>
 
-  <nav class="main-nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">AK://</a>
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Home">AK</a>
       <ul class="nav-links">
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#experience">WORK</a></li>
-        <li><a href="#projects">PROJECTS</a></li>
-        <li><a href="#skills">SKILLS</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -53,314 +44,306 @@
   </nav>
 
   <main>
+
+    <!-- HERO -->
     <section id="hero" class="section hero-section">
-      <div class="hero-background" aria-hidden="true">
-        <div class="grid-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="status-dot"></span>
+          <span>Available for work</span>
+        </div>
+        <h1 class="hero-name" id="hero-name">
+          <span class="name-line">AYUSH</span>
+          <span class="name-line">KUMAR</span>
+        </h1>
+        <p class="hero-role">Software Engineer · QA Specialist · Systems Builder</p>
+        <p class="hero-bio">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Get in touch</a>
+          <a href="#projects" class="btn-ghost">View Projects</a>
+        </div>
+        <div class="hero-chips">
+          <a href="mailto:ayushkumarh078@gmail.com" class="mini-chip">ayushkumarh078@gmail.com</a>
+          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="mini-chip">LinkedIn</a>
+          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="mini-chip">GitHub</a>
+        </div>
       </div>
-      <div class="hero-content" data-animate>
-        <h1 class="hero-name">AYUSH KUMAR</h1>
-        <div class="hero-meta">
-          <span class="hero-subtitle">SOFTWARE ENGINEER / QA &amp; SYSTEMS</span>
-        </div>
-        <p class="hero-statement">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans.</p>
-        <div class="contact-chips">
-          <a href="mailto:ayushkumarh078@gmail.com" class="chip">EMAIL</a>
-          <a href="tel:+919876543210" class="chip">PHONE</a>
-          <a href="https://linkedin.com/in/ayushkumar" class="chip" target="_blank" rel="noopener">LINKEDIN</a>
-          <a href="https://github.com/ayushkumar" class="chip" target="_blank" rel="noopener">GITHUB</a>
-        </div>
-        <div class="scroll-cue">
-          <span>SCROLL DOWN</span>
-          <span class="chevron">↓</span>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb-container">
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
+          <svg class="orb-ring" viewBox="0 0 300 300">
+            <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="1" stroke-dasharray="8 6"/>
+            <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(99,102,241,0.12)" stroke-width="1" stroke-dasharray="4 8"/>
+            <circle cx="150" cy="150" r="58" fill="none" stroke="rgba(236,72,153,0.1)" stroke-width="1"/>
+            <text x="150" y="146" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10" font-family="Space Mono" letter-spacing="2">SYSTEM</text>
+            <text x="150" y="162" text-anchor="middle" fill="rgba(168,85,247,0.9)" font-size="10" font-family="Space Mono" letter-spacing="2">ONLINE</text>
+          </svg>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section about-section">
-      <div class="hud-bracket">
-        <h2 class="section-title"><span>[</span> ABOUT_ME <span>]</span></h2>
+    <!-- ABOUT -->
+    <section id="about" class="section about-section" data-animate>
+      <div class="section-header">
+        <span class="section-tag">01 — About</span>
+        <h2 class="section-heading">Who I Am</h2>
       </div>
       <div class="about-grid">
-        <div class="about-content hud-panel" data-animate>
-          <div class="hud-corner top-left"></div>
-          <div class="hud-corner bottom-right"></div>
-          <p>Computer Science undergraduate at VIT Bhopal specializing in QA engineering and full-stack development. Just completed a QA internship at FSSAI Headquarters where I architected test plans for national food safety platforms. Cloud-certified engineer who ships end-to-end projects solo, from conception through deployment.</p>
+        <div class="about-text">
+          <p>Computer Science undergraduate at <strong>VIT Bhopal</strong> specializing in QA engineering and full-stack development. Just completed a QA internship at <strong>FSSAI Headquarters</strong> where I architected test plans for national food safety platforms.</p>
+          <p>Cloud-certified engineer who ships end-to-end projects solo, from conception through deployment. I don't just build things — I make sure they don't break.</p>
         </div>
-        <div class="spec-plate" data-animate>
-          <div class="plate-row"><span class="plate-label">UNIT:</span> <span class="plate-value">AYUSH KUMAR</span></div>
-          <div class="plate-row"><span class="plate-label">CLASS:</span> <span class="plate-value">B.TECH CSE — VIT (2026)</span></div>
-          <div class="plate-row"><span class="plate-label">CERT:</span> <span class="plate-value">AZURE DP-900 · AWS CLOUD FOUNDATIONS · AWS CLOUD ARCHITECTING</span></div>
-          <div class="plate-row"><span class="plate-label">STATUS:</span> <span class="plate-value">OPEN TO WORK</span></div>
+        <div class="about-stats">
+          <div class="stat-card magnetic">
+            <span class="stat-num" data-count="200">0</span><span class="stat-unit">+</span>
+            <span class="stat-label">Test Cases</span>
+          </div>
+          <div class="stat-card magnetic">
+            <span class="stat-num" data-count="3">0</span>
+            <span class="stat-label">Cloud Certs</span>
+          </div>
+          <div class="stat-card magnetic">
+            <span class="stat-num" data-count="35">0</span><span class="stat-unit">%</span>
+            <span class="stat-label">Engagement ↑</span>
+          </div>
+          <div class="stat-card magnetic">
+            <span class="stat-num" data-count="10">0</span>
+            <span class="stat-label">Team Members Led</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="section experience-section">
-      <div class="hud-bracket">
-        <h2 class="section-title"><span>[</span> SYSTEM_LOG: EXP <span>]</span></h2>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section experience-section" data-animate>
+      <div class="section-header">
+        <span class="section-tag">02 — Experience</span>
+        <h2 class="section-heading">Where I've Worked</h2>
       </div>
-      <div class="timeline">
-        <article class="timeline-node" data-animate>
-          <div class="timeline-marker">
-            <span class="node-dates">Jan 2026–Jun 2026</span>
+      <div class="exp-list">
+        <div class="exp-item tilt-card">
+          <div class="exp-meta">
+            <span class="exp-date">Jan 2026 – Jun 2026</span>
+            <span class="exp-badge">Most Recent</span>
           </div>
-          <div class="timeline-content">
-            <div class="card-shine"></div>
-            <h3>QA &amp; Testing Intern</h3>
-            <p class="company">FSSAI Headquarters, Delhi</p>
+          <div class="exp-body">
+            <h3>QA & Testing Intern</h3>
+            <p class="exp-company">FSSAI Headquarters, Delhi</p>
             <ul>
               <li>Architected comprehensive test plans for FoSCoS, Consumer Grievance Portal, AMS, and AMC systems.</li>
               <li>Created workflow diagrams mapping edge cases and escalation paths across 12+ modules.</li>
               <li>Executed manual testing coverage across 200+ test cases with systematic bug tracking.</li>
               <li>Facilitated stakeholder validation sessions with 8+ cross-functional teams.</li>
             </ul>
+            <div class="exp-tags"><span>QA</span><span>Testing</span><span>Workflow</span><span>Bug Tracking</span></div>
           </div>
-        </article>
-        <article class="timeline-node" data-animate>
-          <div class="timeline-marker">
-            <span class="node-dates">Jul 2024–May 2025</span>
+        </div>
+
+        <div class="exp-item tilt-card">
+          <div class="exp-meta">
+            <span class="exp-date">Jul 2024 – May 2025</span>
           </div>
-          <div class="timeline-content">
-            <div class="card-shine"></div>
+          <div class="exp-body">
             <h3>Tech Lead</h3>
-            <p class="company">Innovators Quest Club</p>
+            <p class="exp-company">Innovators Quest Club</p>
             <ul>
               <li>Led 10-person team to deliver 6 large-scale technical workshops and hackathons.</li>
               <li>Drove 35% engagement increase across technical events.</li>
               <li>Achieved 25% YoY membership growth through optimized project pipelines.</li>
             </ul>
-            <div class="stat-chips">
-              <span class="stat-chip"><span data-count="35">0</span>% ENGAGEMENT</span>
-              <span class="stat-chip"><span data-count="10">0</span> MEMBERS</span>
-              <span class="stat-chip"><span data-count="25">0</span>% GROWTH</span>
-            </div>
+            <div class="exp-tags"><span>Leadership</span><span>Events</span><span>Strategy</span></div>
           </div>
-        </article>
-        <article class="timeline-node" data-animate>
-          <div class="timeline-marker">
-            <span class="node-dates">Jul 2023–May 2024</span>
+        </div>
+
+        <div class="exp-item tilt-card">
+          <div class="exp-meta">
+            <span class="exp-date">Jul 2023 – May 2024</span>
           </div>
-          <div class="timeline-content">
-            <div class="card-shine"></div>
-            <h3>Core Member &amp; Event Organizer</h3>
-            <p class="company">English Literacy Club</p>
+          <div class="exp-body">
+            <h3>Core Member & Event Organizer</h3>
+            <p class="exp-company">English Literacy Club</p>
             <ul>
               <li>Organized 10+ literary events including debates and open mic sessions.</li>
-              <li>Managed stakeholder communications between students and faculty.</li>
               <li>Optimized promotional workflows increasing event attendance by 40%.</li>
             </ul>
+            <div class="exp-tags"><span>Events</span><span>Communication</span><span>Outreach</span></div>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="section projects-section">
-      <div class="hud-bracket">
-        <h2 class="section-title"><span>[</span> DIRECTORY: PROJECTS <span>]</span></h2>
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects-section" data-animate>
+      <div class="section-header">
+        <span class="section-tag">03 — Projects</span>
+        <h2 class="section-heading">What I've Built</h2>
       </div>
       <div class="projects-grid">
-        <article class="project-card hud-panel" data-animate>
-          <div class="hud-corner top-right"></div>
-          <div class="hud-corner bottom-left"></div>
-          <div class="card-shine"></div>
-          <div class="project-graphic theft-detection">
-            <svg viewBox="0 0 100 100" class="signal-art">
-              <circle cx="50" cy="50" r="32" fill="none" stroke="var(--signal-amber)" stroke-width="1" />
-              <circle cx="50" cy="50" r="16" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 50 18 L 64 34" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 64 34 L 58 58" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 58 58 L 38 58" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 38 58 L 32 38" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 32 38 L 44 22" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 44 22 L 50 18" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
-              <path d="M 38 32 Q 50 24 62 32" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round" />
-              <circle cx="44" cy="42" r="2" fill="var(--signal-cyan)" />
-              <circle cx="50" cy="50" r="2" fill="var(--signal-amber)" />
-            </svg>
+
+        <article class="project-card tilt-card" data-tilt>
+          <div class="project-header">
+            <div class="project-icon" style="--icon-color: #f59e0b;">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M20 6V9M20 31V34M6 20H9M31 20H34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="project-num">01</div>
           </div>
-          <div class="project-content">
+          <div class="project-body">
             <h3>ATM Theft Detection System</h3>
-            <p class="project-desc">Real-time fire/forced-entry/tampering detection via image recognition and IoT sensors.</p>
-            <div class="project-stats">
-              <span class="stat-chip"><span data-count="95">0</span>% DETECTION</span>
-              <span class="stat-chip">RESPONSE TIME &darr;</span>
+            <p>Real-time fire, forced-entry, and tampering detection via image recognition and IoT sensors. Achieved 95% detection accuracy.</p>
+            <div class="project-metrics">
+              <div class="metric"><span class="metric-val" data-count="95">0</span><span>%</span><small>Detection</small></div>
+              <div class="metric"><span class="metric-val">↓</span><small>Response Time</small></div>
             </div>
-            <div class="tech-tags">
-              <span>Python</span><span>OpenCV</span><span>IoT</span>
-            </div>
+            <div class="project-tech"><span>Python</span><span>OpenCV</span><span>IoT</span></div>
           </div>
+          <div class="card-glow" style="--glow-color: rgba(245,158,11,0.15)"></div>
         </article>
 
-        <article class="project-card hud-panel" data-animate>
-          <div class="hud-corner top-right"></div>
-          <div class="hud-corner bottom-left"></div>
-          <div class="card-shine"></div>
-          <div class="project-graphic quiz-website">
-            <svg viewBox="0 0 100 100" class="signal-art">
-              <path d="M 50 20 L 80 32 L 50 44 L 20 32 Z" fill="none" stroke="var(--signal-cyan)" stroke-width="1" />
-              <path d="M 20 44 L 50 56 L 80 44" fill="none" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
-              <line x1="20" y1="32" x2="20" y2="44" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
-              <line x1="80" y1="32" x2="80" y2="44" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
-              <line x1="50" y1="44" x2="50" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
-              <path d="M 20 56 L 50 68 L 80 56" fill="none" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
-              <line x1="20" y1="44" x2="20" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
-              <line x1="80" y1="44" x2="80" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
-              <line x1="50" y1="56" x2="50" y2="68" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
-              <circle cx="50" cy="32" r="3" fill="var(--signal-amber)" />
-              <line x1="50" y1="32" x2="50" y2="12" stroke="var(--signal-amber)" stroke-width="0.5" stroke-dasharray="1 1" />
-              <circle cx="50" cy="12" r="1.5" fill="var(--signal-amber)" />
-            </svg>
+        <article class="project-card tilt-card" data-tilt>
+          <div class="project-header">
+            <div class="project-icon" style="--icon-color: #8b5cf6;">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="10" width="28" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 16H34" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="20" cy="24" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M12 13H14M16 13H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="project-num">02</div>
           </div>
-          <div class="project-content">
+          <div class="project-body">
             <h3>AI-Generated Quiz Website</h3>
-            <p class="project-desc">NLP-based quiz generation platform with AWS and SQL backend infrastructure.</p>
-            <div class="project-stats">
-              <span class="stat-chip"><span data-count="500">0</span>+ USERS</span>
-              <span class="stat-chip"><span data-count="70">0</span>% LESS PREP</span>
+            <p>NLP-based quiz generation platform with AWS and SQL backend. Reduced study prep time by 70% for 500+ users.</p>
+            <div class="project-metrics">
+              <div class="metric"><span class="metric-val" data-count="500">0</span><span>+</span><small>Users</small></div>
+              <div class="metric"><span class="metric-val" data-count="70">0</span><span>%</span><small>Less Prep</small></div>
             </div>
-            <div class="tech-tags">
-              <span>Python</span><span>Flask</span><span>NLP</span>
-            </div>
+            <div class="project-tech"><span>Python</span><span>Flask</span><span>NLP</span><span>AWS</span></div>
           </div>
+          <div class="card-glow" style="--glow-color: rgba(139,92,246,0.15)"></div>
         </article>
 
-        <article class="project-card hud-panel" data-animate>
-          <div class="hud-corner top-right"></div>
-          <div class="hud-corner bottom-left"></div>
-          <div class="card-shine"></div>
-          <div class="project-graphic trash-can">
-            <svg viewBox="0 0 100 100" class="signal-art">
-              <circle cx="50" cy="50" r="28" fill="none" stroke="var(--signal-amber)" stroke-width="1" />
-              <path d="M 50 16 L 50 22 M 50 78 L 50 84 M 16 50 L 22 50 M 78 50 L 84 50" stroke="var(--signal-amber)" stroke-width="1" />
-              <path d="M 26 26 L 31 31 M 69 69 L 74 74 M 74 26 L 69 31 M 31 69 L 26 74" stroke="var(--signal-amber)" stroke-width="1" />
-              <circle cx="50" cy="50" r="12" fill="none" stroke="var(--signal-cyan)" stroke-width="1" />
-              <circle cx="50" cy="50" r="4" fill="var(--signal-cyan)" />
-              <circle cx="50" cy="50" r="35" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="0.5" stroke-dasharray="10 40">
-                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite" />
-              </circle>
-            </svg>
+        <article class="project-card tilt-card" data-tilt>
+          <div class="project-header">
+            <div class="project-icon" style="--icon-color: #06b6d4;">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="20" cy="4" r="2" fill="currentColor" stroke="currentColor" stroke-width="1">
+                  <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="5s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </div>
+            <div class="project-num">03</div>
           </div>
-          <div class="project-content">
+          <div class="project-body">
             <h3>Self-Aiming Smart Trash Can</h3>
-            <p class="project-desc">Raspberry Pi powered waste detection with motorized centering system.</p>
-            <div class="project-stats">
-              <span class="stat-chip"><span data-min="5" data-count="20">0</span> FPS</span>
-              <span class="stat-chip"><span data-min="5" data-count="10">0</span>W POWER</span>
+            <p>Raspberry Pi powered waste detection with motorized centering system. Runs at 20 FPS on only 10W.</p>
+            <div class="project-metrics">
+              <div class="metric"><span class="metric-val" data-count="20">0</span><span>fps</span><small>Real-time</small></div>
+              <div class="metric"><span class="metric-val" data-count="10">0</span><span>W</span><small>Power</small></div>
             </div>
-            <div class="tech-tags">
-              <span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span>
-            </div>
+            <div class="project-tech"><span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span></div>
           </div>
+          <div class="card-glow" style="--glow-color: rgba(6,182,212,0.15)"></div>
         </article>
+
       </div>
     </section>
 
-    <section id="skills" class="section skills-section">
-      <div class="hud-bracket">
-        <h2 class="section-title"><span>[</span> DB: SKILLSET <span>]</span></h2>
+    <!-- SKILLS -->
+    <section id="skills" class="section skills-section" data-animate>
+      <div class="section-header">
+        <span class="section-tag">04 — Skills</span>
+        <h2 class="section-heading">My Stack</h2>
       </div>
-      <div class="skills-groups" data-animate>
-        <div class="skill-group">
-          <h3 class="skill-eyebrow">PROGRAMMING &amp; DATA</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Python</span>
-            <span class="skill-chip">R</span>
-            <span class="skill-chip">Java</span>
-            <span class="skill-chip">SQL</span>
-            <span class="skill-chip">NoSQL</span>
-            <span class="skill-chip">Redis</span>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Programming & Data</h3>
+          <div class="skill-pills">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">R</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">NoSQL</span>
+            <span class="skill-pill">Redis</span>
           </div>
         </div>
-        <div class="skill-group">
-          <h3 class="skill-eyebrow">TOOLS &amp; PLATFORMS</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Excel</span>
-            <span class="skill-chip">PowerPoint</span>
-            <span class="skill-chip">Figma</span>
-            <span class="skill-chip">APIs</span>
-            <span class="skill-chip">LLMs</span>
+        <div class="skill-category">
+          <h3>Tools & Platforms</h3>
+          <div class="skill-pills">
+            <span class="skill-pill">Excel</span>
+            <span class="skill-pill">PowerPoint</span>
+            <span class="skill-pill">Figma</span>
+            <span class="skill-pill">APIs</span>
+            <span class="skill-pill">LLMs</span>
           </div>
         </div>
-        <div class="skill-group">
-          <h3 class="skill-eyebrow">CLOUD</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">AWS</span>
-            <span class="skill-chip">Microsoft Azure</span>
+        <div class="skill-category">
+          <h3>Cloud</h3>
+          <div class="skill-pills">
+            <span class="skill-pill">AWS</span>
+            <span class="skill-pill">Microsoft Azure</span>
           </div>
         </div>
-        <div class="skill-group">
-          <h3 class="skill-eyebrow">COLLABORATION &amp; LEADERSHIP</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Project Management</span>
-            <span class="skill-chip">Cross-functional Teamwork</span>
-            <span class="skill-chip">Technical Documentation</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="section education-section">
-      <h2 class="section-title">EDUCATION &amp; CERTIFICATIONS</h2>
-      <div class="education-grid">
-        <div class="education-content" data-animate>
-          <div class="spec-plate">
-            <div class="plate-row"><span class="plate-label">DEGREE:</span> <span class="plate-value">B.TECH CSE — VIT BHOPAL</span></div>
-            <div class="plate-row"><span class="plate-label">GRADUATION:</span> <span class="plate-value">MAY 2026</span></div>
-          </div>
-          <div class="spec-plate">
-            <div class="plate-row"><span class="plate-label">SCHOOL:</span> <span class="plate-value">CITY MONTESSORI SCHOOL</span></div>
-            <div class="plate-row"><span class="plate-label">SCORES:</span> <span class="plate-value">SR. SEC: 87.2% · ICSE 10TH: 89.6%</span></div>
-          </div>
-        </div>
-        <div class="certifications" data-animate>
-          <div class="cert-badge">
-            <span class="cert-text">AZURE DP-900</span>
-          </div>
-          <div class="cert-badge">
-            <span class="cert-text">AWS CLOUD</span>
-          </div>
-          <div class="cert-badge">
-            <span class="cert-text">AWS ARCH</span>
+        <div class="skill-category">
+          <h3>Leadership</h3>
+          <div class="skill-pills">
+            <span class="skill-pill">Project Management</span>
+            <span class="skill-pill">Cross-functional Teams</span>
+            <span class="skill-pill">Technical Docs</span>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="beyond" class="section beyond-section">
-      <h2 class="section-title">BEYOND WORK</h2>
-      <div class="beyond-grid" data-animate>
-        <div class="beyond-item">
-          <span class="beyond-icon">⚽</span>
-          <span>Football Captain — Sahara FC</span>
+      <div class="cert-row">
+        <div class="cert-card">
+          <div class="cert-icon">☁</div>
+          <div>
+            <div class="cert-name">Azure DP-900</div>
+            <div class="cert-issuer">Microsoft</div>
+          </div>
         </div>
-        <div class="beyond-item">
-          <span class="beyond-icon">🎓</span>
-          <span>Community Mentor — Technical workshops for underprivileged students</span>
+        <div class="cert-card">
+          <div class="cert-icon">☁</div>
+          <div>
+            <div class="cert-name">AWS Cloud Foundations</div>
+            <div class="cert-issuer">Amazon</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">☁</div>
+          <div>
+            <div class="cert-name">AWS Cloud Architecting</div>
+            <div class="cert-issuer">Amazon</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section contact-section">
-      <div class="contact-content" data-animate>
-        <h2 class="contact-headline">LET'S BUILD SOMETHING THAT DOESN'T BREAK.</h2>
-        <a href="mailto:ayushkumarh078@gmail.com" class="contact-email">ayushkumarh078@gmail.com</a>
+    <!-- CONTACT -->
+    <section id="contact" class="section contact-section" data-animate>
+      <div class="contact-inner">
+        <span class="section-tag">05 — Contact</span>
+        <h2 class="contact-heading">Let's build something<br><span class="gradient-text">that doesn't break.</span></h2>
+        <a href="mailto:ayushkumarh078@gmail.com" class="contact-email magnetic">ayushkumarh078@gmail.com</a>
         <div class="contact-links">
-          <a href="mailto:ayushkumarh078@gmail.com" class="contact-icon" aria-label="Email">✉</a>
-          <a href="tel:+919876543210" class="contact-icon" aria-label="Phone">📞</a>
-          <a href="https://linkedin.com/in/ayushkumar" class="contact-icon" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://github.com/ayushkumar" class="contact-icon" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+          <a href="mailto:ayushkumarh078@gmail.com" class="contact-link magnetic" aria-label="Email">Email</a>
+          <a href="tel:+919876543210" class="contact-link magnetic" aria-label="Phone">Phone</a>
+          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="contact-link magnetic" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="contact-link magnetic" aria-label="GitHub">GitHub</a>
         </div>
-        <div class="contact-footer">
-          <span>© 2026 AYUSH KUMAR — TRANSMISSION END</span>
-          <svg class="footer-glyph" viewBox="0 0 100 100" aria-hidden="true">
-            <circle cx="50" cy="50" r="32" fill="none" stroke="var(--signal-amber)" stroke-width="0.75" />
-            <circle cx="50" cy="18" r="4" fill="var(--signal-cyan)">
-              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="6s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-        </div>
+        <p class="footer-copy">© 2026 Ayush Kumar. Designed & Built with ☕</p>
       </div>
     </section>
+
   </main>
 
   <script src="script.js"></script>

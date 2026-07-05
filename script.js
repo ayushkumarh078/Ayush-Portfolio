@@ -1,361 +1,286 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initBootScreen();
-  initScrollProgress();
-  initAnimations();
+  initNebula();
+  initCursor();
+  initScrollBar();
   initNavigation();
-  initCustomCursor();
-  initCardShine();
-  initCardTilt();
+  initScrollAnimations();
+  initTiltCards();
   initCountUp();
-  initLetterFade();
-  initCanvasBackground();
+  initMagneticElements();
 });
 
-function initBootScreen() {
-  const bootScreen = document.getElementById('boot-screen');
-  if (bootScreen) {
-    setTimeout(() => {
-      bootScreen.classList.add('hidden');
-    }, 2500);
-  }
-}
-
-function initScrollProgress() {
-  const progressBar = document.querySelector('.scroll-progress');
-
-  function updateProgress() {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-    progressBar.style.width = scrollPercent + '%';
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateProgress();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-  updateProgress();
-}
-
-function initAnimations() {
-  const animatedElements = document.querySelectorAll('[data-animate]');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, index * 80);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  animatedElements.forEach(el => observer.observe(el));
-}
-
-function initNavigation() {
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('.section');
-  const navToggle = document.querySelector('.nav-toggle');
-  const mainNav = document.querySelector('.main-nav');
-
-  if (navToggle) {
-    navToggle.addEventListener('click', () => {
-      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', !isExpanded);
-      mainNav.classList.toggle('nav-open');
-      document.body.classList.toggle('menu-active');
-    });
-  }
-
-  function updateActiveLink() {
-    let current = '';
-    const scrollPos = window.scrollY + 200;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    if (window.scrollY < 100) {
-      current = 'hero';
-    }
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href').substring(1) === current) {
-        link.classList.add('active');
-      }
-    });
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateActiveLink();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (mainNav.classList.contains('nav-open')) {
-        mainNav.classList.remove('nav-open');
-        document.body.classList.remove('menu-active');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-}
-
-function initCustomCursor() {
-  if (window.matchMedia('(hover: none)').matches) return;
-
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  document.body.appendChild(cursor);
-
-  const ring = document.createElement('div');
-  ring.className = 'cursor-ring';
-  // Futuristic crosshair lines inside the ring
-  ring.innerHTML = '<div style="position:absolute;top:50%;left:-5px;right:-5px;height:1px;background:var(--signal-amber);"></div><div style="position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--signal-amber);"></div>';
-  document.body.appendChild(ring);
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animateCursor() {
-    ringX += (mouseX - ringX) * 0.2; // faster tracking for HUD
-    ringY += (mouseY - ringY) * 0.2;
-
-    cursor.style.left = `${mouseX}px`;
-    cursor.style.top = `${mouseY}px`;
-    
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
-
-    requestAnimationFrame(animateCursor);
-  }
-
-  animateCursor();
-
-  const updateHoverables = () => {
-    const hoverables = document.querySelectorAll('a, button, .project-card, .skill-chip, .chip, .timeline-content');
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        ring.classList.add('hover');
-        ring.style.transform = 'translate(-50%, -50%) rotate(45deg)';
-      });
-      el.addEventListener('mouseleave', () => {
-        ring.classList.remove('hover');
-        ring.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-      });
-    });
-  };
-
-  updateHoverables();
-  
-  const observer = new MutationObserver(updateHoverables);
-  observer.observe(document.body, { childList: true, subtree: true });
-}
-
-// Spotlight glass reflection coordinates updater
-function initCardShine() {
-  const cards = document.querySelectorAll('.project-card, .timeline-content');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-  });
-}
-
-// Statistical numbers count up
-function initCountUp() {
-  const countElements = document.querySelectorAll('[data-count]');
-  
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        if (el.classList.contains('counted')) return;
-        el.classList.add('counted');
-        
-        const targetVal = parseInt(el.getAttribute('data-count'), 10);
-        const minVal = parseInt(el.getAttribute('data-min'), 10) || 0;
-        const duration = 1500;
-        let startTime = null;
-        
-        function animateValue(timestamp) {
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
-          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-          const current = Math.floor(easeProgress * (targetVal - minVal) + minVal);
-          
-          el.innerText = current;
-          
-          if (progress < 1) {
-            requestAnimationFrame(animateValue);
-          } else {
-            el.innerText = targetVal;
-          }
-        }
-        requestAnimationFrame(animateValue);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  countElements.forEach(el => countObserver.observe(el));
-}
-
-// Letter-by-letter fade-in animation
-function initLetterFade() {
-  const titles = document.querySelectorAll('.section-title');
-  titles.forEach(title => {
-    const text = title.innerText;
-    title.innerHTML = '';
-    
-    const textNode = document.createElement('span');
-    textNode.className = 'title-text-node';
-    
-    [...text].forEach((char, index) => {
-      const span = document.createElement('span');
-      span.className = 'letter-fade';
-      span.innerText = char === ' ' ? '\u00A0' : char;
-      span.style.transitionDelay = `${index * 30}ms`;
-      textNode.appendChild(span);
-    });
-    
-    title.appendChild(textNode);
-    
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const letters = entry.target.querySelectorAll('.letter-fade');
-          letters.forEach(letter => letter.classList.add('active'));
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    observer.observe(title);
-  });
-}
-
-function initCardTilt() {
-  const cards = document.querySelectorAll('.project-card, .timeline-content');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      if (window.innerWidth < 768) return; // Disable on mobile
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) translateY(0)`;
-    });
-  });
-}
-
-function initCanvasBackground() {
-  const canvas = document.getElementById('starfield');
+/* ============================
+   NEBULA CANVAS BACKGROUND
+   ============================ */
+function initNebula() {
+  const canvas = document.getElementById('nebula-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let width, height;
-  let stars = [];
-  
+
+  let W, H, particles = [], mouse = { x: -9999, y: -9999 };
+
   function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', () => { resize(); buildParticles(); });
   resize();
 
-  class Star {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.baseAlpha = Math.random() * 0.5 + 0.1;
-      this.phase = Math.random() * Math.PI * 2;
-    }
-    update() {
-      this.y -= 0.15;
-      if (this.y < 0) {
-        this.y = height;
-        this.x = Math.random() * width;
-      }
-      this.phase += 0.02;
-    }
-    draw() {
-      const alpha = this.baseAlpha + Math.sin(this.phase) * 0.3;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, alpha)})`;
-      ctx.fill();
+  function buildParticles() {
+    particles = [];
+    const count = Math.floor((W * H) / 12000);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.2 + 0.3,
+        alpha: Math.random() * 0.5 + 0.2,
+        phase: Math.random() * Math.PI * 2
+      });
     }
   }
+  buildParticles();
 
-  for (let i = 0; i < 150; i++) {
-    stars.push(new Star());
-  }
-
-  let mx = -1000, my = -1000;
   window.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    
-    for (let i = 0; i < stars.length; i++) {
-      stars[i].update();
-      stars[i].draw();
-      
-      const dxMouse = stars[i].x - mx;
-      const dyMouse = stars[i].y - my;
-      const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-      
-      if (distMouse < 120) {
+  const COLORS = ['rgba(168,85,247,', 'rgba(99,102,241,', 'rgba(236,72,153,', 'rgba(6,182,212,'];
+
+  let t = 0;
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+
+    // Draw nebula blobs
+    const blobData = [
+      { x: W * 0.2, y: H * 0.3, r: Math.min(W, H) * 0.35, color: 'rgba(168,85,247,' },
+      { x: W * 0.8, y: H * 0.6, r: Math.min(W, H) * 0.4, color: 'rgba(99,102,241,' },
+      { x: W * 0.5, y: H * 0.1, r: Math.min(W, H) * 0.25, color: 'rgba(236,72,153,' },
+    ];
+    blobData.forEach(blob => {
+      const grad = ctx.createRadialGradient(blob.x, blob.y, 0, blob.x, blob.y, blob.r);
+      grad.addColorStop(0, blob.color + '0.04)');
+      grad.addColorStop(1, blob.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(blob.x, blob.y, blob.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Draw particles
+    particles.forEach((p, i) => {
+      // Drift slowly toward mouse slightly
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200) {
+        p.vx += dx * 0.00008;
+        p.vy += dy * 0.00008;
+      }
+
+      p.vx *= 0.995;
+      p.vy *= 0.995;
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+
+      const alpha = p.alpha * (0.7 + 0.3 * Math.sin(t * 0.02 + p.phase));
+      const color = COLORS[i % COLORS.length];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = color + alpha + ')';
+      ctx.fill();
+
+      // Lines to nearby particles
+      for (let j = i + 1; j < particles.length; j++) {
+        const ddx = p.x - particles[j].x;
+        const ddy = p.y - particles[j].y;
+        const d = Math.sqrt(ddx * ddx + ddy * ddy);
+        if (d < 90) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(168,85,247,' + (0.08 * (1 - d / 90)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      // Lines to mouse
+      if (dist < 160) {
         ctx.beginPath();
-        ctx.moveTo(stars[i].x, stars[i].y);
-        ctx.lineTo(mx, my);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - distMouse/120 * 0.12})`;
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = 'rgba(236,72,153,' + (0.2 * (1 - dist / 160)) + ')';
+        ctx.lineWidth = 0.5;
         ctx.stroke();
       }
-    }
-    requestAnimationFrame(animate);
+    });
+
+    requestAnimationFrame(frame);
   }
-  animate();
+  frame();
+}
+
+/* ============================
+   CUSTOM CURSOR
+   ============================ */
+function initCursor() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const dot = document.getElementById('cursor-dot');
+  const glow = document.getElementById('cursor-glow');
+  if (!dot || !glow) return;
+
+  let mx = 0, my = 0, gx = 0, gy = 0;
+
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  function animateCursor() {
+    gx += (mx - gx) * 0.15;
+    gy += (my - gy) * 0.15;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+    glow.style.left = gx + 'px';
+    glow.style.top = gy + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .project-card, .stat-card, .exp-item, .skill-pill, .cert-card').forEach(el => {
+    el.addEventListener('mouseenter', () => glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => glow.classList.remove('hovering'));
+  });
+}
+
+/* ============================
+   SCROLL PROGRESS BAR
+   ============================ */
+function initScrollBar() {
+  const bar = document.querySelector('.scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (pct * 100) + '%';
+  }, { passive: true });
+}
+
+/* ============================
+   NAVIGATION
+   ============================ */
+function initNavigation() {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('.section');
+
+  toggle?.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', nav.classList.contains('open'));
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Active link on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const id = entry.target.getAttribute('id');
+        const active = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => io.observe(s));
+}
+
+/* ============================
+   SCROLL ANIMATIONS
+   ============================ */
+function initScrollAnimations() {
+  const els = document.querySelectorAll('[data-animate]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+}
+
+/* ============================
+   3D TILT CARDS
+   ============================ */
+function initTiltCards() {
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (window.innerWidth < 768) return;
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg) translateZ(6px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
+}
+
+/* ============================
+   COUNT UP NUMBERS
+   ============================ */
+function initCountUp() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      entry.target.querySelectorAll('[data-count]').forEach(el => {
+        const target = +el.getAttribute('data-count');
+        const dur = 1400;
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(ease * target);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+      });
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.about-stats, .projects-grid').forEach(el => io.observe(el));
+}
+
+/* ============================
+   MAGNETIC ELEMENTS
+   ============================ */
+function initMagneticElements() {
+  document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'translate(0, 0)';
+    });
+  });
 }
