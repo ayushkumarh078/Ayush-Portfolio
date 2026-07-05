@@ -3,332 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ayush Kumar — Software Engineer & QA Specialist. Building and breaking systems from FSSAI's national food-safety platforms to self-aiming trash cans." />
+  <meta name="description" content="Ayush Kumar — Software Engineer & QA Specialist at VIT-AP. Building and breaking systems from FSSAI's national food-safety platforms to self-aiming trash cans." />
   <title>Ayush Kumar — Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <meta property="og:title" content="Ayush Kumar — Portfolio" />
-  <meta property="og:description" content="Software Engineer & QA Specialist." />
-  <meta property="og:type" content="website" />
 </head>
 <body>
 
-  <!-- Background -->
-  <div class="bg-base" aria-hidden="true">
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
-    <div class="bg-blob blob-3"></div>
-    <div class="bg-grid"></div>
-  </div>
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
 
-  <!-- Cursor -->
-  <div id="c-dot"></div>
-  <div id="c-ring"></div>
-
-  <!-- Scroll progress -->
-  <div class="scroll-bar"></div>
+  <div class="noise" aria-hidden="true"></div>
 
   <!-- NAV -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">AK.</a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Work</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </div>
+  <nav class="nav" id="nav">
+    <a href="#hero" class="logo">AK<span>.</span></a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span>
+    </button>
   </nav>
 
-  <main>
+  <div class="progress-bar" id="progress"></div>
 
-    <!-- HERO -->
-    <section id="hero" class="hero-section">
-      <div class="hero-wrapper">
-        <div class="hero-left">
-          <div class="hero-badge">
-            <span class="pulse"></span> Open to opportunities
-          </div>
-          <h1 class="hero-title">
-            <span class="line" style="--i:0">Ayush</span>
-            <span class="line accent-line" style="--i:1">Kumar.</span>
-          </h1>
-          <p class="hero-sub">Software Engineer · QA Specialist · Cloud Certified</p>
-          <p class="hero-desc">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans. I ship things that work.</p>
-          <div class="hero-cta">
-            <a href="#contact" class="btn-main">Let's Talk</a>
-            <a href="#projects" class="btn-outline">See My Work ↓</a>
-          </div>
-        </div>
-        <div class="hero-right" aria-hidden="true">
-          <div class="hero-card-stack">
-            <div class="h-card hc-1">
-              <div class="hc-label">LATEST ROLE</div>
-              <div class="hc-value">QA Intern @ FSSAI</div>
-              <div class="hc-sub">Delhi HQ · 2026</div>
-            </div>
-            <div class="h-card hc-2">
-              <div class="hc-label">CERTIFICATION</div>
-              <div class="hc-value">Azure DP-900 · AWS</div>
-              <div class="hc-sub">Cloud Certified</div>
-            </div>
-            <div class="h-card hc-3">
-              <div class="hc-label">EDUCATION</div>
-              <div class="hc-value">B.Tech CSE</div>
-              <div class="hc-sub">VIT-AP · 2026</div>
-            </div>
-          </div>
+  <!-- ======================== HERO ======================== -->
+  <section id="hero" class="hero">
+    <div class="hero-glow" id="hero-glow" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="live-dot"></span> Available for opportunities
+      </div>
+      <h1 class="hero-name" id="hero-name">
+        <span>AYUSH</span>
+        <span>KUMAR</span>
+      </h1>
+      <div class="hero-roles">
+        <span class="role-chip">Software Engineer</span>
+        <span class="sep">·</span>
+        <span class="role-chip">QA Specialist</span>
+        <span class="sep">·</span>
+        <span class="role-chip">VIT-AP 2026</span>
+      </div>
+      <p class="hero-desc">Building and breaking systems — from FSSAI's national food-safety platforms used across India, to self-aiming trash cans. I make things that <em>don't break</em>.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-glow">Get in touch</a>
+        <a href="#projects" class="btn-ghost">View Projects</a>
+      </div>
+      <div class="hero-links">
+        <a href="mailto:ayushkumarh078@gmail.com">ayushkumarh078@gmail.com</a>
+        <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero-cards" aria-hidden="true">
+      <div class="float-card fc-1">
+        <div class="fc-tag">Latest Role</div>
+        <div class="fc-main">QA Intern</div>
+        <div class="fc-sub">FSSAI · Delhi HQ</div>
+        <div class="fc-bar" style="--c:#7c3aed"></div>
+      </div>
+      <div class="float-card fc-2">
+        <div class="fc-tag">Education</div>
+        <div class="fc-main">B.Tech CSE</div>
+        <div class="fc-sub">VIT-AP University · 2026</div>
+        <div class="fc-bar" style="--c:#22d3ee"></div>
+      </div>
+      <div class="float-card fc-3">
+        <div class="fc-tag">Certifications</div>
+        <div class="fc-main">3 Cloud Certs</div>
+        <div class="fc-sub">Azure · AWS × 2</div>
+        <div class="fc-bar" style="--c:#fb7185"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ABOUT ======================== -->
+  <section id="about" class="section">
+    <div class="sec-intro" data-reveal>
+      <span class="sec-num">01</span>
+      <h2>About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text" data-reveal>
+        <p>Computer Science undergraduate at <strong>VIT-AP University</strong>, graduating May 2026. I specialize in QA engineering and full-stack development — I'm the person who makes sure software works and keeps working.</p>
+        <p>Recently completed a QA internship at <strong>FSSAI Headquarters, New Delhi</strong>, where I built test plans for national food safety platforms serving millions of citizens.</p>
+        <p>Beyond code, I led the <strong>Innovators Quest Club</strong> as Tech Lead, ran football captain duties for Sahara FC, and mentor underprivileged students in technical workshops.</p>
+        <div class="skills-inline">
+          <span>Python</span><span>QA / Testing</span><span>AWS</span><span>Azure</span><span>OpenCV</span><span>SQL</span><span>Flask</span><span>IoT</span>
         </div>
       </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section" data-animate>
-      <div class="sec-label">01 · About</div>
-      <h2 class="sec-title">A little about me</h2>
-      <div class="about-layout">
-        <div class="about-text">
-          <p>Computer Science undergraduate at <strong>VIT-AP University</strong>, specializing in QA engineering and full-stack development. I just completed a QA internship at <strong>FSSAI Headquarters, Delhi</strong> — architecting test plans for national food safety platforms used across India.</p>
-          <p>I'm a cloud-certified engineer who builds end-to-end systems solo — from hardware (Raspberry Pi trash cans) to cloud-backed web platforms. I believe in making software that's both functional and unbreakable.</p>
-          <div class="tag-row">
-            <span>QA Engineering</span>
-            <span>Full-Stack Dev</span>
-            <span>Cloud Architecture</span>
-            <span>IoT</span>
-            <span>Machine Learning</span>
-          </div>
+      <div class="stats-grid" data-reveal>
+        <div class="s-card">
+          <span class="s-val"><span data-count="200">0</span>+</span>
+          <span class="s-lbl">Test Cases Executed</span>
         </div>
-        <div class="about-numbers">
-          <div class="num-card">
-            <div class="num-big"><span data-count="200">0</span>+</div>
-            <div class="num-label">Test Cases Executed</div>
-          </div>
-          <div class="num-card">
-            <div class="num-big"><span data-count="8">0</span>+</div>
-            <div class="num-label">Cross-functional Teams</div>
-          </div>
-          <div class="num-card">
-            <div class="num-big"><span data-count="35">0</span>%</div>
-            <div class="num-label">Engagement Increase</div>
-          </div>
-          <div class="num-card">
-            <div class="num-big"><span data-count="3">0</span></div>
-            <div class="num-label">Cloud Certifications</div>
-          </div>
+        <div class="s-card">
+          <span class="s-val"><span data-count="12">0</span>+</span>
+          <span class="s-lbl">System Modules Tested</span>
+        </div>
+        <div class="s-card">
+          <span class="s-val"><span data-count="35">0</span>%</span>
+          <span class="s-lbl">Event Engagement Boost</span>
+        </div>
+        <div class="s-card">
+          <span class="s-val"><span data-count="10">0</span></span>
+          <span class="s-lbl">Team Members Led</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section" data-animate>
-      <div class="sec-label">02 · Experience</div>
-      <h2 class="sec-title">Where I've worked</h2>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-line"></div>
-          <div class="tl-card">
-            <div class="tl-top">
-              <div>
-                <h3>QA & Testing Intern</h3>
-                <p class="tl-company">FSSAI Headquarters · Delhi</p>
-              </div>
-              <span class="tl-date">Jan–Jun 2026</span>
-            </div>
-            <ul>
-              <li>Architected comprehensive test plans for FoSCoS, Consumer Grievance Portal, AMS, and AMC systems.</li>
-              <li>Created workflow diagrams mapping edge cases and escalation paths across 12+ modules.</li>
-              <li>Executed manual testing coverage across <strong>200+ test cases</strong> with systematic bug tracking.</li>
-              <li>Facilitated stakeholder validation sessions with <strong>8+ cross-functional teams</strong>.</li>
-            </ul>
-            <div class="tl-tags"><span>QA</span><span>Manual Testing</span><span>Bug Tracking</span><span>Stakeholder Mgmt</span></div>
-          </div>
+  <!-- ======================== EXPERIENCE ======================== -->
+  <section id="experience" class="section">
+    <div class="sec-intro" data-reveal>
+      <span class="sec-num">02</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="exp-stack">
+
+      <div class="exp-card" data-reveal>
+        <div class="exp-left">
+          <span class="exp-period">Jan–Jun 2026</span>
+          <span class="exp-badge badge-purple">Recent</span>
         </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-line"></div>
-          <div class="tl-card">
-            <div class="tl-top">
-              <div>
-                <h3>Tech Lead</h3>
-                <p class="tl-company">Innovators Quest Club · VIT-AP</p>
-              </div>
-              <span class="tl-date">Jul 2024–May 2025</span>
-            </div>
-            <ul>
-              <li>Led a 10-person team delivering 6 large-scale technical workshops and hackathons.</li>
-              <li>Drove <strong>35% engagement increase</strong> across technical events.</li>
-              <li>Achieved 25% YoY membership growth through optimized project pipelines.</li>
-            </ul>
-            <div class="tl-tags"><span>Leadership</span><span>Events</span><span>Strategy</span></div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-card">
-            <div class="tl-top">
-              <div>
-                <h3>Core Member & Event Organizer</h3>
-                <p class="tl-company">English Literacy Club · VIT-AP</p>
-              </div>
-              <span class="tl-date">Jul 2023–May 2024</span>
-            </div>
-            <ul>
-              <li>Organized 10+ literary events including debates and open mic sessions.</li>
-              <li>Optimized promotional workflows, increasing event attendance by <strong>40%</strong>.</li>
-            </ul>
-            <div class="tl-tags"><span>Communication</span><span>Events</span><span>Outreach</span></div>
-          </div>
+        <div class="exp-right">
+          <h3>QA &amp; Testing Intern</h3>
+          <p class="exp-where">FSSAI Headquarters · New Delhi</p>
+          <ul>
+            <li>Architected end-to-end test plans for <strong>FoSCoS, Consumer Grievance Portal, AMS &amp; AMC</strong> — national platforms serving millions of citizens.</li>
+            <li>Created workflow diagrams mapping edge cases and escalation paths across <strong>12+ system modules</strong>.</li>
+            <li>Executed <strong>200+ manual test cases</strong> with systematic bug tracking and resolution workflows.</li>
+            <li>Facilitated stakeholder validation sessions with <strong>8+ cross-functional teams</strong>.</li>
+          </ul>
+          <div class="tag-list"><span>QA</span><span>Manual Testing</span><span>Bug Tracking</span><span>Workflow Design</span><span>Stakeholder Mgmt</span></div>
         </div>
       </div>
-    </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section" data-animate>
-      <div class="sec-label">03 · Projects</div>
-      <h2 class="sec-title">What I've built</h2>
-      <div class="proj-grid">
-
-        <article class="proj-card" style="--accent: #f59e0b">
-          <div class="proj-num">01</div>
-          <div class="proj-icon">
-            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="1.5" fill="currentColor"/><path d="M16 6V9M16 23V26M6 16H9M23 16H26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <h3>ATM Theft Detection System</h3>
-          <p>Real-time fire, forced-entry & tampering detection using image recognition and IoT sensors.</p>
-          <div class="proj-stats">
-            <span><strong data-count="95">0</strong>% Accuracy</span>
-            <span>Real-time Alerts</span>
-          </div>
-          <div class="proj-stack"><span>Python</span><span>OpenCV</span><span>IoT</span></div>
-        </article>
-
-        <article class="proj-card" style="--accent: #8b5cf6">
-          <div class="proj-num">02</div>
-          <div class="proj-icon">
-            <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 13H28" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="21" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 10.5H11M13 10.5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>AI-Generated Quiz Website</h3>
-          <p>NLP-based quiz generation platform with AWS backend — cuts study prep time by 70%.</p>
-          <div class="proj-stats">
-            <span><strong data-count="500">0</strong>+ Users</span>
-            <span>70% Less Prep</span>
-          </div>
-          <div class="proj-stack"><span>Python</span><span>Flask</span><span>NLP</span><span>AWS</span></div>
-        </article>
-
-        <article class="proj-card" style="--accent: #06b6d4">
-          <div class="proj-num">03</div>
-          <div class="proj-icon">
-            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M16 7V10M16 22V25M7 16H10M22 16H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="7" r="1.5" fill="currentColor"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="4s" repeatCount="indefinite"/></circle></svg>
-          </div>
-          <h3>Self-Aiming Smart Trash Can</h3>
-          <p>Raspberry Pi system with motorized centering — detects waste in real-time at 20 FPS on 10W.</p>
-          <div class="proj-stats">
-            <span>20 FPS</span>
-            <span>10W Power</span>
-          </div>
-          <div class="proj-stack"><span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span></div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section" data-animate>
-      <div class="sec-label">04 · Skills</div>
-      <h2 class="sec-title">What I work with</h2>
-      <div class="skills-board">
-        <div class="skill-col">
-          <h3>Programming & Data</h3>
-          <div class="chip-row">
-            <span>Python</span><span>R</span><span>Java</span><span>SQL</span><span>NoSQL</span><span>Redis</span>
-          </div>
+      <div class="exp-card" data-reveal>
+        <div class="exp-left">
+          <span class="exp-period">Jul 2024–May 2025</span>
         </div>
-        <div class="skill-col">
-          <h3>Tools & Platforms</h3>
-          <div class="chip-row">
-            <span>Excel</span><span>PowerPoint</span><span>Figma</span><span>REST APIs</span><span>LLMs</span>
-          </div>
-        </div>
-        <div class="skill-col">
-          <h3>Cloud</h3>
-          <div class="chip-row">
-            <span>AWS</span><span>Microsoft Azure</span>
-          </div>
-        </div>
-        <div class="skill-col">
-          <h3>Soft Skills</h3>
-          <div class="chip-row">
-            <span>Project Management</span><span>Cross-functional Teams</span><span>Technical Docs</span>
-          </div>
+        <div class="exp-right">
+          <h3>Tech Lead</h3>
+          <p class="exp-where">Innovators Quest Club · VIT-AP</p>
+          <ul>
+            <li>Led a <strong>10-person team</strong> delivering 6 large-scale technical workshops and hackathons.</li>
+            <li>Drove a <strong>35% increase</strong> in engagement across all technical events.</li>
+            <li>Achieved <strong>25% YoY membership growth</strong> through optimized outreach pipelines.</li>
+          </ul>
+          <div class="tag-list"><span>Leadership</span><span>Events</span><span>Strategy</span><span>Team Building</span></div>
         </div>
       </div>
-      <div class="certs">
-        <div class="cert">
-          <div class="cert-ico">Az</div>
-          <div><p>Azure DP-900</p><small>Microsoft · Data Fundamentals</small></div>
+
+      <div class="exp-card" data-reveal>
+        <div class="exp-left">
+          <span class="exp-period">Jul 2023–May 2024</span>
         </div>
-        <div class="cert">
-          <div class="cert-ico">Aw</div>
-          <div><p>AWS Cloud Foundations</p><small>Amazon Web Services</small></div>
-        </div>
-        <div class="cert">
-          <div class="cert-ico">Aw</div>
-          <div><p>AWS Cloud Architecting</p><small>Amazon Web Services</small></div>
+        <div class="exp-right">
+          <h3>Core Member &amp; Event Organizer</h3>
+          <p class="exp-where">English Literacy Club · VIT-AP</p>
+          <ul>
+            <li>Organized <strong>10+ literary events</strong> — debates, open mics, and writing workshops.</li>
+            <li>Optimized promotional workflows, increasing event attendance by <strong>40%</strong>.</li>
+            <li>Managed communications between students, faculty, and external stakeholders.</li>
+          </ul>
+          <div class="tag-list"><span>Events</span><span>Communication</span><span>Outreach</span></div>
         </div>
       </div>
-    </section>
 
-    <!-- BEYOND -->
-    <section id="beyond" class="section beyond-sec" data-animate>
-      <div class="sec-label">05 · Beyond Work</div>
-      <h2 class="sec-title">Off the clock</h2>
-      <div class="beyond-grid">
-        <div class="beyond-item">
-          <span class="beyond-ico">⚽</span>
-          <div>
-            <strong>Football Captain — Sahara FC</strong>
-            <p>Led the team on and off the field.</p>
+    </div>
+  </section>
+
+  <!-- ======================== PROJECTS ======================== -->
+  <section id="projects" class="section">
+    <div class="sec-intro" data-reveal>
+      <span class="sec-num">03</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="proj-grid">
+
+      <article class="proj-card" data-reveal style="--hue:272">
+        <div class="proj-glow"></div>
+        <div class="proj-top">
+          <span class="proj-n">01</span>
+          <div class="proj-ico">
+            <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="18" cy="18" r="12"/><circle cx="18" cy="18" r="5"/>
+              <path d="M18 6v4M18 26v4M6 18h4M26 18h4"/>
+              <circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+            </svg>
           </div>
         </div>
-        <div class="beyond-item">
-          <span class="beyond-ico">🎓</span>
-          <div>
-            <strong>Community Mentor</strong>
-            <p>Technical workshops for underprivileged students.</p>
+        <h3>ATM Theft Detection</h3>
+        <p>Real-time fire, forced-entry &amp; tampering detection via image recognition and IoT sensors. Deployed for ATM security monitoring.</p>
+        <div class="proj-metrics">
+          <div class="metric"><b data-count="95">0</b>%<small>Detection Accuracy</small></div>
+          <div class="metric"><b>↓</b><small>Response Time</small></div>
+        </div>
+        <div class="proj-tech"><span>Python</span><span>OpenCV</span><span>IoT</span></div>
+      </article>
+
+      <article class="proj-card" data-reveal style="--hue:195">
+        <div class="proj-glow"></div>
+        <div class="proj-top">
+          <span class="proj-n">02</span>
+          <div class="proj-ico">
+            <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="4" y="8" width="28" height="20" rx="3"/>
+              <path d="M4 14h28"/>
+              <circle cx="18" cy="22" r="3"/>
+              <path d="M10 11h2M14 11h2"/>
+            </svg>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section contact-sec" data-animate>
-      <div class="contact-wrap">
-        <div class="sec-label">06 · Contact</div>
-        <h2 class="contact-title">Let's build something<br><em>that doesn't break.</em></h2>
-        <a href="mailto:ayushkumarh078@gmail.com" class="contact-mail">ayushkumarh078@gmail.com</a>
-        <div class="contact-socials">
-          <a href="mailto:ayushkumarh078@gmail.com" class="soc-link">Email</a>
-          <a href="tel:+919876543210" class="soc-link">Phone</a>
-          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener" class="soc-link">LinkedIn</a>
-          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener" class="soc-link">GitHub</a>
+        <h3>AI Quiz Generator</h3>
+        <p>NLP-based quiz generation platform backed by AWS and SQL. Cuts study prep time by 70% — adopted by 500+ users.</p>
+        <div class="proj-metrics">
+          <div class="metric"><b data-count="500">0</b>+<small>Active Users</small></div>
+          <div class="metric"><b data-count="70">0</b>%<small>Less Prep Time</small></div>
         </div>
-        <p class="footer-note">© 2026 Ayush Kumar — Designed & coded with caffeine</p>
-      </div>
-    </section>
+        <div class="proj-tech"><span>Python</span><span>Flask</span><span>NLP</span><span>AWS</span><span>SQL</span></div>
+      </article>
 
-  </main>
+      <article class="proj-card" data-reveal style="--hue:162">
+        <div class="proj-glow"></div>
+        <div class="proj-top">
+          <span class="proj-n">03</span>
+          <div class="proj-ico">
+            <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="18" cy="18" r="10"/>
+              <path d="M18 8v3M18 25v3M8 18h3M25 18h3"/>
+              <circle cx="18" cy="18" r="3"/>
+              <circle cx="18" cy="8" r="2" fill="currentColor" stroke="none">
+                <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="4s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+        </div>
+        <h3>Self-Aiming Trash Can</h3>
+        <p>Raspberry Pi system with real-time waste detection and motorized centering. Runs live at 20 FPS on just 10 watts.</p>
+        <div class="proj-metrics">
+          <div class="metric"><b data-count="20">0</b> FPS<small>Real-time</small></div>
+          <div class="metric"><b data-count="10">0</b> W<small>Power Usage</small></div>
+        </div>
+        <div class="proj-tech"><span>Raspberry Pi</span><span>OpenCV</span><span>MobileNet SSD</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ======================== SKILLS ======================== -->
+  <section id="skills" class="section">
+    <div class="sec-intro" data-reveal>
+      <span class="sec-num">04</span>
+      <h2>Skills &amp; Certs</h2>
+    </div>
+    <div class="skills-wrap" data-reveal>
+      <div class="skill-block">
+        <h3>Programming &amp; Data</h3>
+        <div class="pill-row">
+          <span>Python</span><span>R</span><span>Java</span><span>SQL</span><span>NoSQL</span><span>Redis</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Tools &amp; Platforms</h3>
+        <div class="pill-row">
+          <span>Excel</span><span>PowerPoint</span><span>Figma</span><span>REST APIs</span><span>LLMs</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Cloud</h3>
+        <div class="pill-row"><span>AWS</span><span>Microsoft Azure</span></div>
+      </div>
+      <div class="skill-block">
+        <h3>Testing</h3>
+        <div class="pill-row">
+          <span>Manual Testing</span><span>Test Planning</span><span>Bug Tracking</span><span>Workflow Design</span>
+        </div>
+      </div>
+    </div>
+    <div class="cert-row" data-reveal>
+      <div class="cert-card">
+        <div class="cert-dot" style="--c:#0078d4"></div>
+        <div>
+          <strong>Azure DP-900</strong>
+          <p>Microsoft · Data Fundamentals</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-dot" style="--c:#ff9900"></div>
+        <div>
+          <strong>AWS Cloud Foundations</strong>
+          <p>Amazon Web Services</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-dot" style="--c:#ff9900"></div>
+        <div>
+          <strong>AWS Cloud Architecting</strong>
+          <p>Amazon Web Services</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BEYOND ======================== -->
+  <section id="beyond" class="section beyond-sec">
+    <div class="sec-intro" data-reveal>
+      <span class="sec-num">05</span>
+      <h2>Beyond Code</h2>
+    </div>
+    <div class="beyond-flex" data-reveal>
+      <div class="b-card">
+        <div class="b-emoji">⚽</div>
+        <div>
+          <strong>Football Captain — Sahara FC</strong>
+          <p>Led the squad on and off the field. Team strategy, coordination, and keeping morale high.</p>
+        </div>
+      </div>
+      <div class="b-card">
+        <div class="b-emoji">🎓</div>
+        <div>
+          <strong>Community Mentor</strong>
+          <p>Runs technical workshops for underprivileged students — making tech more accessible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CONTACT ======================== -->
+  <section id="contact" class="section contact-sec">
+    <div class="contact-inner" data-reveal>
+      <span class="sec-num">06</span>
+      <h2 class="contact-heading">Let's build something<br><span>that doesn't break.</span></h2>
+      <a href="mailto:ayushkumarh078@gmail.com" class="big-email">ayushkumarh078@gmail.com</a>
+      <div class="contact-socials">
+        <a href="mailto:ayushkumarh078@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub</a>
+        <a href="tel:+919876543210">Phone</a>
+      </div>
+      <p class="footer">© 2026 Ayush Kumar · VIT-AP University</p>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>

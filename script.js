@@ -1,130 +1,181 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initCursor();
-  initScrollBar();
-  initNav();
-  initScrollAnimations();
-  initTilt();
-  initCountUp();
+  cursor();
+  progress();
+  nav();
+  heroGlow();
+  projGlow();
+  reveal();
+  tilt();
+  countUp();
 });
 
-/* ── CURSOR ─────────────────────────────────── */
-function initCursor() {
-  if (window.matchMedia('(hover: none)').matches) return;
-  const dot  = document.getElementById('c-dot');
-  const ring = document.getElementById('c-ring');
-  if (!dot || !ring) return;
+/* ──────────────────────────────────────
+   CURSOR  (dot snaps, trail lags)
+   ────────────────────────────────────── */
+function cursor() {
+  if (window.matchMedia('(hover:none)').matches) return;
+  const dot   = document.getElementById('cursor');
+  const trail = document.getElementById('cursor-trail');
+  if (!dot || !trail) return;
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+  let mx=0, my=0, tx=0, ty=0;
 
-  (function tick() {
-    rx += (mx - rx) * 0.14;
-    ry += (my - ry) * 0.14;
-    dot.style.cssText  = `left:${mx}px;top:${my}px`;
-    ring.style.cssText = `left:${rx}px;top:${ry}px`;
-    requestAnimationFrame(tick);
+  window.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; }, {passive:true});
+
+  (function loop() {
+    tx += (mx-tx) * .13;
+    ty += (my-ty) * .13;
+    dot.style.left   = mx+'px';
+    dot.style.top    = my+'px';
+    trail.style.left = tx+'px';
+    trail.style.top  = ty+'px';
+    requestAnimationFrame(loop);
   })();
 
-  document.querySelectorAll('a,button,.proj-card,.num-card,.tl-card,.cert,.beyond-item').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('on'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('on'));
+  const hot = 'a,button,.proj-card,.s-card,.exp-card,.cert-card,.float-card,.b-card,.pill-row span,.btn-glow,.btn-ghost';
+  document.querySelectorAll(hot).forEach(el => {
+    el.addEventListener('mouseenter', () => dot.classList.add('big'));
+    el.addEventListener('mouseleave', () => dot.classList.remove('big'));
   });
 }
 
-/* ── SCROLL BAR ─────────────────────────────── */
-function initScrollBar() {
-  const bar = document.querySelector('.scroll-bar');
+/* ──────────────────────────────────────
+   SCROLL PROGRESS BAR
+   ────────────────────────────────────── */
+function progress() {
+  const bar = document.getElementById('progress');
   if (!bar) return;
   window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    bar.style.width = (pct * 100) + '%';
-  }, { passive: true });
+    const pct = window.scrollY / (document.documentElement.scrollHeight - innerHeight);
+    bar.style.width = (pct*100) + '%';
+  }, {passive:true});
 }
 
-/* ── NAV ─────────────────────────────────────── */
-function initNav() {
-  const nav    = document.querySelector('.nav');
-  const toggle = document.getElementById('nav-toggle');
-  const links  = document.querySelectorAll('.nav-links a');
-  const secs   = document.querySelectorAll('[id]');
+/* ──────────────────────────────────────
+   NAVIGATION
+   ────────────────────────────────────── */
+function nav() {
+  const navEl  = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const menu   = document.getElementById('nav-menu');
+  const links  = menu?.querySelectorAll('a');
 
-  toggle?.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.querySelectorAll('span')[0].style.transform = open ? 'translateY(7.5px) rotate(45deg)' : '';
-    toggle.querySelectorAll('span')[1].style.opacity   = open ? '0' : '';
+  burger?.addEventListener('click', () => {
+    const open = navEl.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+    const [s1, s2] = burger.querySelectorAll('span');
+    s1.style.transform = open ? 'translateY(7.5px) rotate(45deg)' : '';
+    s2.style.transform = open ? 'translateY(-7.5px) rotate(-45deg)' : '';
   });
 
-  links.forEach(l => l.addEventListener('click', () => {
-    nav.classList.remove('open');
-    toggle?.setAttribute('aria-expanded', 'false');
-    toggle?.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  links?.forEach(l => l.addEventListener('click', () => {
+    navEl.classList.remove('open');
+    burger?.querySelectorAll('span').forEach(s => s.style.transform='');
   }));
 
+  // Active section highlight
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        a?.classList.add('active');
-      }
+      if (!e.isIntersecting) return;
+      links?.forEach(l => l.classList.remove('active'));
+      const a = menu?.querySelector(`a[href="#${e.target.id}"]`);
+      a?.classList.add('active');
     });
-  }, { threshold: 0.35 });
+  }, {threshold: .35});
 
-  secs.forEach(s => io.observe(s));
+  document.querySelectorAll('[id]').forEach(s => io.observe(s));
 }
 
-/* ── SCROLL REVEAL ──────────────────────────── */
-function initScrollAnimations() {
-  const els = document.querySelectorAll('[data-animate]');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  els.forEach(el => io.observe(el));
+/* ──────────────────────────────────────
+   HERO MOUSE-TRACKING RADIAL GLOW
+   ────────────────────────────────────── */
+function heroGlow() {
+  const hero = document.querySelector('.hero');
+  const glow = document.getElementById('hero-glow');
+  if (!hero || !glow) return;
+
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+    const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+    glow.style.setProperty('--mx', x+'%');
+    glow.style.setProperty('--my', y+'%');
+  }, {passive:true});
 }
 
-/* ── 3D TILT ON CARDS ───────────────────────── */
-function initTilt() {
-  document.querySelectorAll('.proj-card, .tl-card, .num-card, .h-card').forEach(card => {
+/* ──────────────────────────────────────
+   PROJECT CARD MOUSE-TRACKING GLOW
+   ────────────────────────────────────── */
+function projGlow() {
+  document.querySelectorAll('.proj-card').forEach(card => {
     card.addEventListener('mousemove', e => {
-      if (window.innerWidth < 768) return;
       const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `perspective(700px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
+      const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+      const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+      card.querySelector('.proj-glow')?.style.setProperty('--mx', x+'%');
+      card.querySelector('.proj-glow')?.style.setProperty('--my', y+'%');
+    }, {passive:true});
   });
 }
 
-/* ── COUNT UP ───────────────────────────────── */
-function initCountUp() {
+/* ──────────────────────────────────────
+   SCROLL REVEAL
+   ────────────────────────────────────── */
+function reveal() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('show'), i * 60);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+}
+
+/* ──────────────────────────────────────
+   3D TILT ON CARDS
+   ────────────────────────────────────── */
+function tilt() {
+  const cards = '.proj-card,.s-card,.exp-card,.float-card,.b-card,.cert-card';
+  document.querySelectorAll(cards).forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (innerWidth < 768) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - .5;
+      const y = (e.clientY - r.top)  / r.height - .5;
+      // Only tilt if not already controlled by a hover transform in CSS
+      const current = card.style.transform;
+      if (!current || current === 'none') {
+        card.style.transform = `perspective(700px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px)`;
+      }
+    }, {passive:true});
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+}
+
+/* ──────────────────────────────────────
+   COUNT-UP ANIMATION
+   ────────────────────────────────────── */
+function countUp() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       io.unobserve(entry.target);
       entry.target.querySelectorAll('[data-count]').forEach(el => {
-        const target = +el.dataset.count;
-        const dur = 1200;
-        let start = null;
+        const end = +el.dataset.count, dur = 1300;
+        let t0 = null;
         const step = ts => {
-          if (!start) start = ts;
-          const p = Math.min((ts - start) / dur, 1);
-          el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+          if (!t0) t0 = ts;
+          const p = Math.min((ts - t0) / dur, 1);
+          el.textContent = Math.floor((1 - Math.pow(1-p, 3)) * end);
           if (p < 1) requestAnimationFrame(step);
-          else el.textContent = target;
+          else el.textContent = end;
         };
         requestAnimationFrame(step);
       });
     });
-  }, { threshold: 0.3 });
+  }, {threshold:.3});
 
-  document.querySelectorAll('.about-numbers, .proj-grid').forEach(el => io.observe(el));
+  document.querySelectorAll('.stats-grid, .proj-grid').forEach(el => io.observe(el));
 }
