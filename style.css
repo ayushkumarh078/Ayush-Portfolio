@@ -51,47 +51,71 @@ body {
   position: relative;
 }
 
-/* Vibrant Aurora Background */
-.aurora-bg {
+/* System Boot Screen */
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #020204;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--signal-amber);
+  transition: opacity 0.5s ease-out;
+}
+.boot-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.boot-text p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  text-shadow: 0 0 5px rgba(255, 176, 58, 0.5);
+}
+.blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Cyber Grid Background */
+.cyber-grid-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
+  background-color: #050508;
   overflow: hidden;
-  background-color: #030308;
 }
-
-.aurora-blob {
+.grid-layer {
   position: absolute;
-  filter: blur(90px);
-  opacity: 0.55;
-  border-radius: 50%;
-  animation: float 20s infinite alternate ease-in-out;
-  pointer-events: none;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+  animation: grid-move 20s linear infinite;
+  transform-origin: top;
 }
-
-.aurora-1 {
-  top: -10%; left: -10%;
-  width: 50vw; height: 50vw;
-  background: radial-gradient(circle, #7e22ce, transparent 70%);
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 176, 58, 0.3);
+  box-shadow: 0 0 20px rgba(255, 176, 58, 0.6);
+  animation: scan 6s linear infinite;
 }
-
-.aurora-2 {
-  bottom: -20%; right: -10%;
-  width: 60vw; height: 60vw;
-  background: radial-gradient(circle, #0ea5e9, transparent 70%);
-  animation-delay: -5s;
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 40px; }
 }
-
-.aurora-3 {
-  top: 40%; left: 30%;
-  width: 45vw; height: 45vw;
-  background: radial-gradient(circle, #10b981, transparent 70%);
-  animation-delay: -10s;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(10%, 15%) scale(1.2); }
+@keyframes scan {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
 }
 
 #starfield {
@@ -99,6 +123,7 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  opacity: 0.3;
 }
 
 /* Scroll progress bar */
@@ -230,31 +255,48 @@ body {
   gap: 1.5rem;
 }
 
+.hud-bracket span {
+  color: var(--signal-cyan);
+  font-weight: 300;
+  opacity: 0.7;
+}
+
 .section-title::after {
   content: "";
-  height: 1px;
-  background: linear-gradient(90deg, var(--chrome-700), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, var(--signal-amber), transparent);
   flex-grow: 1;
 }
 
-/* Refined Aurora Cards */
+/* HUD Panels (Cyberpunk Cards) */
 .project-card,
 .timeline-content,
 .spec-plate {
-  background: rgba(10, 10, 16, 0.7);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: rgba(8, 8, 12, 0.95);
+  border: 1px solid var(--signal-cyan);
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
   position: relative;
   overflow: hidden;
   transform-style: preserve-3d;
-  transition: border-color 0.4s var(--transition-standard), 
-               transform 0.1s ease-out, 
-               box-shadow 0.4s var(--transition-standard);
+  transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--signal-amber);
+  z-index: 10;
+}
+.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+.bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+.top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+
+.project-card:hover,
+.timeline-content:hover {
+  border-color: var(--signal-amber);
+  box-shadow: 0 0 20px rgba(255, 176, 58, 0.2);
 }
 
 .card-shine {

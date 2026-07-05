@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  initBootScreen();
   initScrollProgress();
   initAnimations();
   initNavigation();
@@ -9,6 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initLetterFade();
   initCanvasBackground();
 });
+
+function initBootScreen() {
+  const bootScreen = document.getElementById('boot-screen');
+  if (bootScreen) {
+    setTimeout(() => {
+      bootScreen.classList.add('hidden');
+    }, 2500);
+  }
+}
 
 function initScrollProgress() {
   const progressBar = document.querySelector('.scroll-progress');
@@ -119,6 +129,8 @@ function initCustomCursor() {
 
   const ring = document.createElement('div');
   ring.className = 'cursor-ring';
+  // Futuristic crosshair lines inside the ring
+  ring.innerHTML = '<div style="position:absolute;top:50%;left:-5px;right:-5px;height:1px;background:var(--signal-amber);"></div><div style="position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--signal-amber);"></div>';
   document.body.appendChild(ring);
 
   let mouseX = 0;
@@ -132,8 +144,8 @@ function initCustomCursor() {
   });
 
   function animateCursor() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
+    ringX += (mouseX - ringX) * 0.2; // faster tracking for HUD
+    ringY += (mouseY - ringY) * 0.2;
 
     cursor.style.left = `${mouseX}px`;
     cursor.style.top = `${mouseY}px`;
@@ -151,11 +163,11 @@ function initCustomCursor() {
     hoverables.forEach(el => {
       el.addEventListener('mouseenter', () => {
         ring.classList.add('hover');
-        cursor.classList.add('hover');
+        ring.style.transform = 'translate(-50%, -50%) rotate(45deg)';
       });
       el.addEventListener('mouseleave', () => {
         ring.classList.remove('hover');
-        cursor.classList.remove('hover');
+        ring.style.transform = 'translate(-50%, -50%) rotate(0deg)';
       });
     });
   };
