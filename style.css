@@ -51,14 +51,53 @@ body {
   position: relative;
 }
 
-/* Interactive Canvas Background */
-#bg-canvas {
+/* Vibrant Aurora Background */
+.aurora-bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 0;
+  overflow: hidden;
+  background-color: #030308;
+}
+
+.aurora-blob {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.55;
+  border-radius: 50%;
+  animation: float 20s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+.aurora-1 {
+  top: -10%; left: -10%;
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle, #7e22ce, transparent 70%);
+}
+
+.aurora-2 {
+  bottom: -20%; right: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, #0ea5e9, transparent 70%);
+  animation-delay: -5s;
+}
+
+.aurora-3 {
+  top: 40%; left: 30%;
+  width: 45vw; height: 45vw;
+  background: radial-gradient(circle, #10b981, transparent 70%);
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(10%, 15%) scale(1.2); }
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -82,8 +121,10 @@ body {
   right: 0;
   padding: 1.5rem 2rem;
   z-index: 1000;
-  background: rgba(3, 3, 7, 0.95);
-  border-bottom: 1px solid var(--chrome-700);
+  background: rgba(3, 3, 7, 0.5);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.4s var(--transition-standard);
 }
 
@@ -196,16 +237,18 @@ body {
   flex-grow: 1;
 }
 
-/* Solid Interactive Cards */
+/* Refined Aurora Cards */
 .project-card,
 .timeline-content,
 .spec-plate {
-  background: var(--void-3);
-  border: 1px solid var(--chrome-700);
+  background: rgba(10, 10, 16, 0.7);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
   transform-style: preserve-3d;

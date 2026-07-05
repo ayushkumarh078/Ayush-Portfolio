@@ -276,11 +276,11 @@ function initCardTilt() {
 }
 
 function initCanvasBackground() {
-  const canvas = document.getElementById('bg-canvas');
+  const canvas = document.getElementById('starfield');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let width, height;
-  let particles = [];
+  let stars = [];
   
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -289,30 +289,33 @@ function initCanvasBackground() {
   window.addEventListener('resize', resize);
   resize();
 
-  class Particle {
+  class Star {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.radius = Math.random() * 1.5 + 0.5;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.baseAlpha = Math.random() * 0.5 + 0.1;
+      this.phase = Math.random() * Math.PI * 2;
     }
     update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
+      this.y -= 0.15;
+      if (this.y < 0) {
+        this.y = height;
+        this.x = Math.random() * width;
+      }
+      this.phase += 0.02;
     }
     draw() {
+      const alpha = this.baseAlpha + Math.sin(this.phase) * 0.3;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, alpha)})`;
       ctx.fill();
     }
   }
 
-  for (let i = 0; i < 80; i++) {
-    particles.push(new Particle());
+  for (let i = 0; i < 150; i++) {
+    stars.push(new Star());
   }
 
   let mx = -1000, my = -1000;
@@ -324,32 +327,19 @@ function initCanvasBackground() {
   function animate() {
     ctx.clearRect(0, 0, width, height);
     
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw();
+    for (let i = 0; i < stars.length; i++) {
+      stars[i].update();
+      stars[i].draw();
       
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist/120 * 0.15})`;
-          ctx.stroke();
-        }
-      }
-      
-      const dxMouse = particles[i].x - mx;
-      const dyMouse = particles[i].y - my;
+      const dxMouse = stars[i].x - mx;
+      const dyMouse = stars[i].y - my;
       const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-      if (distMouse < 150) {
+      
+      if (distMouse < 120) {
         ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.moveTo(stars[i].x, stars[i].y);
         ctx.lineTo(mx, my);
-        ctx.strokeStyle = `rgba(255, 176, 58, ${0.3 - distMouse/150 * 0.3})`;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - distMouse/120 * 0.12})`;
         ctx.stroke();
       }
     }
