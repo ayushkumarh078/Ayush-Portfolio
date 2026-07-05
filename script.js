@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initAnimations();
   initNavigation();
-  initGlitchEffects();
   initCustomCursor();
-  initTextScrambler();
+  initCardShine();
   initCountUp();
+  initLetterFade();
 });
 
 function initScrollProgress() {
@@ -28,7 +28,7 @@ function initScrollProgress() {
       ticking = true;
     }
   });
-  updateProgress(); // Initial check
+  updateProgress();
 }
 
 function initAnimations() {
@@ -74,7 +74,6 @@ function initNavigation() {
       }
     });
 
-    // Fallback to top section if at the very top
     if (window.scrollY < 100) {
       current = 'hero';
     }
@@ -109,38 +108,6 @@ function initNavigation() {
   });
 }
 
-function initGlitchEffects() {
-  const glitchName = document.querySelector('.glitch-name');
-
-  if (!glitchName || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  let glitchTimeout;
-
-  glitchName.addEventListener('mousemove', (e) => {
-    const rect = glitchName.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    glitchName.style.transform = `perspective(1000px) rotateX(${y * 10}deg) rotateY(${x * 10}deg)`;
-  });
-
-  glitchName.addEventListener('mouseleave', () => {
-    glitchName.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-  });
-
-  function randomGlitch() {
-    if (Math.random() > 0.65) {
-      glitchName.classList.add('glitching');
-      setTimeout(() => {
-        glitchName.classList.remove('glitching');
-      }, 200);
-    }
-    glitchTimeout = setTimeout(randomGlitch, Math.random() * 6000 + 3000);
-  }
-
-  glitchTimeout = setTimeout(randomGlitch, 4000);
-}
-
 function initCustomCursor() {
   if (window.matchMedia('(hover: none)').matches) return;
 
@@ -156,7 +123,6 @@ function initCustomCursor() {
   let mouseY = 0;
   let ringX = 0;
   let ringY = 0;
-  let isHovering = false;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -164,7 +130,6 @@ function initCustomCursor() {
   });
 
   function animateCursor() {
-    // Spring physics approximation
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
 
@@ -179,7 +144,6 @@ function initCustomCursor() {
 
   animateCursor();
 
-  // Detect hover on interactive elements
   const updateHoverables = () => {
     const hoverables = document.querySelectorAll('a, button, .project-card, .skill-chip, .chip, .timeline-content');
     hoverables.forEach(el => {
@@ -196,100 +160,25 @@ function initCustomCursor() {
 
   updateHoverables();
   
-  // Re-run whenever mutations occur (e.g. dynamic elements, though not applicable here, good practice)
   const observer = new MutationObserver(updateHoverables);
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
-// Matrix Text Scrambler Effect
-class TextScrambler {
-  constructor(el) {
-    this.el = el;
-    this.chars = '!<>-_\\/[]{}—=+*^?#________10X';
-    this.update = this.update.bind(this);
-  }
-
-  setText(newText) {
-    const oldText = this.el.innerText;
-    const length = Math.max(oldText.length, newText.length);
-    const promise = new Promise((resolve) => this.resolve = resolve);
-    this.queue = [];
-    
-    for (let i = 0; i < length; i++) {
-      const from = oldText[i] || '';
-      const to = newText[i] || '';
-      const start = Math.floor(Math.random() * 15);
-      const end = start + Math.floor(Math.random() * 15);
-      this.queue.push({ from, to, start, end, char: '' });
-    }
-    
-    cancelAnimationFrame(this.frameId);
-    this.frame = 0;
-    this.update();
-    return promise;
-  }
-
-  update() {
-    let output = '';
-    let complete = 0;
-    
-    for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i];
-      if (this.frame >= end) {
-        complete++;
-        output += to;
-      } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
-          char = this.randomChar();
-          this.queue[i].char = char;
-        }
-        output += `<span class="scramble-char" style="color: var(--signal-cyan);">${char}</span>`;
-      } else {
-        output += from;
-      }
-    }
-    
-    this.el.innerHTML = output;
-    
-    if (complete === this.queue.length) {
-      this.resolve();
-    } else {
-      this.frameId = requestAnimationFrame(this.update);
-      this.frame++;
-    }
-  }
-
-  randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)];
-  }
-}
-
-function initTextScrambler() {
-  const scrambleElements = document.querySelectorAll('.nav-links a, .section-title, .plate-row span.plate-value, .contact-email');
-  
-  scrambleElements.forEach(el => {
-    // If there's nested elements or HTML content, we only grab raw text
-    const originalText = el.getAttribute('data-scramble-text') || el.innerText;
-    
-    // Save original text as attribute in case we need it
-    if (!el.getAttribute('data-scramble-text')) {
-      el.setAttribute('data-scramble-text', originalText);
-    }
-    
-    const scrambler = new TextScrambler(el);
-    let isScrambling = false;
-    
-    el.addEventListener('mouseenter', () => {
-      if (isScrambling) return;
-      isScrambling = true;
-      scrambler.setText(originalText).then(() => {
-        isScrambling = false;
-      });
+// Spotlight glass reflection coordinates updater
+function initCardShine() {
+  const cards = document.querySelectorAll('.project-card, .timeline-content');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
     });
   });
 }
 
-// Count-Up Statistics
+// Statistical numbers count up
 function initCountUp() {
   const countElements = document.querySelectorAll('[data-count]');
   
@@ -302,13 +191,12 @@ function initCountUp() {
         
         const targetVal = parseInt(el.getAttribute('data-count'), 10);
         const minVal = parseInt(el.getAttribute('data-min'), 10) || 0;
-        const duration = 1500; // 1.5 seconds
+        const duration = 1500;
         let startTime = null;
         
         function animateValue(timestamp) {
           if (!startTime) startTime = timestamp;
           const progress = Math.min((timestamp - startTime) / duration, 1);
-          // Easing: easeOutExpo
           const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
           const current = Math.floor(easeProgress * (targetVal - minVal) + minVal);
           
@@ -326,4 +214,37 @@ function initCountUp() {
   }, { threshold: 0.1 });
   
   countElements.forEach(el => countObserver.observe(el));
+}
+
+// Letter-by-letter fade-in animation
+function initLetterFade() {
+  const titles = document.querySelectorAll('.section-title');
+  titles.forEach(title => {
+    const text = title.innerText;
+    title.innerHTML = '';
+    
+    const textNode = document.createElement('span');
+    textNode.className = 'title-text-node';
+    
+    [...text].forEach((char, index) => {
+      const span = document.createElement('span');
+      span.className = 'letter-fade';
+      span.innerText = char === ' ' ? '\u00A0' : char;
+      span.style.transitionDelay = `${index * 30}ms`;
+      textNode.appendChild(span);
+    });
+    
+    title.appendChild(textNode);
+    
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const letters = entry.target.querySelectorAll('.letter-fade');
+          letters.forEach(letter => letter.classList.add('active'));
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    observer.observe(title);
+  });
 }

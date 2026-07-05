@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Ayush Kumar — Software Engineer & QA Specialist. Building and breaking systems from FSSAI's national food-safety platforms to self-aiming trash cans." />
-  <title>AYUSH_KUMAR.EXE — Portfolio</title>
+  <title>Ayush Kumar — Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <meta property="og:title" content="AYUSH_KUMAR.EXE — Portfolio" />
-  <meta property="og:description" content="Software Engineer & QA Specialist. Love, Death + Robots inspired portfolio." />
+  <meta property="og:title" content="Ayush Kumar — Portfolio" />
+  <meta property="og:description" content="Software Engineer & QA Specialist. Glassmorphic portfolio." />
   <meta property="og:type" content="website" />
 </head>
 <body>
-  <div class="corner-brackets" aria-hidden="true">
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow-container" aria-hidden="true">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
   </div>
 
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -28,11 +28,11 @@
     <div class="nav-container">
       <a href="#hero" class="nav-logo">AK://</a>
       <ul class="nav-links">
-        <li><a href="#about">01 ABOUT</a></li>
-        <li><a href="#experience">02 WORK</a></li>
-        <li><a href="#projects">03 PROJECTS</a></li>
-        <li><a href="#skills">04 SKILLS</a></li>
-        <li><a href="#contact">05 CONTACT</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#experience">WORK</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -44,40 +44,27 @@
     <section id="hero" class="section hero-section">
       <div class="hero-background" aria-hidden="true">
         <div class="grid-overlay"></div>
-        <svg class="hud-ring" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--signal-red)" stroke-width="0.5" opacity="0.15" stroke-dasharray="5 20">
-            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="25s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="50" cy="50" r="38" fill="none" stroke="var(--signal-cyan)" stroke-width="0.25" opacity="0.1" stroke-dasharray="60 10">
-            <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="40s" repeatCount="indefinite" />
-          </circle>
-          <line x1="50" y1="2" x2="50" y2="98" stroke="var(--chrome-500)" stroke-width="0.1" opacity="0.1" />
-          <line x1="2" y1="50" x2="98" y2="50" stroke="var(--chrome-500)" stroke-width="0.1" opacity="0.1" />
-        </svg>
-        <div class="scanline" aria-hidden="true"></div>
       </div>
       <div class="hero-content" data-animate>
-        <h1 class="glitch-name" data-text="AYUSH KUMAR">AYUSH KUMAR</h1>
+        <h1 class="hero-name">AYUSH KUMAR</h1>
         <div class="hero-meta">
-          <span class="episode-tag">EP.00</span>
           <span class="hero-subtitle">SOFTWARE ENGINEER / QA &amp; SYSTEMS</span>
         </div>
         <p class="hero-statement">Building and breaking systems — from FSSAI's national food-safety platforms to self-aiming trash cans.</p>
         <div class="contact-chips">
-          <a href="mailto:ayushkumar@email.com" class="chip">EMAIL</a>
+          <a href="mailto:ayushkumarh078@gmail.com" class="chip">EMAIL</a>
           <a href="tel:+919876543210" class="chip">PHONE</a>
           <a href="https://linkedin.com/in/ayushkumar" class="chip" target="_blank" rel="noopener">LINKEDIN</a>
           <a href="https://github.com/ayushkumar" class="chip" target="_blank" rel="noopener">GITHUB</a>
         </div>
         <div class="scroll-cue">
-          <span>SCROLL</span>
+          <span>SCROLL DOWN</span>
           <span class="chevron">↓</span>
         </div>
       </div>
     </section>
 
     <section id="about" class="section about-section">
-      <div class="section-number">EP.01</div>
       <h2 class="section-title">ABOUT / SUMMARY</h2>
       <div class="about-grid">
         <div class="about-content" data-animate>
@@ -93,19 +80,14 @@
     </section>
 
     <section id="experience" class="section experience-section">
-      <div class="section-number">EP.02</div>
       <h2 class="section-title">EXPERIENCE / WORK</h2>
       <div class="timeline">
         <article class="timeline-node" data-animate>
           <div class="timeline-marker">
-            <span class="node-episode">EP.02.01</span>
             <span class="node-dates">Jan 2026–Jun 2026</span>
           </div>
           <div class="timeline-content">
-            <div class="card-corner top-l"></div>
-            <div class="card-corner top-r"></div>
-            <div class="card-corner bot-l"></div>
-            <div class="card-corner bot-r"></div>
+            <div class="card-shine"></div>
             <h3>QA &amp; Testing Intern</h3>
             <p class="company">FSSAI Headquarters, Delhi</p>
             <ul>
@@ -118,14 +100,10 @@
         </article>
         <article class="timeline-node" data-animate>
           <div class="timeline-marker">
-            <span class="node-episode">EP.02.02</span>
             <span class="node-dates">Jul 2024–May 2025</span>
           </div>
           <div class="timeline-content">
-            <div class="card-corner top-l"></div>
-            <div class="card-corner top-r"></div>
-            <div class="card-corner bot-l"></div>
-            <div class="card-corner bot-r"></div>
+            <div class="card-shine"></div>
             <h3>Tech Lead</h3>
             <p class="company">Innovators Quest Club</p>
             <ul>
@@ -142,14 +120,10 @@
         </article>
         <article class="timeline-node" data-animate>
           <div class="timeline-marker">
-            <span class="node-episode">EP.02.03</span>
             <span class="node-dates">Jul 2023–May 2024</span>
           </div>
           <div class="timeline-content">
-            <div class="card-corner top-l"></div>
-            <div class="card-corner top-r"></div>
-            <div class="card-corner bot-l"></div>
-            <div class="card-corner bot-r"></div>
+            <div class="card-shine"></div>
             <h3>Core Member &amp; Event Organizer</h3>
             <p class="company">English Literacy Club</p>
             <ul>
@@ -163,37 +137,23 @@
     </section>
 
     <section id="projects" class="section projects-section">
-      <div class="section-number">EP.03</div>
       <h2 class="section-title">PROJECTS</h2>
       <div class="projects-grid">
         <article class="project-card" data-animate>
-          <div class="card-corner top-l"></div>
-          <div class="card-corner top-r"></div>
-          <div class="card-corner bot-l"></div>
-          <div class="card-corner bot-r"></div>
+          <div class="card-shine"></div>
           <div class="project-graphic theft-detection">
             <svg viewBox="0 0 100 100" class="signal-art">
-              <line x1="10" y1="50" x2="90" y2="50" stroke="var(--chrome-700)" stroke-width="0.25" stroke-dasharray="2 2" />
-              <line x1="50" y1="10" x2="50" y2="90" stroke="var(--chrome-700)" stroke-width="0.25" stroke-dasharray="2 2" />
-              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--chrome-500)" stroke-width="0.5" opacity="0.4" />
-              <path d="M 35 25 L 25 25 L 25 35" fill="none" stroke="var(--signal-red)" stroke-width="1" />
-              <path d="M 65 25 L 75 25 L 75 35" fill="none" stroke="var(--signal-red)" stroke-width="1" />
-              <path d="M 35 75 L 25 75 L 25 65" fill="none" stroke="var(--signal-red)" stroke-width="1" />
-              <path d="M 65 75 L 75 75 L 75 65" fill="none" stroke="var(--signal-red)" stroke-width="1" />
-              <circle cx="50" cy="50" r="30" fill="none" stroke="var(--signal-cyan)" stroke-width="0.75" stroke-dasharray="10 5">
-                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="5s" repeatCount="indefinite" />
-              </circle>
-              <g opacity="0.8">
-                <circle cx="42" cy="38" r="1.5" fill="var(--signal-red)" />
-                <circle cx="42" cy="38" r="4" fill="none" stroke="var(--signal-red)" stroke-width="0.5">
-                  <animate attributeName="r" values="1;6;1" dur="2s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
-                </circle>
-                <text x="47" y="37" font-family="'JetBrains Mono', monospace" font-size="3" fill="var(--signal-red)">OBJ_DETECTED</text>
-              </g>
-              <path d="M15,85 L30,80 L35,88 L50,75 L60,82 L75,70 L90,85" fill="none" stroke="var(--signal-cyan)" stroke-width="0.5" opacity="0.6" />
-              <rect x="72" y="78" width="12" height="6" fill="none" stroke="var(--chrome-500)" stroke-width="0.5" />
-              <text x="74" y="82" font-family="'JetBrains Mono', monospace" font-size="3" fill="var(--chrome-500)">SYS_OK</text>
+              <circle cx="50" cy="50" r="32" fill="none" stroke="var(--signal-amber)" stroke-width="1" />
+              <circle cx="50" cy="50" r="16" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 50 18 L 64 34" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 64 34 L 58 58" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 58 58 L 38 58" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 38 58 L 32 38" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 32 38 L 44 22" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 44 22 L 50 18" fill="none" stroke="var(--signal-amber)" stroke-width="0.5" />
+              <path d="M 38 32 Q 50 24 62 32" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round" />
+              <circle cx="44" cy="42" r="2" fill="var(--signal-cyan)" />
+              <circle cx="50" cy="50" r="2" fill="var(--signal-amber)" />
             </svg>
           </div>
           <div class="project-content">
@@ -210,37 +170,21 @@
         </article>
 
         <article class="project-card" data-animate>
-          <div class="card-corner top-l"></div>
-          <div class="card-corner top-r"></div>
-          <div class="card-corner bot-l"></div>
-          <div class="card-corner bot-r"></div>
+          <div class="card-shine"></div>
           <div class="project-graphic quiz-website">
             <svg viewBox="0 0 100 100" class="signal-art">
-              <path d="M 10 10 L 90 10 L 90 90 L 10 90 Z" fill="none" stroke="var(--chrome-700)" stroke-width="0.25" />
-              <path d="M 20 20 L 80 20 L 80 80 L 20 80 Z" fill="none" stroke="var(--chrome-700)" stroke-width="0.25" stroke-dasharray="1 3" />
-              <circle cx="50" cy="45" r="8" fill="none" stroke="var(--signal-cyan)" stroke-width="1" />
-              <circle cx="50" cy="45" r="3" fill="var(--signal-cyan)" />
-              <line x1="50" y1="37" x2="50" y2="25" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="50" y1="53" x2="50" y2="65" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="42" y1="45" x2="30" y2="45" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="58" y1="45" x2="70" y2="45" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="44" y1="39" x2="32" y2="27" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="56" y1="39" x2="68" y2="27" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="44" y1="51" x2="32" y2="63" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <line x1="56" y1="51" x2="68" y2="63" stroke="var(--signal-cyan)" stroke-width="0.5" />
-              <circle cx="50" cy="25" r="2.5" fill="var(--signal-red)" />
-              <circle cx="50" cy="65" r="2.5" fill="var(--signal-red)" />
-              <circle cx="30" cy="45" r="2.5" fill="var(--signal-red)" />
-              <circle cx="70" cy="45" r="2.5" fill="var(--signal-red)" />
-              <circle cx="32" cy="27" r="2" fill="var(--signal-cyan)" />
-              <circle cx="68" cy="27" r="2" fill="var(--signal-cyan)" />
-              <circle cx="32" cy="63" r="2" fill="var(--signal-cyan)" />
-              <circle cx="68" cy="63" r="2" fill="var(--signal-cyan)" />
-              <circle cx="50" cy="45" r="14" fill="none" stroke="var(--signal-red)" stroke-width="0.5" stroke-dasharray="4 6">
-                <animateTransform attributeName="transform" type="rotate" from="360 50 45" to="0 50 45" dur="8s" repeatCount="indefinite" />
-              </circle>
-              <text x="15" y="86" font-family="'JetBrains Mono', monospace" font-size="4" fill="var(--chrome-500)">[NLP.GEN.ACTIVE]</text>
-              <text x="65" y="86" font-family="'JetBrains Mono', monospace" font-size="4" fill="var(--signal-cyan)">SELECT *</text>
+              <path d="M 50 20 L 80 32 L 50 44 L 20 32 Z" fill="none" stroke="var(--signal-cyan)" stroke-width="1" />
+              <path d="M 20 44 L 50 56 L 80 44" fill="none" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
+              <line x1="20" y1="32" x2="20" y2="44" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
+              <line x1="80" y1="32" x2="80" y2="44" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
+              <line x1="50" y1="44" x2="50" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.6" />
+              <path d="M 20 56 L 50 68 L 80 56" fill="none" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
+              <line x1="20" y1="44" x2="20" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
+              <line x1="80" y1="44" x2="80" y2="56" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
+              <line x1="50" y1="56" x2="50" y2="68" stroke="var(--signal-cyan)" stroke-width="1" opacity="0.3" />
+              <circle cx="50" cy="32" r="3" fill="var(--signal-amber)" />
+              <line x1="50" y1="32" x2="50" y2="12" stroke="var(--signal-amber)" stroke-width="0.5" stroke-dasharray="1 1" />
+              <circle cx="50" cy="12" r="1.5" fill="var(--signal-amber)" />
             </svg>
           </div>
           <div class="project-content">
@@ -257,32 +201,16 @@
         </article>
 
         <article class="project-card" data-animate>
-          <div class="card-corner top-l"></div>
-          <div class="card-corner top-r"></div>
-          <div class="card-corner bot-l"></div>
-          <div class="card-corner bot-r"></div>
+          <div class="card-shine"></div>
           <div class="project-graphic trash-can">
             <svg viewBox="0 0 100 100" class="signal-art">
-              <circle cx="50" cy="50" r="35" fill="none" stroke="var(--chrome-700)" stroke-width="0.5" />
-              <circle cx="50" cy="50" r="25" fill="none" stroke="var(--chrome-500)" stroke-width="0.5" opacity="0.5" stroke-dasharray="2 2" />
-              <circle cx="50" cy="50" r="12" fill="none" stroke="var(--signal-cyan)" stroke-width="0.75" />
-              <circle cx="50" cy="50" r="3" fill="var(--signal-red)" />
-              <line x1="10" y1="50" x2="90" y2="50" stroke="var(--chrome-700)" stroke-width="0.5" />
-              <line x1="50" y1="10" x2="50" y2="90" stroke="var(--chrome-700)" stroke-width="0.5" />
-              <line x1="50" y1="50" x2="72" y2="28" stroke="var(--signal-red)" stroke-width="1" stroke-dasharray="1 1">
-                <animate attributeName="x2" values="50;72;30;50" dur="4s" repeatCount="indefinite" />
-                <animate attributeName="y2" values="50;28;60;50" dur="4s" repeatCount="indefinite" />
-              </line>
-              <circle cx="72" cy="28" r="4" fill="none" stroke="var(--signal-red)" stroke-width="0.75">
-                <animate attributeName="cx" values="50;72;30;50" dur="4s" repeatCount="indefinite" />
-                <animate attributeName="cy" values="50;28;60;50" dur="4s" repeatCount="indefinite" />
-                <animate attributeName="r" values="3;5;3" dur="1s" repeatCount="indefinite" />
-              </circle>
-              <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="3.5" fill="var(--signal-cyan)">AZIMUTH: 184.2°</text>
-              <text x="12" y="27" font-family="'JetBrains Mono', monospace" font-size="3.5" fill="var(--signal-cyan)">ELEV: -12.4°</text>
-              <text x="62" y="82" font-family="'JetBrains Mono', monospace" font-size="3.5" fill="var(--signal-red)">LOCK_ON</text>
-              <circle cx="50" cy="50" r="38" fill="none" stroke="var(--signal-cyan)" stroke-width="0.5" stroke-dasharray="6 30">
-                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="12s" repeatCount="indefinite" />
+              <circle cx="50" cy="50" r="28" fill="none" stroke="var(--signal-amber)" stroke-width="1" />
+              <path d="M 50 16 L 50 22 M 50 78 L 50 84 M 16 50 L 22 50 M 78 50 L 84 50" stroke="var(--signal-amber)" stroke-width="1" />
+              <path d="M 26 26 L 31 31 M 69 69 L 74 74 M 74 26 L 69 31 M 31 69 L 26 74" stroke="var(--signal-amber)" stroke-width="1" />
+              <circle cx="50" cy="50" r="12" fill="none" stroke="var(--signal-cyan)" stroke-width="1" />
+              <circle cx="50" cy="50" r="4" fill="var(--signal-cyan)" />
+              <circle cx="50" cy="50" r="35" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="0.5" stroke-dasharray="10 40">
+                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite" />
               </circle>
             </svg>
           </div>
@@ -302,7 +230,6 @@
     </section>
 
     <section id="skills" class="section skills-section">
-      <div class="section-number">EP.04</div>
       <h2 class="section-title">SKILLS / CAPABILITIES</h2>
       <div class="skills-groups" data-animate>
         <div class="skill-group">
@@ -345,7 +272,6 @@
     </section>
 
     <section id="education" class="section education-section">
-      <div class="section-number">EP.05</div>
       <h2 class="section-title">EDUCATION &amp; CERTIFICATIONS</h2>
       <div class="education-grid">
         <div class="education-content" data-animate>
@@ -373,7 +299,6 @@
     </section>
 
     <section id="beyond" class="section beyond-section">
-      <div class="section-number">EP.06</div>
       <h2 class="section-title">BEYOND WORK</h2>
       <div class="beyond-grid" data-animate>
         <div class="beyond-item">
@@ -390,9 +315,9 @@
     <section id="contact" class="section contact-section">
       <div class="contact-content" data-animate>
         <h2 class="contact-headline">LET'S BUILD SOMETHING THAT DOESN'T BREAK.</h2>
-        <a href="mailto:ayushkumar@email.com" class="contact-email">ayushkumar@email.com</a>
+        <a href="mailto:ayushkumarh078@gmail.com" class="contact-email">ayushkumarh078@gmail.com</a>
         <div class="contact-links">
-          <a href="mailto:ayushkumar@email.com" class="contact-icon" aria-label="Email">✉</a>
+          <a href="mailto:ayushkumarh078@gmail.com" class="contact-icon" aria-label="Email">✉</a>
           <a href="tel:+919876543210" class="contact-icon" aria-label="Phone">📞</a>
           <a href="https://linkedin.com/in/ayushkumar" class="contact-icon" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="https://github.com/ayushkumar" class="contact-icon" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
@@ -400,13 +325,10 @@
         <div class="contact-footer">
           <span>© 2026 AYUSH KUMAR — TRANSMISSION END</span>
           <svg class="footer-glyph" viewBox="0 0 100 100" aria-hidden="true">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--signal-red)" stroke-width="1" stroke-dasharray="5 15">
-              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="10s" repeatCount="indefinite" />
+            <circle cx="50" cy="50" r="32" fill="none" stroke="var(--signal-amber)" stroke-width="0.75" />
+            <circle cx="50" cy="18" r="4" fill="var(--signal-cyan)">
+              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="6s" repeatCount="indefinite" />
             </circle>
-            <circle cx="50" cy="50" r="32" fill="none" stroke="var(--signal-cyan)" stroke-width="0.5" stroke-dasharray="40 10">
-              <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="15s" repeatCount="indefinite" />
-            </circle>
-            <path d="M 45 50 L 55 50 M 50 45 L 50 55" stroke="var(--signal-red)" stroke-width="1" />
           </svg>
         </div>
       </div>
