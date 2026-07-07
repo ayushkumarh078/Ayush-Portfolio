@@ -5,223 +5,351 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Ayush Kumar — Software Engineer at VIT-AP. Building scalable systems and full-stack applications." />
   <title>Ayush Kumar — Software Engineer</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 3D Scroll Environment -->
-  <div class="sky-container" id="sky" aria-hidden="true">
-    <div class="sun" id="sun"></div>
-    <div class="mountains"></div>
-    <div class="ocean"></div>
-    <div class="stars" id="stars"></div>
-    <div class="particles" id="particles"></div>
-  </div>
+  <!-- ===== CANVAS SKY — drawn by JS, looks photorealistic ===== -->
+  <canvas id="sky-canvas"></canvas>
 
-  <div id="cursor"></div>
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
   <div class="progress-bar" id="progress"></div>
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#hero" class="logo">Ayush.dev</a>
+    <a href="#hero" class="logo">AK<span>.</span></a>
     <ul class="nav-menu" id="nav-menu">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Work</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="burger" id="burger" aria-label="Toggle menu">
-      <span></span><span></span>
+    <button class="burger" id="burger" aria-label="menu">
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- CONTENT -->
-  <main class="content-wrapper">
+  <!-- ===== PAGE CONTENT (floats above the canvas) ===== -->
+  <main id="page">
 
-    <!-- ======================== HERO ======================== -->
-    <section id="hero" class="hero">
-      <div class="hero-content" data-parallax="0.2">
-        <div class="hero-tag">
-          <span class="live-dot"></span> SDE Profile
+    <!-- HERO -->
+    <section id="hero" class="hero-section">
+
+      <div class="hero-left">
+        <div class="badge">
+          <span class="pulse"></span> Open to Opportunities
         </div>
-        <h1 class="hero-name">
-          AYUSH<br>KUMAR
+
+        <h1 class="name-3d" id="hero-name">
+          <span class="line" data-depth="0.3">AYUSH</span>
+          <span class="line accent" data-depth="0.5">KUMAR</span>
         </h1>
-        <div class="hero-roles">
-          <span class="role-chip">Software Engineer</span>
-          <span class="sep">/</span>
-          <span class="role-chip">Full-Stack Dev</span>
-          <span class="sep">/</span>
-          <span class="role-chip">VIT-AP '26</span>
+
+        <div class="hero-sub">
+          <span>Software Engineer</span>
+          <span class="divider">|</span>
+          <span>Full-Stack Dev</span>
+          <span class="divider">|</span>
+          <span>VIT-AP '26</span>
         </div>
-        <p class="hero-desc">I architect and build scalable systems — from backend APIs and cloud infrastructure to full-stack applications that don't break.</p>
-        <div class="hero-btns">
-          <a href="#projects" class="btn-glass">View Work</a>
-          <a href="#contact" class="btn-ghost">Contact</a>
+
+        <p class="hero-p">
+          I architect and build <strong>scalable systems</strong> — from cloud-backed AI platforms and REST APIs to edge-computing IoT devices. I make software that holds up.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
+        </div>
+
+        <div class="hero-links">
+          <a href="mailto:ayushkumarh078@gmail.com">ayushkumarh078@gmail.com</a>
+          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
       </div>
-      <div class="hero-cards" data-parallax="0.4">
-        <div class="glass-card g-1" data-tilt>
-          <div class="gc-icon">☁️</div>
-          <div class="gc-text">
-            <strong>Cloud Native</strong>
-            <span>AWS &amp; Azure Certified</span>
+
+      <div class="hero-right">
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <div class="card-ico">☁️</div>
+            <div>
+              <strong>Cloud Certified</strong>
+              <span>AWS · Azure DP-900</span>
+            </div>
           </div>
         </div>
-        <div class="glass-card g-2" data-tilt>
-          <div class="gc-icon">⚙️</div>
-          <div class="gc-text">
-            <strong>Backend Dev</strong>
-            <span>Python, SQL, REST APIs</span>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <div class="card-ico">⚙️</div>
+            <div>
+              <strong>Backend Engineering</strong>
+              <span>Python · Flask · SQL · REST</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <div class="card-ico">🤖</div>
+            <div>
+              <strong>AI / IoT Systems</strong>
+              <span>OpenCV · MobileNet · RPi</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================== ABOUT ======================== -->
+    <!-- ABOUT -->
     <section id="about" class="section">
-      <div class="sec-intro" data-reveal>
-        <h2>About Me</h2>
-      </div>
+      <div class="sec-label">01 / About</div>
+      <h2 class="sec-title" data-reveal>About Me</h2>
       <div class="about-grid">
-        <div class="about-text glass-panel" data-reveal data-tilt>
-          <p>I am a Computer Science undergraduate at <strong>VIT-AP University</strong>, deeply passionate about software architecture and backend engineering.</p>
-          <p>Recently, I worked as a <strong>Software Engineering Intern at FSSAI Headquarters</strong>, where I mapped out complex system workflows and architected test/validation modules for national food safety platforms serving millions of citizens.</p>
-          <p>I thrive on solving complex problems, building resilient APIs, and automating workflows. Whether it's a cloud-backed AI generator or a self-aiming IoT trash can, I build systems that work efficiently under pressure.</p>
-          <div class="skills-inline">
-            <span>Python</span><span>AWS</span><span>Azure</span><span>Flask</span><span>SQL</span><span>System Design</span><span>IoT</span><span>REST APIs</span>
+        <div class="card-3d wide" data-tilt data-reveal>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <p>CS undergraduate at <strong>VIT-AP University</strong>, graduating 2026. I specialize in backend engineering and software architecture — I build things that run reliably under real-world pressure.</p>
+            <p>I spent 6 months as a <strong>Software Engineering Intern at FSSAI HQ, New Delhi</strong>, where I mapped and optimized the architecture of national food-safety platforms serving millions of users across India.</p>
+            <p>Outside work I led the <strong>Innovators Quest Club</strong> as Tech Lead, captained Sahara FC, and run technical workshops for underprivileged students.</p>
+            <div class="pill-wrap">
+              <span>Python</span><span>AWS</span><span>Azure</span><span>Flask</span><span>SQL</span><span>System Design</span><span>IoT</span><span>REST APIs</span><span>OpenCV</span>
+            </div>
           </div>
         </div>
-        <div class="stats-grid" data-reveal>
-          <div class="s-card glass-panel" data-tilt>
-            <span class="s-val"><span data-count="12">0</span>+</span>
-            <span class="s-lbl">System Modules Mapped</span>
+        <div class="stats-col" data-reveal>
+          <div class="stat-card card-3d" data-tilt>
+            <div class="card-shine"></div>
+            <div class="card-body col center">
+              <span class="stat-num"><span data-count="12">0</span>+</span>
+              <span class="stat-lbl">System Modules Architected</span>
+            </div>
           </div>
-          <div class="s-card glass-panel" data-tilt>
-            <span class="s-val"><span data-count="3">0</span></span>
-            <span class="s-lbl">Cloud Certifications</span>
+          <div class="stat-card card-3d" data-tilt>
+            <div class="card-shine"></div>
+            <div class="card-body col center">
+              <span class="stat-num"><span data-count="3">0</span></span>
+              <span class="stat-lbl">Cloud Certifications</span>
+            </div>
           </div>
-          <div class="s-card glass-panel" data-tilt>
-            <span class="s-val"><span data-count="500">0</span>+</span>
-            <span class="s-lbl">API Users Supported</span>
+          <div class="stat-card card-3d" data-tilt>
+            <div class="card-shine"></div>
+            <div class="card-body col center">
+              <span class="stat-num"><span data-count="500">0</span>+</span>
+              <span class="stat-lbl">API Users Served</span>
+            </div>
           </div>
-          <div class="s-card glass-panel" data-tilt>
-            <span class="s-val"><span data-count="10">0</span></span>
-            <span class="s-lbl">Dev Team Size Led</span>
+          <div class="stat-card card-3d" data-tilt>
+            <div class="card-shine"></div>
+            <div class="card-body col center">
+              <span class="stat-num"><span data-count="10">0</span></span>
+              <span class="stat-lbl">Team Members Led</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================== EXPERIENCE ======================== -->
+    <!-- EXPERIENCE -->
     <section id="experience" class="section">
-      <div class="sec-intro" data-reveal>
-        <h2>Experience</h2>
-      </div>
-      <div class="exp-stack">
+      <div class="sec-label">02 / Experience</div>
+      <h2 class="sec-title" data-reveal>Work History</h2>
+      <div class="timeline">
 
-        <div class="exp-card glass-panel" data-reveal data-tilt>
-          <div class="exp-left">
-            <span class="exp-period">Jan–Jun 2026</span>
-          </div>
-          <div class="exp-right">
-            <h3>Software Engineering Intern</h3>
-            <p class="exp-where">FSSAI Headquarters · New Delhi</p>
+        <div class="card-3d exp-wide" data-tilt data-reveal>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <div class="exp-header">
+              <div>
+                <h3>Software Engineering Intern</h3>
+                <p class="exp-company">FSSAI Headquarters · New Delhi</p>
+              </div>
+              <span class="badge-date">Jan – Jun 2026</span>
+            </div>
             <ul>
-              <li>Analyzed and documented architectural workflows for <strong>FoSCoS, AMS &amp; AMC</strong> — national platforms handling thousands of daily transactions.</li>
-              <li>Engineered system mapping diagrams to identify edge cases and optimize data flow across <strong>12+ system modules</strong>.</li>
-              <li>Collaborated with <strong>8+ cross-functional teams</strong> to validate backend logic and ensure system resilience before production deployments.</li>
+              <li>Analyzed and mapped the entire architectural workflow for <strong>FoSCoS, AMS &amp; AMC</strong> — national platforms processing thousands of daily food-safety transactions.</li>
+              <li>Engineered data-flow diagrams identifying edge cases across <strong>12+ backend modules</strong>, directly reducing production incidents.</li>
+              <li>Worked across <strong>8+ cross-functional teams</strong> to validate backend logic before production deployments.</li>
             </ul>
-            <div class="tag-list"><span>System Architecture</span><span>Workflow Design</span><span>Backend Logic</span></div>
+            <div class="tag-row"><span>System Architecture</span><span>Workflow Design</span><span>Backend Logic</span><span>API Validation</span></div>
           </div>
         </div>
 
-        <div class="exp-card glass-panel" data-reveal data-tilt>
-          <div class="exp-left">
-            <span class="exp-period">Jul 2024–May 2025</span>
-          </div>
-          <div class="exp-right">
-            <h3>Tech Lead</h3>
-            <p class="exp-where">Innovators Quest Club · VIT-AP</p>
+        <div class="card-3d exp-wide" data-tilt data-reveal>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <div class="exp-header">
+              <div>
+                <h3>Tech Lead</h3>
+                <p class="exp-company">Innovators Quest Club · VIT-AP</p>
+              </div>
+              <span class="badge-date">Jul 2024 – May 2025</span>
+            </div>
             <ul>
-              <li>Led a <strong>10-person dev team</strong> to orchestrate 6 large-scale technical hackathons.</li>
-              <li>Drove a <strong>35% increase</strong> in technical engagement through streamlined event platforms.</li>
+              <li>Led a <strong>10-person dev &amp; design team</strong> to run 6 large-scale hackathons and technical workshops.</li>
+              <li>Grew event engagement by <strong>35%</strong> and club membership by <strong>25% YoY</strong>.</li>
             </ul>
-            <div class="tag-list"><span>Technical Leadership</span><span>Agile</span><span>System Planning</span></div>
+            <div class="tag-row"><span>Technical Leadership</span><span>Agile</span><span>System Planning</span></div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ======================== PROJECTS ======================== -->
+    <!-- PROJECTS -->
     <section id="projects" class="section">
-      <div class="sec-intro" data-reveal>
-        <h2>Engineering Projects</h2>
-      </div>
+      <div class="sec-label">03 / Projects</div>
+      <h2 class="sec-title" data-reveal>Engineering Projects</h2>
       <div class="proj-grid">
 
-        <article class="proj-card glass-panel" data-reveal data-tilt>
-          <div class="proj-top">
-            <div class="proj-ico">☁️</div>
-            <span class="proj-link">github.com ↗</span>
+        <article class="card-3d proj" data-tilt data-reveal style="--accent:#6366f1">
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <div class="proj-head">
+              <span class="proj-ico">☁️</span>
+              <a class="proj-link" href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+            <h3>AI Quiz Generator</h3>
+            <p>NLP-powered quiz platform backed by AWS Lambda and RDS. Automatically parses documents to generate contextual quizzes, reducing study prep by 70%.</p>
+            <div class="proj-metrics">
+              <div><b data-count="500">0</b><small>Users</small></div>
+              <div><b data-count="70">0</b>%<small>Prep Saved</small></div>
+              <div><b data-count="95">0</b>%<small>Uptime</small></div>
+            </div>
+            <div class="tag-row"><span>Python</span><span>Flask</span><span>AWS Lambda</span><span>NLP</span><span>RDS</span></div>
           </div>
-          <h3>AI Quiz Generator</h3>
-          <p>Scalable NLP platform backed by AWS and SQL. Automatically parses text to generate quizzes, cutting study prep time by 70%.</p>
-          <div class="proj-metrics">
-            <div class="metric"><b data-count="500">0</b>+<small>Users</small></div>
-            <div class="metric"><b data-count="70">0</b>%<small>Time Saved</small></div>
-          </div>
-          <div class="proj-tech"><span>Python</span><span>Flask</span><span>AWS</span><span>NLP</span><span>SQL</span></div>
         </article>
 
-        <article class="proj-card glass-panel" data-reveal data-tilt>
-          <div class="proj-top">
-            <div class="proj-ico">🛡️</div>
-            <span class="proj-link">github.com ↗</span>
+        <article class="card-3d proj" data-tilt data-reveal style="--accent:#06b6d4">
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <div class="proj-head">
+              <span class="proj-ico">🛡️</span>
+              <a class="proj-link" href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+            <h3>ATM Theft Detection</h3>
+            <p>Real-time security system using computer vision + IoT sensors to detect forced entry, fire, and tampering. Alerting latency under 1 second.</p>
+            <div class="proj-metrics">
+              <div><b data-count="95">0</b>%<small>Accuracy</small></div>
+              <div><b>&lt;1s</b><small>Latency</small></div>
+            </div>
+            <div class="tag-row"><span>Python</span><span>OpenCV</span><span>IoT</span><span>Raspberry Pi</span></div>
           </div>
-          <h3>ATM Theft Detection</h3>
-          <p>Real-time security monitoring system using image recognition and IoT sensors to detect forced entry and tampering instantly.</p>
-          <div class="proj-metrics">
-            <div class="metric"><b data-count="95">0</b>%<small>Accuracy</small></div>
-            <div class="metric"><b>&lt;1s</b><small>Latency</small></div>
-          </div>
-          <div class="proj-tech"><span>Python</span><span>OpenCV</span><span>IoT Sensors</span></div>
         </article>
 
-        <article class="proj-card glass-panel" data-reveal data-tilt>
-          <div class="proj-top">
-            <div class="proj-ico">🤖</div>
-            <span class="proj-link">github.com ↗</span>
+        <article class="card-3d proj" data-tilt data-reveal style="--accent:#10b981">
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <div class="proj-head">
+              <span class="proj-ico">🤖</span>
+              <a class="proj-link" href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+            <h3>Self-Aiming Smart System</h3>
+            <p>Edge-computing system on Raspberry Pi with real-time MobileNet SSD object detection and motorized targeting. Runs live at 20 FPS on 10 W.</p>
+            <div class="proj-metrics">
+              <div><b data-count="20">0</b> FPS<small>Realtime</small></div>
+              <div><b data-count="10">0</b>W<small>Power</small></div>
+            </div>
+            <div class="tag-row"><span>Raspberry Pi</span><span>MobileNet SSD</span><span>OpenCV</span></div>
           </div>
-          <h3>Smart Aiming System</h3>
-          <p>Raspberry Pi-powered motorized centering system with real-time object detection running locally on edge hardware.</p>
-          <div class="proj-metrics">
-            <div class="metric"><b data-count="20">0</b> FPS<small>Edge Compute</small></div>
-            <div class="metric"><b data-count="10">0</b> W<small>Power Draw</small></div>
-          </div>
-          <div class="proj-tech"><span>Raspberry Pi</span><span>MobileNet SSD</span><span>OpenCV</span></div>
         </article>
 
       </div>
     </section>
 
-    <!-- ======================== CONTACT ======================== -->
-    <section id="contact" class="section contact-sec">
-      <div class="contact-inner glass-panel" data-reveal data-tilt>
-        <h2 class="contact-heading">Let's build the future.</h2>
-        <a href="mailto:ayushkumarh078@gmail.com" class="big-email">ayushkumarh078@gmail.com</a>
-        <div class="contact-socials">
-          <a href="https://linkedin.com/in/ayushkumar" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/ayushkumar" target="_blank" rel="noopener">GitHub</a>
-          <a href="tel:+919876543210">Phone</a>
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="sec-label">04 / Skills</div>
+      <h2 class="sec-title" data-reveal>Stack &amp; Certifications</h2>
+      <div class="skills-grid" data-reveal>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <h4>Programming</h4>
+            <div class="pill-wrap"><span>Python</span><span>Java</span><span>R</span><span>SQL</span><span>NoSQL</span><span>Redis</span></div>
+          </div>
+        </div>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <h4>Cloud &amp; Infra</h4>
+            <div class="pill-wrap"><span>AWS</span><span>Azure</span><span>Lambda</span><span>RDS</span><span>S3</span></div>
+          </div>
+        </div>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <h4>Frameworks</h4>
+            <div class="pill-wrap"><span>Flask</span><span>REST APIs</span><span>OpenCV</span><span>LLMs</span></div>
+          </div>
+        </div>
+        <div class="card-3d" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body col">
+            <h4>Tools</h4>
+            <div class="pill-wrap"><span>Figma</span><span>Excel</span><span>PowerPoint</span><span>Git</span></div>
+          </div>
         </div>
       </div>
-      <p class="footer">© 2026 Ayush Kumar · Software Engineer</p>
+
+      <div class="cert-row" data-reveal>
+        <div class="card-3d cert" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <span class="cert-dot" style="background:#0078d4; box-shadow: 0 0 12px #0078d4"></span>
+            <div>
+              <strong>Azure DP-900</strong>
+              <p>Microsoft — Data Fundamentals</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-3d cert" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <span class="cert-dot" style="background:#f90; box-shadow: 0 0 12px #f90"></span>
+            <div>
+              <strong>AWS Cloud Foundations</strong>
+              <p>Amazon Web Services</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-3d cert" data-tilt>
+          <div class="card-shine"></div>
+          <div class="card-body">
+            <span class="cert-dot" style="background:#f90; box-shadow: 0 0 12px #f90"></span>
+            <div>
+              <strong>AWS Cloud Architecting</strong>
+              <p>Amazon Web Services</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="sec-label">05 / Contact</div>
+      <div class="card-3d contact-card" data-tilt data-reveal>
+        <div class="card-shine"></div>
+        <div class="card-body col center">
+          <h2 class="contact-title">Let's build something<br><em>that doesn't break.</em></h2>
+          <a href="mailto:ayushkumarh078@gmail.com" class="email-link">ayushkumarh078@gmail.com</a>
+          <div class="contact-btns">
+            <a href="https://linkedin.com/in/ayushkumar" target="_blank" class="btn-outline sm">LinkedIn</a>
+            <a href="https://github.com/ayushkumar" target="_blank" class="btn-outline sm">GitHub</a>
+            <a href="mailto:ayushkumarh078@gmail.com" class="btn-primary sm">Email Me</a>
+          </div>
+        </div>
+      </div>
+      <p class="footer">© 2026 Ayush Kumar · VIT-AP University · Software Engineer</p>
     </section>
 
   </main>
