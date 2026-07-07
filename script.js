@@ -64,12 +64,6 @@ function initNav(engine) {
 
   window.addEventListener('scroll', () => {
     nav.classList.toggle('dark', window.scrollY > 80);
-
-    // Drive the canvas engine mode by scroll position
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if      (pct < 0.30) engine.setMode(0); // matrix
-    else if (pct < 0.65) engine.setMode(1); // neural
-    else                 engine.setMode(2); // stars
   }, { passive: true });
 
   burger?.addEventListener('click', () => nav.classList.toggle('open'));
