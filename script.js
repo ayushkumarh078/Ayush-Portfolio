@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initCountUp();
   initParallax();
+  initTilt();
 });
 
 /* ──────────────────────────────────────
@@ -40,10 +41,10 @@ function initScrollAnimations() {
   const progressBar = document.getElementById('progress');
   
   // Lighting breakpoints
-  const sunrise = { top: '#0a1128', bot: '#ff7e67', sunColor: '#ffde59', sunGlow: 'rgba(255, 222, 89, 0.6)' };
-  const noon = { top: '#1eaaf1', bot: '#b8f2ff', sunColor: '#ffffff', sunGlow: 'rgba(255, 255, 255, 0.8)' };
-  const sunset = { top: '#2c0c3a', bot: '#ff4b1f', sunColor: '#ff512f', sunGlow: 'rgba(255, 81, 47, 0.8)' };
-  const twilight = { top: '#090a0f', bot: '#1b1d36', sunColor: '#f4f4f4', sunGlow: 'rgba(244, 244, 244, 0.4)' };
+  const sunrise = { top: '#0a1128', bot: '#f59e0b', sunColor: '#fcd34d', sunGlow: 'rgba(252, 211, 77, 0.6)' };
+  const noon = { top: '#1eaaf1', bot: '#bae6fd', sunColor: '#ffffff', sunGlow: 'rgba(255, 255, 255, 0.8)' };
+  const sunset = { top: '#2e1065', bot: '#d946ef', sunColor: '#f0abfc', sunGlow: 'rgba(240, 171, 252, 0.8)' };
+  const twilight = { top: '#020617', bot: '#1e1b4b', sunColor: '#e2e8f0', sunGlow: 'rgba(226, 232, 240, 0.4)' };
 
   function interpolateColor(color1, color2, factor) {
     if (arguments.length < 3) { factor = 0.5; }
@@ -107,12 +108,14 @@ function initScrollAnimations() {
     const mappedSunScale = 1 - (sunYRaw * 0.4); // Smaller when higher up
     root.style.setProperty('--sun-scale', mappedSunScale);
 
-    // Stars visibility
+    // Stars & Particles visibility
     if (scrollPercent > 0.8) {
       const starOpacity = (scrollPercent - 0.8) / 0.2;
       root.style.setProperty('--star-opacity', starOpacity);
+      root.style.setProperty('--particle-opacity', 0.4 - (starOpacity * 0.4));
     } else {
       root.style.setProperty('--star-opacity', 0);
+      root.style.setProperty('--particle-opacity', 0.4);
     }
   }
 
@@ -200,4 +203,29 @@ function initCountUp() {
   }, { threshold: 0.3 });
 
   statContainers.forEach(el => observer.observe(el));
+}
+
+/* ──────────────────────────────────────
+   6. 3D TILT EFFECT
+   ────────────────────────────────────── */
+function initTilt() {
+  const cards = document.querySelectorAll('[data-tilt]');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (window.innerWidth < 768) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    }, { passive: true });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 }
