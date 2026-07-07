@@ -1,94 +1,47 @@
 /* ============================================================
-   CINEMATIC MOVIE INTRO SCRIPT
-   - Intro Sequence Timeline (Fading text)
-   - Scroll Observers (Ken Burns fade in)
-   - Audio Toggle
-   - Custom Cursor
+   SCRIPT FOR REALISTIC VIDEO BACKGROUND THEME
+   - Fast, immediate load
+   - Smooth IntersectionObserver reveals
+   - Custom trailing cursor
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  runIntroSequence();
-  initScrollReveal();
+  initReveal();
   initNav();
-  initAudio();
   initCursor();
 });
 
 /* ============================================================
-   1. INTRO SEQUENCE
-   Play titles sequentially, then reveal the site.
+   SCROLL REVEAL (Fast & Snappy)
    ============================================================ */
-function runIntroSequence() {
-  const introContainer = document.getElementById('intro-sequence');
-  const texts = [
-    document.getElementById('intro-1'),
-    document.getElementById('intro-2'),
-    document.getElementById('intro-3')
-  ];
-
-  let delay = 500; // Initial delay
-
-  // Sequence: Show 1, Hide 1, Show 2, Hide 2, Show 3, Hide 3, Reveal Site
-  texts.forEach((textEl, index) => {
-    // Show text
-    setTimeout(() => {
-      textEl.classList.add('active');
-    }, delay);
-
-    // Keep it on screen for 2.5s, then hide it (unless it's the last one)
-    delay += 2500;
-    
-    setTimeout(() => {
-      textEl.style.opacity = '0';
-    }, delay);
-
-    delay += 1000; // Pause between texts
-  });
-
-  // Reveal the main site
-  setTimeout(() => {
-    introContainer.style.opacity = '0';
-    document.body.classList.remove('loading');
-    
-    // Completely remove intro sequence from DOM after fade out
-    setTimeout(() => {
-      introContainer.style.display = 'none';
-      // Trigger scroll reveal for hero elements that are now visible
-      window.dispatchEvent(new Event('scroll'));
-    }, 2000);
-  }, delay);
-}
-
-/* ============================================================
-   2. SCROLL REVEAL (Cinematic Ken Burns Fade)
-   ============================================================ */
-function initScrollReveal() {
-  // Use IntersectionObserver to trigger animations when elements come into view
+function initReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Slight delay based on element index if multiple appear at once? Keep it simple for now.
         entry.target.classList.add('show');
-        observer.unobserve(entry.target); // Only animate once
+        // Unobserve after showing so it only animates once
+        observer.unobserve(entry.target);
       }
     });
   }, { 
-    threshold: 0.15, // Trigger when 15% visible
-    rootMargin: "0px 0px -100px 0px" // Trigger slightly before it hits bottom of screen
+    threshold: 0.1, 
+    rootMargin: "0px 0px -50px 0px" 
   });
 
-  document.querySelectorAll('[data-cinematic-reveal]').forEach(el => {
+  document.querySelectorAll('[data-reveal]').forEach(el => {
     observer.observe(el);
   });
 }
 
 /* ============================================================
-   3. NAVIGATION (Fade background on scroll)
+   NAVIGATION
    ============================================================ */
 function initNav() {
   const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
   const links = document.querySelectorAll('.nav-menu a');
 
+  // Background blur on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       nav.classList.add('scrolled');
@@ -96,6 +49,18 @@ function initNav() {
       nav.classList.remove('scrolled');
     }
   }, { passive: true });
+
+  // Mobile menu toggle
+  burger?.addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+
+  // Close mobile menu on link click
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+    });
+  });
 
   // Update active link based on scroll position
   const sections = document.querySelectorAll('section[id]');
@@ -106,93 +71,66 @@ function initNav() {
       const activeLink = document.querySelector(`.nav-menu a[href="#${e.target.id}"]`);
       if(activeLink) activeLink.classList.add('active');
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.3 });
+  
   sections.forEach(s => io.observe(s));
 }
 
 /* ============================================================
-   4. AUDIO TOGGLE (Optional cinematic soundtrack)
-   ============================================================ */
-function initAudio() {
-  const audioBtn = document.getElementById('audio-toggle');
-  const audio = document.getElementById('bg-audio');
-  
-  if(!audioBtn || !audio) return;
-
-  // Let's set a dark cinematic ambient track (royalty free source example)
-  // For safety and actual implementation, we'll leave it empty unless the user wants a specific track,
-  // but the logic is here.
-  
-  let isPlaying = false;
-  audio.volume = 0.5;
-
-  audioBtn.addEventListener('click', () => {
-    if(!audio.src) {
-      // You could add a real audio file here. For now it just simulates it.
-      // audio.src = 'cinematic-ambient.mp3'; 
-      console.log("Audio source not set. Add an MP3 to <audio> tag.");
-    }
-
-    if (isPlaying) {
-      audio.pause();
-      audioBtn.textContent = 'SOUND: OFF';
-      isPlaying = false;
-    } else {
-      // Catch promise rejection if browser blocks autoplay (though user click usually allows it)
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(_ => {
-          audioBtn.textContent = 'SOUND: ON';
-          isPlaying = true;
-        })
-        .catch(error => {
-          console.log("Audio playback failed.", error);
-        });
-      }
-    }
-  });
-}
-
-/* ============================================================
-   5. CUSTOM CURSOR
+   CUSTOM CURSOR (Soft glow)
    ============================================================ */
 function initCursor() {
-  if (window.matchMedia('(hover: none)').matches) return; // Don't run on mobile
+  if (window.matchMedia('(hover: none)').matches) return;
   
-  const cursor = document.getElementById('cursor-dot');
+  const cursor = document.getElementById('cursor');
   if (!cursor) return;
 
-  // Cinematic cursor styling
+  // Setup cursor styles dynamically here or in CSS
   cursor.style.position = 'fixed';
-  cursor.style.width = '6px';
-  cursor.style.height = '6px';
-  cursor.style.backgroundColor = '#fff';
+  cursor.style.width = '300px';
+  cursor.style.height = '300px';
   cursor.style.borderRadius = '50%';
+  cursor.style.background = 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)';
   cursor.style.pointerEvents = 'none';
-  cursor.style.zIndex = '99999';
+  cursor.style.zIndex = '9999';
   cursor.style.transform = 'translate(-50%, -50%)';
-  cursor.style.transition = 'width 0.2s, height 0.2s, background-color 0.2s';
-  cursor.style.mixBlendMode = 'difference';
+  cursor.style.transition = 'width 0.3s, height 0.3s';
+  cursor.style.mixBlendMode = 'screen';
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
 
   window.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   }, { passive: true });
 
-  // Hover effects
-  const interactables = document.querySelectorAll('a, button');
+  // Smooth lerp for the large glowing cursor
+  function animate() {
+    currentX += (mouseX - currentX) * 0.15;
+    currentY += (mouseY - currentY) * 0.15;
+    
+    cursor.style.left = currentX + 'px';
+    cursor.style.top = currentY + 'px';
+    
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Make it pulse on interactive elements
+  const interactables = document.querySelectorAll('a, button, .glass-card, .glass-panel');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursor.style.width = '40px';
-      cursor.style.height = '40px';
-      cursor.style.backgroundColor = 'transparent';
-      cursor.style.border = '1px solid #fff';
+      cursor.style.width = '400px';
+      cursor.style.height = '400px';
+      cursor.style.background = 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%)';
     });
     el.addEventListener('mouseleave', () => {
-      cursor.style.width = '6px';
-      cursor.style.height = '6px';
-      cursor.style.backgroundColor = '#fff';
-      cursor.style.border = 'none';
+      cursor.style.width = '300px';
+      cursor.style.height = '300px';
+      cursor.style.background = 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)';
     });
   });
 }

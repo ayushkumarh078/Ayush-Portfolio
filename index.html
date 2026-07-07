@@ -3,49 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ayush Kumar — Software Engineer. A Cinematic Experience." />
+  <meta name="description" content="Ayush Kumar — Software Engineer" />
   <title>Ayush Kumar | Software Engineer</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Cinematic Fonts: Cinzel for dramatic titles, Montserrat for clean sans text -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="loading">
+<body>
 
-  <!-- Cinematic Overlays -->
-  <div id="film-grain"></div>
-  <div id="vignette"></div>
-  <div class="letterbox top"></div>
-  <div class="letterbox bottom"></div>
-  
-  <!-- Audio Control (Hidden initially, appears after intro) -->
-  <button id="audio-toggle" aria-label="Toggle Audio">SOUND: OFF</button>
-  <audio id="bg-audio" loop>
-    <!-- We'll leave the src empty, but this structure simulates a cinematic audio player -->
-  </audio>
-
-  <!-- Intro Sequence Overlay -->
-  <div id="intro-sequence">
-    <div class="intro-text" id="intro-1">A PORTFOLIO BY</div>
-    <div class="intro-text" id="intro-2">AYUSH KUMAR</div>
-    <div class="intro-text" id="intro-3">SOFTWARE ENGINEER</div>
-  </div>
+  <!-- Realistic Video Background -->
+  <video id="bg-video" autoplay loop muted playsinline>
+    <!-- High-quality abstract 3D fluid video -->
+    <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4" />
+  </video>
+  <div id="video-overlay"></div>
 
   <!-- Custom cursor -->
-  <div id="cursor-dot"></div>
+  <div id="cursor"></div>
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#hero" class="logo">AK.</a>
+    <a href="#hero" class="logo">Ayush<span>.</span></a>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="#about">SCENE I : ABOUT</a></li>
-      <li><a href="#experience">SCENE II : EXPERIENCE</a></li>
-      <li><a href="#projects">SCENE III : PROJECTS</a></li>
-      <li><a href="#skills">SCENE IV : SKILLS</a></li>
-      <li><a href="#contact">FINALE : CONTACT</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="menu">
       <span></span><span></span><span></span>
@@ -56,47 +43,64 @@
   <main id="page">
 
     <!-- HERO -->
-    <section id="hero" class="hero-section">
-      <div class="hero-content" data-cinematic-reveal>
-        <div class="director-cut">DIRECTOR'S CUT</div>
-        <h1 class="title">AYUSH KUMAR</h1>
-        <p class="subtitle">BUILDING SCALABLE SYSTEMS & FULL-STACK APPLICATIONS</p>
+    <section id="hero" class="section hero-section">
+      <div class="hero-content glass-panel" data-reveal="fade-up">
+        <div class="badge">Open to Opportunities</div>
+        <h1 class="title">Ayush Kumar</h1>
+        <h2 class="subtitle">Software Engineer &amp; Architect</h2>
+        <p class="hero-desc">I build scalable backend systems, cloud architectures, and full-stack applications that thrive under real-world pressure.</p>
+        
         <div class="hero-cta">
-          <a href="#projects" class="btn-cine">VIEW THE WORK</a>
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-outline">Contact Me</a>
         </div>
       </div>
-      <!-- Scroll Indicator -->
-      <div class="scroll-down">
-        <span>SCROLL TO CONTINUE</span>
-        <div class="line"></div>
+      
+      <div class="hero-cards">
+        <div class="glass-card mini-card" data-reveal="slide-left" style="--delay: 0.2s">
+          <span class="icon">☁️</span>
+          <div>
+            <strong>Cloud Native</strong>
+            <span>AWS &amp; Azure Certified</span>
+          </div>
+        </div>
+        <div class="glass-card mini-card" data-reveal="slide-left" style="--delay: 0.4s">
+          <span class="icon">⚡</span>
+          <div>
+            <strong>Backend Dev</strong>
+            <span>Python, SQL, REST</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <div class="content-wrapper">
-        <h2 class="scene-title" data-cinematic-reveal>SCENE I <br><span>THE PROTAGONIST</span></h2>
+      <h2 class="section-title" data-reveal="fade-up">About Me</h2>
+      
+      <div class="about-grid">
+        <div class="glass-panel about-text" data-reveal="fade-right">
+          <p>I am a Computer Science undergraduate at <strong>VIT-AP University</strong>, deeply passionate about software architecture and backend engineering.</p>
+          <p>Recently, I worked as a <strong>Software Engineering Intern at FSSAI Headquarters</strong>, where I mapped out complex system workflows and architected test modules for national food safety platforms serving millions of citizens.</p>
+          <p>Whether it's a cloud-backed AI generator or a self-aiming IoT trash can, I build systems that work efficiently under pressure.</p>
+        </div>
         
-        <div class="about-grid">
-          <div class="about-text" data-cinematic-reveal>
-            <p>I am a Computer Science undergraduate at VIT-AP University, specializing in backend engineering and software architecture.</p>
-            <p>During my tenure as a Software Engineering Intern at FSSAI Headquarters in New Delhi, I mapped and optimized the architecture of national food-safety platforms serving millions across India.</p>
-            <p>I build things that run reliably under real-world pressure.</p>
+        <div class="stats-grid">
+          <div class="glass-card stat-card" data-reveal="fade-up" style="--delay: 0.1s">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">Modules Architected</span>
           </div>
-          
-          <div class="about-stats" data-cinematic-reveal>
-            <div class="stat-item">
-              <span class="stat-num">12+</span>
-              <span class="stat-label">MODULES ARCHITECTED</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-num">500+</span>
-              <span class="stat-label">API USERS SERVED</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-num">10</span>
-              <span class="stat-label">TEAM MEMBERS LED</span>
-            </div>
+          <div class="glass-card stat-card" data-reveal="fade-up" style="--delay: 0.2s">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Cloud Certifications</span>
+          </div>
+          <div class="glass-card stat-card" data-reveal="fade-up" style="--delay: 0.3s">
+            <span class="stat-num">500+</span>
+            <span class="stat-label">API Users Supported</span>
+          </div>
+          <div class="glass-card stat-card" data-reveal="fade-up" style="--delay: 0.4s">
+            <span class="stat-num">10</span>
+            <span class="stat-label">Dev Team Size Led</span>
           </div>
         </div>
       </div>
@@ -104,66 +108,78 @@
 
     <!-- EXPERIENCE -->
     <section id="experience" class="section">
-      <div class="content-wrapper">
-        <h2 class="scene-title" data-cinematic-reveal>SCENE II <br><span>THE JOURNEY</span></h2>
-        
-        <div class="timeline">
-          <div class="timeline-item" data-cinematic-reveal>
-            <div class="time-meta">
-              <h3>SOFTWARE ENGINEERING INTERN</h3>
-              <span>FSSAI HEADQUARTERS | JAN – JUN 2026</span>
+      <h2 class="section-title" data-reveal="fade-up">Work Experience</h2>
+      
+      <div class="timeline">
+        <div class="glass-panel exp-card" data-reveal="fade-up">
+          <div class="exp-header">
+            <div>
+              <h3>Software Engineering Intern</h3>
+              <h4>FSSAI Headquarters · New Delhi</h4>
             </div>
-            <div class="time-desc">
-              <p>Analyzed and mapped the entire architectural workflow for FoSCoS, AMS & AMC — national platforms processing thousands of daily food-safety transactions.</p>
-              <p>Engineered data-flow diagrams identifying edge cases across 12+ backend modules, directly reducing production incidents.</p>
-            </div>
+            <span class="date-badge">Jan – Jun 2026</span>
           </div>
+          <ul class="exp-list">
+            <li>Analyzed and documented architectural workflows for <strong>FoSCoS, AMS &amp; AMC</strong> — national platforms handling thousands of daily transactions.</li>
+            <li>Engineered system mapping diagrams to identify edge cases and optimize data flow across <strong>12+ system modules</strong>.</li>
+            <li>Collaborated with <strong>8+ cross-functional teams</strong> to validate backend logic and ensure system resilience before production deployments.</li>
+          </ul>
+        </div>
 
-          <div class="timeline-item" data-cinematic-reveal>
-            <div class="time-meta">
-              <h3>TECH LEAD</h3>
-              <span>INNOVATORS QUEST CLUB | JUL 2024 – MAY 2025</span>
+        <div class="glass-panel exp-card" data-reveal="fade-up">
+          <div class="exp-header">
+            <div>
+              <h3>Tech Lead</h3>
+              <h4>Innovators Quest Club · VIT-AP</h4>
             </div>
-            <div class="time-desc">
-              <p>Led a 10-person dev & design team to run 6 large-scale hackathons and technical workshops.</p>
-              <p>Grew event engagement by 35% and club membership by 25% YoY.</p>
-            </div>
+            <span class="date-badge">Jul 2024 – May 2025</span>
           </div>
+          <ul class="exp-list">
+            <li>Led a <strong>10-person dev team</strong> to orchestrate 6 large-scale technical hackathons.</li>
+            <li>Drove a <strong>35% increase</strong> in technical engagement through streamlined event platforms.</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
-      <div class="content-wrapper">
-        <h2 class="scene-title" data-cinematic-reveal>SCENE III <br><span>THE ARCHIVES</span></h2>
-        
-        <div class="credits-grid">
-          <div class="credit-card" data-cinematic-reveal>
-            <h3>AI QUIZ GENERATOR</h3>
-            <p>NLP-powered quiz platform backed by AWS Lambda and RDS. Automatically parses documents to generate contextual quizzes, reducing study prep by 70%.</p>
-            <div class="credit-cast">
-              <span>CAST:</span> PYTHON, FLASK, AWS LAMBDA, NLP, RDS
-            </div>
-            <a href="https://github.com/ayushkumar" target="_blank" class="credit-link">VIEW SOURCE</a>
+      <h2 class="section-title" data-reveal="fade-up">Engineering Projects</h2>
+      
+      <div class="proj-grid">
+        <div class="glass-panel proj-card" data-reveal="fade-up" style="--delay: 0.1s">
+          <div class="proj-top">
+            <span class="proj-icon">☁️</span>
+            <a href="https://github.com/ayushkumar" target="_blank" class="proj-link">GitHub ↗</a>
           </div>
-
-          <div class="credit-card" data-cinematic-reveal>
-            <h3>ATM THEFT DETECTION</h3>
-            <p>Real-time security system using computer vision + IoT sensors to detect forced entry, fire, and tampering. Alerting latency under 1 second.</p>
-            <div class="credit-cast">
-              <span>CAST:</span> PYTHON, OPENCV, IOT, RASPBERRY PI
-            </div>
-            <a href="https://github.com/ayushkumar" target="_blank" class="credit-link">VIEW SOURCE</a>
+          <h3>AI Quiz Generator</h3>
+          <p>Scalable NLP platform backed by AWS and SQL. Automatically parses text to generate quizzes, cutting study prep time by 70%.</p>
+          <div class="tech-stack">
+            <span>Python</span><span>Flask</span><span>AWS</span><span>NLP</span><span>SQL</span>
           </div>
+        </div>
 
-          <div class="credit-card" data-cinematic-reveal>
-            <h3>SELF-AIMING SMART SYSTEM</h3>
-            <p>Edge-computing system on Raspberry Pi with real-time MobileNet SSD object detection and motorized targeting. Runs live at 20 FPS on 10 W.</p>
-            <div class="credit-cast">
-              <span>CAST:</span> RASPBERRY PI, MOBILENET SSD, OPENCV
-            </div>
-            <a href="https://github.com/ayushkumar" target="_blank" class="credit-link">VIEW SOURCE</a>
+        <div class="glass-panel proj-card" data-reveal="fade-up" style="--delay: 0.2s">
+          <div class="proj-top">
+            <span class="proj-icon">🛡️</span>
+            <a href="https://github.com/ayushkumar" target="_blank" class="proj-link">GitHub ↗</a>
+          </div>
+          <h3>ATM Theft Detection</h3>
+          <p>Real-time security monitoring system using image recognition and IoT sensors to detect forced entry and tampering instantly.</p>
+          <div class="tech-stack">
+            <span>Python</span><span>OpenCV</span><span>IoT Sensors</span>
+          </div>
+        </div>
+
+        <div class="glass-panel proj-card" data-reveal="fade-up" style="--delay: 0.3s">
+          <div class="proj-top">
+            <span class="proj-icon">🤖</span>
+            <a href="https://github.com/ayushkumar" target="_blank" class="proj-link">GitHub ↗</a>
+          </div>
+          <h3>Smart Aiming System</h3>
+          <p>Raspberry Pi-powered motorized centering system with real-time object detection running locally on edge hardware.</p>
+          <div class="tech-stack">
+            <span>Raspberry Pi</span><span>MobileNet SSD</span><span>OpenCV</span>
           </div>
         </div>
       </div>
@@ -171,59 +187,34 @@
 
     <!-- SKILLS -->
     <section id="skills" class="section">
-      <div class="content-wrapper">
-        <h2 class="scene-title" data-cinematic-reveal>SCENE IV <br><span>THE ARSENAL</span></h2>
-        
-        <div class="skills-layout">
-          <div class="skill-category" data-cinematic-reveal>
-            <h4>LANGUAGES</h4>
-            <p>PYTHON · JAVA · R · SQL · NOSQL</p>
-          </div>
-          <div class="skill-category" data-cinematic-reveal>
-            <h4>CLOUD & INFRA</h4>
-            <p>AWS · AZURE · LAMBDA · RDS · S3</p>
-          </div>
-          <div class="skill-category" data-cinematic-reveal>
-            <h4>FRAMEWORKS & TOOLS</h4>
-            <p>FLASK · REST APIS · OPENCV · LLMS · GIT</p>
-          </div>
-          <div class="skill-category" data-cinematic-reveal>
-            <h4>CERTIFICATIONS</h4>
-            <p>AZURE DP-900 · AWS CLOUD FOUNDATIONS · AWS CLOUD ARCHITECTING</p>
-          </div>
+      <h2 class="section-title" data-reveal="fade-up">Skills &amp; Certifications</h2>
+      
+      <div class="skills-grid">
+        <div class="glass-panel skill-card" data-reveal="fade-up" style="--delay: 0.1s">
+          <h3>Programming</h3>
+          <p>Python, Java, R, SQL, NoSQL, Redis</p>
+        </div>
+        <div class="glass-panel skill-card" data-reveal="fade-up" style="--delay: 0.2s">
+          <h3>Cloud &amp; Infra</h3>
+          <p>AWS, Azure, Lambda, RDS, S3</p>
+        </div>
+        <div class="glass-panel skill-card" data-reveal="fade-up" style="--delay: 0.3s">
+          <h3>Frameworks</h3>
+          <p>Flask, REST APIs, OpenCV, LLMs</p>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section finale">
-      <div class="content-wrapper" data-cinematic-reveal>
-        <h2 class="scene-title center">FINALE</h2>
-        <div class="contact-box">
-          <p>LET'S BUILD SOMETHING THAT DOESN'T BREAK.</p>
-          <a href="mailto:ayushkumarh078@gmail.com" class="big-email">ayushkumarh078@gmail.com</a>
-          <div class="social-links">
-            <a href="https://linkedin.com/in/ayushkumar" target="_blank">LINKEDIN</a>
-            <a href="https://github.com/ayushkumar" target="_blank">GITHUB</a>
-          </div>
+    <section id="contact" class="section">
+      <div class="glass-panel contact-panel" data-reveal="fade-up">
+        <h2>Let's build the future.</h2>
+        <a href="mailto:ayushkumarh078@gmail.com" class="email-huge">ayushkumarh078@gmail.com</a>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/ayushkumar" target="_blank">LinkedIn</a>
+          <a href="https://github.com/ayushkumar" target="_blank">GitHub</a>
         </div>
-      </div>
-      
-      <!-- Rolling Credits Style Footer -->
-      <div class="rolling-credits">
-        <div class="credit-line">
-          <span>DIRECTED BY</span>
-          <span>AYUSH KUMAR</span>
-        </div>
-        <div class="credit-line">
-          <span>PRODUCED AT</span>
-          <span>VIT-AP UNIVERSITY</span>
-        </div>
-        <div class="credit-line">
-          <span>RELEASE YEAR</span>
-          <span>2026</span>
-        </div>
-        <p class="copyright">© 2026 AYUSH KUMAR. ALL RIGHTS RESERVED.</p>
+        <p class="footer-text">© 2026 Ayush Kumar · Software Engineer</p>
       </div>
     </section>
 
