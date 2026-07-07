@@ -1,181 +1,203 @@
 document.addEventListener('DOMContentLoaded', () => {
-  cursor();
-  progress();
-  nav();
-  heroGlow();
-  projGlow();
-  reveal();
-  tilt();
-  countUp();
+  initCursor();
+  initScrollAnimations();
+  initNavigation();
+  initCountUp();
+  initParallax();
 });
 
 /* ──────────────────────────────────────
-   CURSOR  (dot snaps, trail lags)
+   1. CUSTOM CURSOR
    ────────────────────────────────────── */
-function cursor() {
-  if (window.matchMedia('(hover:none)').matches) return;
-  const dot   = document.getElementById('cursor');
-  const trail = document.getElementById('cursor-trail');
-  if (!dot || !trail) return;
+function initCursor() {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const cursor = document.getElementById('cursor');
+  if (!cursor) return;
 
-  let mx=0, my=0, tx=0, ty=0;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
 
-  window.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; }, {passive:true});
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  }, { passive: true });
 
-  (function loop() {
-    tx += (mx-tx) * .13;
-    ty += (my-ty) * .13;
-    dot.style.left   = mx+'px';
-    dot.style.top    = my+'px';
-    trail.style.left = tx+'px';
-    trail.style.top  = ty+'px';
-    requestAnimationFrame(loop);
-  })();
-
-  const hot = 'a,button,.proj-card,.s-card,.exp-card,.cert-card,.float-card,.b-card,.pill-row span,.btn-glow,.btn-ghost';
-  document.querySelectorAll(hot).forEach(el => {
-    el.addEventListener('mouseenter', () => dot.classList.add('big'));
-    el.addEventListener('mouseleave', () => dot.classList.remove('big'));
+  const interactiveElements = document.querySelectorAll('a, button, .glass-card, .proj-card');
+  interactiveElements.forEach((el) => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
   });
 }
 
 /* ──────────────────────────────────────
-   SCROLL PROGRESS BAR
+   2. 3D SCROLL & PARALLAX ANIMATIONS (Sunrise to Sunset)
    ────────────────────────────────────── */
-function progress() {
-  const bar = document.getElementById('progress');
-  if (!bar) return;
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.documentElement.scrollHeight - innerHeight);
-    bar.style.width = (pct*100) + '%';
-  }, {passive:true});
+function initScrollAnimations() {
+  const root = document.documentElement;
+  const nav = document.getElementById('nav');
+  const progressBar = document.getElementById('progress');
+  
+  // Lighting breakpoints
+  const sunrise = { top: '#0a1128', bot: '#ff7e67', sunColor: '#ffde59', sunGlow: 'rgba(255, 222, 89, 0.6)' };
+  const noon = { top: '#1eaaf1', bot: '#b8f2ff', sunColor: '#ffffff', sunGlow: 'rgba(255, 255, 255, 0.8)' };
+  const sunset = { top: '#2c0c3a', bot: '#ff4b1f', sunColor: '#ff512f', sunGlow: 'rgba(255, 81, 47, 0.8)' };
+  const twilight = { top: '#090a0f', bot: '#1b1d36', sunColor: '#f4f4f4', sunGlow: 'rgba(244, 244, 244, 0.4)' };
+
+  function interpolateColor(color1, color2, factor) {
+    if (arguments.length < 3) { factor = 0.5; }
+    var result = color1.slice(1).match(/.{2}/g).map((c, i) => {
+      return Math.round(parseInt(c, 16) + factor * (parseInt(color2.slice(1).match(/.{2}/g)[i], 16) - parseInt(c, 16)));
+    });
+    return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
+  }
+
+  function handleScroll() {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.max(0, Math.min(1, scrollY / maxScroll));
+
+    // Update Progress Bar
+    if (progressBar) progressBar.style.width = `${scrollPercent * 100}%`;
+
+    // Nav Background
+    if (scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+
+    // Determine Lighting Phase
+    let phasePercent, currentPhase, nextPhase;
+    
+    if (scrollPercent < 0.33) {
+      // Sunrise to Noon
+      phasePercent = scrollPercent / 0.33;
+      currentPhase = sunrise;
+      nextPhase = noon;
+    } else if (scrollPercent < 0.66) {
+      // Noon to Sunset
+      phasePercent = (scrollPercent - 0.33) / 0.33;
+      currentPhase = noon;
+      nextPhase = sunset;
+    } else {
+      // Sunset to Twilight
+      phasePercent = (scrollPercent - 0.66) / 0.34;
+      currentPhase = sunset;
+      nextPhase = twilight;
+    }
+
+    // Interpolate Sky Colors
+    const topColor = interpolateColor(currentPhase.top, nextPhase.top, phasePercent);
+    const botColor = interpolateColor(currentPhase.bot, nextPhase.bot, phasePercent);
+    const sunColor = interpolateColor(currentPhase.sunColor, nextPhase.sunColor, phasePercent);
+
+    root.style.setProperty('--sky-top', topColor);
+    root.style.setProperty('--sky-bot', botColor);
+    root.style.setProperty('--sun-color', sunColor);
+    
+    // Sun position: rises from bottom, peaks at noon, sets at the end
+    // Parabolic arc for Y
+    const sunYRaw = Math.sin(scrollPercent * Math.PI); // 0 at ends, 1 in middle
+    const mappedSunY = 80 - (sunYRaw * 60); // Starts at 80vh, peaks at 20vh
+    root.style.setProperty('--sun-y', `${mappedSunY}vh`);
+    
+    // Scale sun to simulate distance
+    const mappedSunScale = 1 - (sunYRaw * 0.4); // Smaller when higher up
+    root.style.setProperty('--sun-scale', mappedSunScale);
+
+    // Stars visibility
+    if (scrollPercent > 0.8) {
+      const starOpacity = (scrollPercent - 0.8) / 0.2;
+      root.style.setProperty('--star-opacity', starOpacity);
+    } else {
+      root.style.setProperty('--star-opacity', 0);
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Init
 }
 
 /* ──────────────────────────────────────
-   NAVIGATION
+   3. CONTENT PARALLAX
    ────────────────────────────────────── */
-function nav() {
-  const navEl  = document.getElementById('nav');
+function initParallax() {
+  const parallaxElements = document.querySelectorAll('[data-parallax]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    parallaxElements.forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-parallax'));
+      const yPos = -(scrollY * speed);
+      el.style.transform = `translateY(${yPos}px)`;
+    });
+  }, { passive: true });
+
+  // Scroll Reveal Observer
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+  revealElements.forEach((el) => observer.observe(el));
+}
+
+/* ──────────────────────────────────────
+   4. NAVIGATION MENU
+   ────────────────────────────────────── */
+function initNavigation() {
+  const nav = document.getElementById('nav');
   const burger = document.getElementById('burger');
-  const menu   = document.getElementById('nav-menu');
-  const links  = menu?.querySelectorAll('a');
+  const links = document.querySelectorAll('.nav-menu a');
 
   burger?.addEventListener('click', () => {
-    const open = navEl.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open);
-    const [s1, s2] = burger.querySelectorAll('span');
-    s1.style.transform = open ? 'translateY(7.5px) rotate(45deg)' : '';
-    s2.style.transform = open ? 'translateY(-7.5px) rotate(-45deg)' : '';
+    nav.classList.toggle('open');
   });
 
-  links?.forEach(l => l.addEventListener('click', () => {
-    navEl.classList.remove('open');
-    burger?.querySelectorAll('span').forEach(s => s.style.transform='');
-  }));
-
-  // Active section highlight
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      links?.forEach(l => l.classList.remove('active'));
-      const a = menu?.querySelector(`a[href="#${e.target.id}"]`);
-      a?.classList.add('active');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
     });
-  }, {threshold: .35});
-
-  document.querySelectorAll('[id]').forEach(s => io.observe(s));
-}
-
-/* ──────────────────────────────────────
-   HERO MOUSE-TRACKING RADIAL GLOW
-   ────────────────────────────────────── */
-function heroGlow() {
-  const hero = document.querySelector('.hero');
-  const glow = document.getElementById('hero-glow');
-  if (!hero || !glow) return;
-
-  hero.addEventListener('mousemove', e => {
-    const r = hero.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
-    const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
-    glow.style.setProperty('--mx', x+'%');
-    glow.style.setProperty('--my', y+'%');
-  }, {passive:true});
-}
-
-/* ──────────────────────────────────────
-   PROJECT CARD MOUSE-TRACKING GLOW
-   ────────────────────────────────────── */
-function projGlow() {
-  document.querySelectorAll('.proj-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
-      const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
-      card.querySelector('.proj-glow')?.style.setProperty('--mx', x+'%');
-      card.querySelector('.proj-glow')?.style.setProperty('--my', y+'%');
-    }, {passive:true});
   });
 }
 
 /* ──────────────────────────────────────
-   SCROLL REVEAL
+   5. COUNT-UP STATS
    ────────────────────────────────────── */
-function reveal() {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (!e.isIntersecting) return;
-      setTimeout(() => e.target.classList.add('show'), i * 60);
-      io.unobserve(e.target);
-    });
-  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
-
-  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
-}
-
-/* ──────────────────────────────────────
-   3D TILT ON CARDS
-   ────────────────────────────────────── */
-function tilt() {
-  const cards = '.proj-card,.s-card,.exp-card,.float-card,.b-card,.cert-card';
-  document.querySelectorAll(cards).forEach(card => {
-    card.addEventListener('mousemove', e => {
-      if (innerWidth < 768) return;
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - .5;
-      const y = (e.clientY - r.top)  / r.height - .5;
-      // Only tilt if not already controlled by a hover transform in CSS
-      const current = card.style.transform;
-      if (!current || current === 'none') {
-        card.style.transform = `perspective(700px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px)`;
+function initCountUp() {
+  const statContainers = document.querySelectorAll('.stats-grid, .proj-metrics');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('[data-count]').forEach(el => {
+          const target = +el.getAttribute('data-count');
+          const duration = 2000;
+          let startTime = null;
+          
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            el.textContent = Math.floor(easeOutQuart * target);
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              el.textContent = target;
+            }
+          }
+          window.requestAnimationFrame(step);
+        });
+        observer.unobserve(entry.target);
       }
-    }, {passive:true});
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-  });
-}
-
-/* ──────────────────────────────────────
-   COUNT-UP ANIMATION
-   ────────────────────────────────────── */
-function countUp() {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      io.unobserve(entry.target);
-      entry.target.querySelectorAll('[data-count]').forEach(el => {
-        const end = +el.dataset.count, dur = 1300;
-        let t0 = null;
-        const step = ts => {
-          if (!t0) t0 = ts;
-          const p = Math.min((ts - t0) / dur, 1);
-          el.textContent = Math.floor((1 - Math.pow(1-p, 3)) * end);
-          if (p < 1) requestAnimationFrame(step);
-          else el.textContent = end;
-        };
-        requestAnimationFrame(step);
-      });
     });
-  }, {threshold:.3});
+  }, { threshold: 0.3 });
 
-  document.querySelectorAll('.stats-grid, .proj-grid').forEach(el => io.observe(el));
+  statContainers.forEach(el => observer.observe(el));
 }
