@@ -33,3 +33,10 @@ body {
   background: rgba(124, 92, 255, 0.35);
   color: #fff;
 }
+
+/* Hide default cursor on desktop since we have a custom one */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
