@@ -8,7 +8,7 @@ const certs = [
     issuer: "Microsoft",
     tag: "Azure",
     color: "#0078d4",
-    link: "https://drive.google.com/file/d/13sektBlr09yicyXwkBxk2elXOgPlYZCg/view",
+    link: "https://drive.google.com/file/d/1GOG1HcmAUP5XX3AY3VRzghkrYqu83hL_/view",
   },
   {
     name: "AWS Cloud Foundations",
@@ -22,7 +22,7 @@ const certs = [
     issuer: "Amazon Web Services",
     tag: "AWS",
     color: "#FF9900",
-    link: "https://drive.google.com/file/d/1GOG1HcmAUP5XX3AY3VRzghkrYqu83hL_/view",
+    link: "https://drive.google.com/file/d/13sektBlr09yicyXwkBxk2elXOgPlYZCg/view",
   },
 ];
 

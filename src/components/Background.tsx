@@ -145,28 +145,8 @@ export default function CinematicBackground() {
 
     const tick = () => {
       frame++;
-      if (transitioning) {
-        blend += 0.018;
-        if (blend >= 1) { blend = 1; mode = nextMode; transitioning = false; }
-        renderMode(mode, 1 - blend);
-        renderMode(nextMode, blend);
-      } else {
-        renderMode(mode, 1);
-      }
+      renderMode(0, 1);
       animId = requestAnimationFrame(tick);
-    };
-
-    // Scroll-based mode switching
-    const onScroll = () => {
-      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      let target = 0;
-      if (pct > 0.65) target = 2;
-      else if (pct > 0.3) target = 1;
-      if (target !== nextMode) {
-        nextMode = target;
-        blend = 0;
-        transitioning = true;
-      }
     };
 
     resize();
@@ -174,12 +154,10 @@ export default function CinematicBackground() {
     initStars();
     tick();
     window.addEventListener("resize", resize, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
