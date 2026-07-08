@@ -5,8 +5,7 @@ import { motion, Variants } from "framer-motion";
 const categories = [
   { name: "Programming", skills: ["Java", "Python", "SQL", "Redis", "NoSQL"] },
   { name: "Backend & APIs", skills: ["REST APIs", "System Design", "Microservices"] },
-  { name: "Cloud", skills: ["AWS", "Azure", "Lambda", "RDS", "S3"] },
-  { name: "Testing & QA", skills: ["Manual Testing", "Quality Assurance", "Test Cases", "Bug Tracking"] },
+  { name: "Cloud", skills: ["AWS", "Azure"] },
   { name: "Tools", skills: ["Git", "GitHub", "Figma", "LLMs", "Excel", "PowerPoint"] },
 ];
 
@@ -31,7 +30,7 @@ export default function Skills() {
           <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">Technical Arsenal</h2>
         </motion.div>
 
-        <div className="space-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
           {categories.map((cat, ci) => (
             <motion.div
               key={ci}

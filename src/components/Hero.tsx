@@ -51,7 +51,7 @@ export default function Hero() {
           className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-md"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-sm font-mono text-white/60 tracking-widest">Open to SDE Roles — 2026</span>
+          <span className="text-sm font-mono text-white/60 tracking-widest">Open for work — 2026</span>
         </motion.div>
 
         {/* Main Heading */}
