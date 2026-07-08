@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav(engine);
   initScrollReveal();
   initCursor();
+  initParticles();
   engine.start();
 });
 
@@ -52,6 +53,30 @@ function initScrollReveal() {
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+}
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+function initParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  
+  const particleCount = 25;
+  for (let i = 0; i < particleCount; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    
+    const size = Math.random() * 4 + 2;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    
+    container.appendChild(p);
+  }
 }
 
 /* ============================================================

@@ -24,6 +24,29 @@ body {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.15;
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+  animation: floatUp 15s linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; transform: translateY(80vh) scale(1); }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(0); opacity: 0; }
 }
 
 /* ============================================================
@@ -416,17 +439,136 @@ section {
    ============================================================ */
 .about-layout {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: start;
 }
-.about-bio { padding: 2.5rem; }
-.about-bio p { font-size: 1.05rem; line-height: 1.85; color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; }
-.about-bio strong { color: #fff; font-weight: 700; }
-.stat-cluster { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.stat-box { padding: 1.8rem; text-align: center; display: flex; flex-direction: column; gap: 0.4rem; }
-.stat-box b { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; background: linear-gradient(135deg, #c7d2fe, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.stat-box span { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+.about-bio { 
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.bio-block h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.bio-block h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #818cf8;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+.bio-block p { 
+  font-size: 1.05rem; 
+  line-height: 1.85; 
+  color: rgba(255,255,255,0.75); 
+  max-width: 65ch;
+}
+.bio-block .role-title {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.bio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.bio-list li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.bio-list li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #6366f1;
+}
+.quick-facts ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.quick-facts li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+}
+.q-icon {
+  font-size: 1.2rem;
+}
+.stat-cluster { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 1.5rem; 
+  margin-top: 2rem;
+}
+.premium-card {
+  padding: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.premium-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top right, rgba(99,102,241,0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.premium-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(99,102,241,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(99,102,241,0.2);
+}
+.premium-card:hover::before {
+  opacity: 1;
+}
+.card-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 1;
+}
+.card-text b {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.card-text span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
 /* ============================================================
    EXPERIENCE
