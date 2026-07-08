@@ -82,16 +82,22 @@ function initNav(engine) {
 }
 
 /* ============================================================
-   CURSOR GLOW (soft magnetic glow)
+   CURSOR GLOW (soft magnetic glow) & DOT
    ============================================================ */
 function initCursor() {
   const glow = document.getElementById('cursor-glow');
-  if (!glow || window.matchMedia('(hover:none)').matches) return;
+  const dot = document.getElementById('cursor-dot');
+  if (!glow || !dot || window.matchMedia('(hover:none)').matches) return;
 
   let cx = innerWidth / 2, cy = innerHeight / 2;
   let tx = cx, ty = cy;
 
-  window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+  window.addEventListener('mousemove', e => { 
+    tx = e.clientX; 
+    ty = e.clientY; 
+    dot.style.left = tx + 'px';
+    dot.style.top = ty + 'px';
+  }, { passive: true });
 
   const interactables = document.querySelectorAll('a, button, .glass');
   interactables.forEach(el => {
@@ -99,11 +105,15 @@ function initCursor() {
       glow.style.width  = '480px';
       glow.style.height = '480px';
       glow.style.background = 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)';
+      dot.style.width = '10px';
+      dot.style.height = '10px';
     });
     el.addEventListener('mouseleave', () => {
       glow.style.width  = '320px';
       glow.style.height = '320px';
       glow.style.background = 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)';
+      dot.style.width = '6px';
+      dot.style.height = '6px';
     });
   });
 
