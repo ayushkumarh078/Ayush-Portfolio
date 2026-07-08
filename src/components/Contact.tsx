@@ -2,8 +2,18 @@
 
 import { motion } from "framer-motion";
 import { Mail, Code, User, Send } from "lucide-react";
+import { useState } from "react";
 
 export function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`);
+    window.location.href = `mailto:ayushkumar.h078@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <section id="contact" className="py-32 px-6 relative z-10">
       <div className="max-w-4xl mx-auto">
@@ -82,26 +92,35 @@ export function Contact() {
 
             {/* Right: Form */}
             <div>
-              <form className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                   type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your Name"
                   className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
                 />
                 <input
                   type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Your Email"
                   className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
                 />
                 <textarea
                   rows={5}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Your Message"
                   className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors resize-none text-sm"
                 />
                 <motion.button
                   whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(124,92,255,0.4)" }}
                   whileTap={{ scale: 0.98 }}
-                  type="button"
+                  type="submit"
                   className="w-full bg-white text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-base"
                 >
                   Send Message <Send size={18} />
