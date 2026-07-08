@@ -1,68 +1,83 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle, Code2, Target, Terminal } from "lucide-react";
 
 export default function About() {
-  const sections = [
-    {
-      id: "intro",
-      icon: <Terminal className="w-5 h-5 text-brand-500" />,
-      title: "Who I Am",
-      content: "Computer Science undergraduate at VIT-AP University, graduating in 2026. Passionate about building scalable backend systems and reliable software.",
-    },
-    {
-      id: "fssai",
-      icon: <CheckCircle className="w-5 h-5 text-emerald-400" />,
-      title: "The QA Perspective",
-      content: "During my Software Testing Internship at FSSAI Headquarters, I learned how to break software. This rigorous QA experience fundamentally changed how I write code—teaching me to anticipate edge cases and build resilient architectures.",
-    },
-    {
-      id: "focus",
-      icon: <Code2 className="w-5 h-5 text-blue-400" />,
-      title: "Current Focus",
-      content: "With a strong foundation in quality assurance, my primary focus is now purely on Software Development. I engineer robust backend APIs, optimize databases, and build full-stack solutions that don't fail in production.",
-    },
-    {
-      id: "goal",
-      icon: <Target className="w-5 h-5 text-rose-400" />,
-      title: "Career Goal",
-      content: "My immediate objective is becoming a Software Development Engineer (SDE) at a forward-thinking company where I can solve complex engineering challenges at scale.",
-    }
-  ];
-
   return (
     <section id="about" className="py-32 px-6 relative z-10">
-      <div className="max-w-4xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+      <div className="max-w-5xl mx-auto">
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-20"
         >
-          <span className="font-mono text-brand-500 tracking-widest text-sm uppercase mb-2 block">01. Background</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">About Me</h2>
+          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+            01 — Background
+          </span>
+          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">About Me</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {sections.map((sec, i) => (
-            <motion.div
-              key={sec.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="glass-panel p-8 rounded-2xl group hover:border-brand-500/50 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                {sec.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">{sec.title}</h3>
-              <p className="text-white/60 leading-relaxed text-sm md:text-base">
-                {sec.content}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left: Story */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <p className="text-xl text-white/70 leading-relaxed">
+              I'm a Computer Science undergraduate at{" "}
+              <span className="text-white font-semibold">VIT-AP University</span>, graduating in 2026.
+              Passionate about building scalable backend systems and reliable software.
+            </p>
+
+            <div className="border-l-2 border-indigo-500/50 pl-6">
+              <h3 className="text-white font-bold text-lg mb-2">The QA Shift</h3>
+              <p className="text-white/60 leading-relaxed">
+                My Software Testing Internship at <span className="text-indigo-300">FSSAI Headquarters</span> taught
+                me how to <em>break</em> software—which fundamentally changed how I <em>build</em> it. I now write
+                code that anticipates edge cases before they reach production.
               </p>
-            </motion.div>
-          ))}
+            </div>
+
+            <div className="border-l-2 border-purple-500/50 pl-6">
+              <h3 className="text-white font-bold text-lg mb-2">Career Goal</h3>
+              <p className="text-white/60 leading-relaxed">
+                Becoming a <span className="text-white font-semibold">Software Development Engineer</span> at a
+                forward-thinking company where I can solve complex problems and build systems that scale.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right: Stat grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-5"
+          >
+            {[
+              { value: "1", label: "Internship", sub: "FSSAI HQ — QA & Testing" },
+              { value: "3", label: "Certifications", sub: "AWS + Azure" },
+              { value: "3", label: "Major Projects", sub: "AI / CV / IoT" },
+              { value: "2026", label: "Graduation", sub: "VIT-AP University" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.03 }}
+                className="rounded-2xl p-6 border border-white/8 bg-white/[0.03] backdrop-blur-sm"
+              >
+                <div className="text-4xl font-black text-transparent bg-clip-text"
+                  style={{ backgroundImage: "linear-gradient(135deg,#c9c3ff,#7c5cff)" }}>
+                  {stat.value}
+                </div>
+                <div className="mt-1 text-white font-semibold text-base">{stat.label}</div>
+                <div className="text-xs text-white/40 font-mono mt-1">{stat.sub}</div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
