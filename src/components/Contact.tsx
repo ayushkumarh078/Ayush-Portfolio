@@ -24,110 +24,70 @@ export function Contact() {
           className="text-center mb-16"
         >
           <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
-            07 — Connect
+            09 — Next Steps
           </span>
-          <h2
-            className="text-6xl md:text-8xl font-black text-transparent bg-clip-text leading-none tracking-tight mb-6"
-            style={{ backgroundImage: "linear-gradient(135deg, #fff 30%, #7c5cff 100%)" }}
-          >
-            Let's Build the Future
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-6">
+            Let's build something scalable.
           </h2>
-          <p className="text-white/50 text-lg max-w-lg mx-auto">
-            Seeking an SDE role. My inbox is always open — let's connect and build something great.
+          <p className="text-white/50 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+            I'm currently seeking a full-time Software Engineering role. Whether you have an opportunity that matches my skills or just want to talk system architecture, I'd love to hear from you.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md overflow-hidden"
+          className="relative rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md overflow-hidden max-w-2xl mx-auto p-8 md:p-12"
         >
-          {/* Glow accent */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-10 md:p-14 relative z-10">
-            {/* Left */}
-            <div className="flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Get In Touch</h3>
-                <p className="text-white/45 text-sm mb-10 leading-relaxed">
-                  Whether it's about an opportunity, collaboration, or just saying hi — I'll get back to you fast.
-                </p>
-                <div className="space-y-5">
-                  {[
-                    {
-                      icon: <Mail size={18} />,
-                      label: "Email",
-                      href: "mailto:ayushkumar.h078@gmail.com",
-                    },
-                    {
-                      icon: <Code size={18} />,
-                      label: "GitHub",
-                      href: "https://github.com/ayushkumarh078",
-                    },
-                    {
-                      icon: <User size={18} />,
-                      label: "LinkedIn",
-                      href: "https://www.linkedin.com/in/ayushkumarh0078/",
-                    },
-                  ].map((item, i) => (
-                    <a
-                      key={i}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 text-white/60 hover:text-white group transition-colors"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
-                        {item.icon}
-                      </div>
-                      <span className="font-medium">{item.label}</span>
-                    </a>
-                  ))}
-                </div>
+          {/* Subtle Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
+          
+          <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Name"
+                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
+              />
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Email address"
+                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
+              />
+            </div>
+            <textarea
+              rows={4}
+              required
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              placeholder="How can I help you?"
+              className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors resize-none text-sm"
+            />
+            
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-2">
+              <div className="flex gap-4">
+                <a href="mailto:ayushkumar.h078@gmail.com" className="text-white/40 hover:text-white transition-colors"><Mail size={20} /></a>
+                <a href="https://github.com/ayushkumarh078" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors"><Code size={20} /></a>
+                <a href="https://www.linkedin.com/in/ayushkumarh0078/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors"><User size={20} /></a>
               </div>
+              
+              <motion.button
+                whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(124,92,255,0.3)" }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition-all text-sm"
+              >
+                Start a Conversation <Send size={16} />
+              </motion.button>
             </div>
-
-            {/* Right: Form */}
-            <div>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Your Name"
-                  className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
-                />
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="Your Email"
-                  className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
-                />
-                <textarea
-                  rows={5}
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Your Message"
-                  className="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/8 text-white placeholder-white/25 focus:outline-none focus:border-indigo-500/60 transition-colors resize-none text-sm"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(124,92,255,0.4)" }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full bg-white text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-base"
-                >
-                  Send Message <Send size={18} />
-                </motion.button>
-              </form>
-            </div>
-          </div>
+          </form>
         </motion.div>
       </div>
     </section>

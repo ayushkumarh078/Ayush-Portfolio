@@ -28,62 +28,40 @@ const certs = [
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-32 px-6 relative z-10">
-      <div className="max-w-5xl mx-auto">
+    <section id="certifications" className="py-24 px-6 relative z-10">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-start">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="md:w-1/3"
         >
           <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
-            06 — Credentials
+            05 — Credentials
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">Certifications</h2>
+          <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">Certifications</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:w-2/3 flex flex-wrap gap-4">
           {certs.map((cert, i) => (
             <motion.a
               key={i}
               href={cert.link}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ scale: 1.02 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              className="relative group rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-sm p-8 overflow-hidden flex flex-col gap-4 cursor-pointer"
+              transition={{ delay: i * 0.1 }}
+              className="flex items-center gap-4 py-3 px-5 rounded-full border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
             >
-              {/* Top glow */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px opacity-60 transition-opacity group-hover:opacity-100"
-                style={{ background: `linear-gradient(90deg, transparent, ${cert.color}, transparent)` }}
-              />
-
-              {/* Provider tag */}
-              <span
-                className="self-start px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-widest"
-                style={{
-                  background: `${cert.color}20`,
-                  color: cert.color,
-                  border: `1px solid ${cert.color}40`,
-                }}
-              >
-                {cert.tag}
-              </span>
-
-              <h3 className="text-xl font-bold text-white leading-snug group-hover:text-indigo-200 transition-colors">
-                {cert.name}
-              </h3>
-              <p className="text-sm font-mono text-white/40 mt-auto">{cert.issuer}</p>
-
-              {/* View certificate text */}
-              <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>View Certificate</span>
-                <span>→</span>
+              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cert.color }} />
+              <div>
+                <h3 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">
+                  {cert.name}
+                </h3>
               </div>
             </motion.a>
           ))}

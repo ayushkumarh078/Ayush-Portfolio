@@ -1,18 +1,18 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import { Server, Layout, Cloud, Bot, Database, TestTube, Settings, Code2 } from "lucide-react";
 
 const categories = [
-  { name: "Programming", skills: ["Java", "Python", "SQL", "Redis", "NoSQL"] },
-  { name: "Backend & APIs", skills: ["REST APIs", "System Design", "Microservices"] },
-  { name: "Cloud", skills: ["AWS", "Azure"] },
-  { name: "Tools", skills: ["Git", "GitHub", "Figma", "LLMs", "Excel", "PowerPoint"] },
+  { name: "Languages", icon: <Code2 size={18} />, skills: ["Go", "Python", "Java", "TypeScript", "SQL"] },
+  { name: "Backend", icon: <Server size={18} />, skills: ["Node.js", "Flask", "gRPC", "REST APIs", "Microservices"] },
+  { name: "Frontend", icon: <Layout size={18} />, skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion"] },
+  { name: "Cloud", icon: <Cloud size={18} />, skills: ["AWS", "Azure", "GCP", "Lambda"] },
+  { name: "Databases", icon: <Database size={18} />, skills: ["PostgreSQL", "Redis", "MongoDB", "DynamoDB"] },
+  { name: "AI / ML", icon: <Bot size={18} />, skills: ["OpenAI API", "OpenCV", "NLP", "LLM Integration"] },
+  { name: "DevOps", icon: <Settings size={18} />, skills: ["Docker", "GitHub Actions", "CI/CD", "Linux"] },
+  { name: "Testing", icon: <TestTube size={18} />, skills: ["Jest", "Playwright", "QA Engineering"] },
 ];
-
-const chipVariants: Variants = {
-  hidden: { opacity: 0, y: 12, scale: 0.9 },
-  visible: { opacity: 1, y: 0, scale: 1 },
-};
 
 export default function Skills() {
   return (
@@ -25,45 +25,35 @@ export default function Skills() {
           className="mb-20"
         >
           <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
-            04 — Capabilities
+            03 — Core Competencies
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">Technical Arsenal</h2>
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Technical Arsenal</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat, ci) => (
             <motion.div
               key={ci}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: ci * 0.08 }}
+              transition={{ delay: ci * 0.05 }}
+              className="bg-black/30 border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-indigo-500/30 transition-colors group"
             >
-              <div className="flex items-center gap-4 mb-5">
-                <span className="font-mono text-xs uppercase tracking-widest text-indigo-400/80">
-                  {cat.name}
-                </span>
-                <div className="flex-1 h-px bg-white/8" />
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/10 group-hover:scale-110 transition-all border border-white/5">
+                  {cat.icon}
+                </div>
+                <h3 className="font-bold text-white tracking-tight">{cat.name}</h3>
               </div>
-
-              <motion.div
-                className="flex flex-wrap gap-3"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ staggerChildren: 0.06, delayChildren: ci * 0.05 }}
-              >
+              <ul className="space-y-3">
                 {cat.skills.map((skill, si) => (
-                  <motion.span
-                    key={si}
-                    variants={chipVariants}
-                    whileHover={{ scale: 1.08, borderColor: "rgba(124,92,255,0.8)" }}
-                    className="px-5 py-2.5 rounded-full text-sm font-medium text-white/80 border border-white/10 bg-white/[0.04] backdrop-blur-sm cursor-default select-none transition-colors hover:text-white"
-                  >
+                  <li key={si} className="text-sm text-white/60 font-mono flex items-center gap-2 group-hover:text-white/80 transition-colors">
+                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-indigo-500 transition-colors" />
                     {skill}
-                  </motion.span>
+                  </li>
                 ))}
-              </motion.div>
+              </ul>
             </motion.div>
           ))}
         </div>

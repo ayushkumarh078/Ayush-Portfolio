@@ -17,45 +17,37 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 }
 
 const stats = [
-  { value: 1, suffix: "", label: "Internship Completed" },
-  { value: 3, suffix: "", label: "Certifications Earned" },
-  { value: 3, suffix: "", label: "Major Projects Built" },
-  { value: 15, suffix: "+", label: "Events Managed" },
-  { value: 50, suffix: "+", label: "Students Mentored" },
-  { value: 10, suffix: "", label: "Member Team Led" },
+  { value: 1, suffix: "", label: "Engineering Internship" },
+  { value: 3, suffix: "", label: "Cloud Certifications" },
+  { value: 3, suffix: "", label: "Production Apps Built" },
   { value: 95, suffix: "%", label: "Detection Accuracy" },
-  { value: 500, suffix: "+", label: "Users Served" },
+  { value: 500, suffix: "+", label: "Quizzes Generated" },
+  { value: 40, suffix: "%", label: "Bug Leak Reduced" },
+  { value: 10, suffix: "+", label: "Events Orchestrated" },
+  { value: 5, suffix: "W", label: "Edge Power Draw" },
 ];
 
 export default function Statistics() {
   return (
     <section className="py-24 px-6 relative z-10">
       <div className="max-w-5xl mx-auto">
-        <div className="border border-white/8 rounded-3xl bg-white/[0.02] backdrop-blur-sm p-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-black text-white text-center mb-14 tracking-tight"
-          >
-            By the Numbers
-          </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+        <div className="border border-white/5 rounded-3xl bg-white/[0.01] backdrop-blur-sm p-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 text-center">
             {stats.map((s, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
+                transition={{ delay: i * 0.05 }}
               >
                 <div
-                  className="text-4xl md:text-5xl font-black text-transparent bg-clip-text mb-2"
-                  style={{ backgroundImage: "linear-gradient(135deg, #c9c3ff, #7c5cff)" }}
+                  className="text-3xl md:text-4xl font-black text-transparent bg-clip-text mb-2"
+                  style={{ backgroundImage: "linear-gradient(135deg, #fff, #c9c3ff)" }}
                 >
                   <Counter value={s.value} suffix={s.suffix} />
                 </div>
-                <div className="text-xs font-mono text-white/40 uppercase tracking-widest leading-snug">
+                <div className="text-[11px] font-mono text-white/40 uppercase tracking-widest leading-snug">
                   {s.label}
                 </div>
               </motion.div>

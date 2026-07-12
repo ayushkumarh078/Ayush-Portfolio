@@ -162,10 +162,15 @@ export default function CinematicBackground() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      id="bg-canvas"
-      className="fixed inset-0 z-[-1] pointer-events-none"
-    />
+    <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: "#020814" }}>
+      <canvas
+        ref={canvasRef}
+        className="block w-full h-full opacity-60"
+        style={{
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 100%)",
+        }}
+      />
+    </div>
   );
 }
