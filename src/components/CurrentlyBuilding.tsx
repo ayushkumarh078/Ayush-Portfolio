@@ -39,9 +39,9 @@ export default function CurrentlyBuilding() {
                   <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest">Active Development</span>
                 </div>
                 
-                <h3 className="text-3xl font-bold text-white mb-4">Distributed Job Scheduler</h3>
+                <h3 className="text-3xl font-bold text-white mb-4">Self-Aiming Smart Trash Can</h3>
                 <p className="text-white/60 leading-relaxed mb-8 text-sm md:text-base">
-                  A high-performance, distributed task scheduling system built in Go. Designed to handle millions of background jobs with guaranteed at-least-once execution, fault tolerance, and a robust retry mechanism.
+                  A hardware and edge computing project combining computer vision with robotics. Uses a Raspberry Pi to perform real-time waste detection and motorized centering to catch thrown objects.
                 </p>
 
                 <div className="space-y-6">
@@ -50,9 +50,9 @@ export default function CurrentlyBuilding() {
                       <Cpu size={16} className="text-indigo-400" /> Architecture Highlights
                     </h4>
                     <ul className="space-y-2 text-sm text-white/50 font-mono">
-                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> Go / gRPC for microservice communication</li>
-                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> Redis Streams for reliable job queuing</li>
-                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> PostgreSQL for persistent state and audit logs</li>
+                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> Raspberry Pi edge computing base</li>
+                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> OpenCV & MobileNet SSD for real-time vision</li>
+                      <li className="flex items-start gap-2"><span className="text-indigo-500">▹</span> Custom motor control logic for centering targets</li>
                     </ul>
                   </div>
 
@@ -64,14 +64,14 @@ export default function CurrentlyBuilding() {
                       <div className="flex items-start gap-3">
                         <GitCommit size={14} className="text-white/30 mt-0.5 shrink-0" />
                         <div>
-                          <p className="text-white/70">Implement leader election using Redis Redlock</p>
+                          <p className="text-white/70">Optimize MobileNet SSD inference for 15+ FPS</p>
                           <span className="text-white/30">2 days ago</span>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <GitCommit size={14} className="text-white/30 mt-0.5 shrink-0" />
                         <div>
-                          <p className="text-white/70">Add exponential backoff for failed job retries</p>
+                          <p className="text-white/70">Integrate servo motor logic for X-axis tracking</p>
                           <span className="text-white/30">5 days ago</span>
                         </div>
                       </div>
@@ -93,7 +93,7 @@ export default function CurrentlyBuilding() {
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-white/10 bg-black/40">
                         <h5 className="font-bold text-white text-sm mb-1">Phase 1</h5>
-                        <p className="text-white/50 text-xs">Core engine & worker pool</p>
+                        <p className="text-white/50 text-xs">Object Detection Pipeline (OpenCV)</p>
                       </div>
                     </div>
 
@@ -103,7 +103,7 @@ export default function CurrentlyBuilding() {
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-indigo-500/30 bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
                         <h5 className="font-bold text-white text-sm mb-1">Phase 2</h5>
-                        <p className="text-indigo-200/70 text-xs">Distributed consensus & fault tolerance</p>
+                        <p className="text-indigo-200/70 text-xs">Motor Integration & Target Tracking</p>
                       </div>
                     </div>
 
@@ -113,7 +113,7 @@ export default function CurrentlyBuilding() {
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                         <h5 className="font-bold text-white/50 text-sm mb-1">Phase 3</h5>
-                        <p className="text-white/30 text-xs">Dashboard UI & Metrics</p>
+                        <p className="text-white/30 text-xs">Edge Optimization & Power Tuning</p>
                       </div>
                     </div>
 

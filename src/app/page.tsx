@@ -1,5 +1,6 @@
 import Background from "@/components/Background";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 import CurrentlyBuilding from "@/components/CurrentlyBuilding";
 import TechnicalDeepDives from "@/components/TechnicalDeepDives";
 import Experience from "@/components/Experience";
@@ -18,6 +19,9 @@ export default function Home() {
       
       {/* Sections with structural separators */}
       <Hero />
+      
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <About />
       
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <CurrentlyBuilding />
