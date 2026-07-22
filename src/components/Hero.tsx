@@ -108,7 +108,9 @@ export default function Hero() {
           <motion.a
             whileHover={{ y: -2, backgroundColor: "rgba(255,255,255,0.1)" }}
             whileTap={{ scale: 0.98 }}
-            href="#contact"
+            href="/Ayush_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-3.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white font-medium text-sm flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
           >
             <FileText size={16} /> View Resume

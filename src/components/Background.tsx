@@ -23,7 +23,6 @@ export default function CinematicBackground() {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      initMatrix();
     };
 
     // --- MATRIX ---

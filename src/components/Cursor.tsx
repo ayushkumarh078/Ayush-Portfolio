@@ -45,7 +45,7 @@ export default function Cursor() {
           scale: isHovering ? 2 : 1,
           opacity: isHovering ? 0.8 : 1,
         }}
-        transition={{ type: "spring", stiffness: 500, damping: 28, mass: 0.5 }}
+        transition={{ type: "tween", duration: 0 }}
       />
     </>
   );
