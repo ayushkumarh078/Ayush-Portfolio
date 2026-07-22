@@ -43,3 +43,13 @@ body {
     cursor: none !important;
   }
 }
+
+@keyframes slow-pan {
+  0% { transform: scale(1.05) translate(0, 0); }
+  50% { transform: scale(1.15) translate(-1.5%, 1.5%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
+.animate-slow-pan {
+  animation: slow-pan 60s ease-in-out infinite;
+}

@@ -15,22 +15,19 @@ export default function CinematicBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-[#050505]">
+    <div className="fixed inset-0 z-0 pointer-events-none bg-[#050505] overflow-hidden">
       {/* 
-        This video element expects a file named 'background.mp4' in your 'public' folder.
-        Please generate the video using Runway Gen-3, Luma, or Sora, and place it there!
+        Uses the high-res AI generated lab background with a 60-second seamless CSS pan/zoom
+        to create the illusion of a cinematic camera slowly moving through the facility.
       */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
-        poster="/fallback-bg.jpg"
-      >
-        <source src="/background.mp4" type="video/mp4" />
-      </video>
+      <div 
+        className="absolute inset-0 w-full h-full opacity-50 animate-slow-pan will-change-transform"
+        style={{
+          backgroundImage: "url('/background-lab.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       
       {/* Cinematic Vignette Overlay to blend the video edges and text */}
       <div 
