@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #d4af37;
-  --color-gold-muted: #a38a2e;
-  --color-gold-border: rgba(212, 175, 55, 0.2);
-  --color-bg-primary: #050505;
-  --color-bg-secondary: #0a0a0a;
+  --color-gold: #cbd5e1;       /* Silver/Platinum */
+  --color-gold-muted: #94a3b8; /* Slate gray */
+  --color-gold-border: rgba(203, 213, 225, 0.2);
+  --color-bg-primary: #020617; /* Deepest slate */
+  --color-bg-secondary: #0f172a; /* Dark slate */
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-dmsans);
   --font-mono: var(--font-mono);
@@ -33,7 +33,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(212, 175, 55, 0.35);
+  background: rgba(203, 213, 225, 0.35);
   color: #fff;
 }
 

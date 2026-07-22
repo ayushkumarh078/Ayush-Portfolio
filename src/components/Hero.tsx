@@ -71,7 +71,7 @@ export default function Hero() {
             <span
               className="text-transparent"
               style={{
-                background: "linear-gradient(to right, #d4af37, #a38a2e)",
+                background: "linear-gradient(to right, #cbd5e1, #64748b)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
