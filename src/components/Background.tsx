@@ -1,32 +1,19 @@
 "use client";
-
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function CinematicBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // Ensure video plays automatically on mount, even in low power mode
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Video autoplay prevented:", error);
-      });
-    }
-  }, []);
-
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-[#050505] overflow-hidden">
       {/* 
         Uses the high-res AI generated lab background with a 60-second seamless CSS pan/zoom
         to create the illusion of a cinematic camera slowly moving through the facility.
       */}
-      <div 
-        className="absolute inset-0 w-full h-full opacity-50 animate-slow-pan will-change-transform"
-        style={{
-          backgroundImage: "url('/background-lab.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+      <Image 
+        src="/background-lab.png"
+        alt="AI Lab Background"
+        fill
+        priority
+        className="object-cover opacity-80 animate-slow-pan will-change-transform"
       />
       
       {/* Cinematic Vignette Overlay to blend the video edges and text */}
