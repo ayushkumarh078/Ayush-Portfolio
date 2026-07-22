@@ -1,30 +1,26 @@
 "use client";
-import Image from "next/image";
 
 export default function CinematicBackground() {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-black overflow-hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none bg-[#050505]">
       {/* 
-        Uses the high-res AI generated lab background with a 60-second seamless CSS pan/zoom
-        to create the illusion of a cinematic camera slowly moving through the facility.
+        Using a standard img tag with a relative path ensures it works 
+        on all hosting environments (including GitHub Pages with basePaths)
+        without Turbopack or next/image optimization bugs.
       */}
-      <Image 
-        src="/background-lab.png"
+      <img 
+        src="./background-lab.png"
         alt="AI Lab Background"
-        fill
-        priority
-        className="object-cover opacity-100 animate-slow-pan will-change-transform"
+        className="absolute inset-0 w-full h-full object-cover opacity-80"
       />
       
-      {/* Cinematic Vignette Overlay to blend the video edges and text */}
+      {/* Very light vignette for text readability */}
       <div 
         className="absolute inset-0 pointer-events-none" 
         style={{
-          background: "radial-gradient(circle at center, transparent 0%, rgba(2, 6, 23, 0.9) 100%)"
+          background: "radial-gradient(circle at center, transparent 0%, rgba(5, 5, 5, 0.9) 100%)"
         }} 
       />
-      {/* Very slight dark tint to ensure text remains highly readable */}
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
     </div>
   );
 }
