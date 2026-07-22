@@ -57,27 +57,29 @@ export default function Hero() {
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
           </div>
           <span className="text-xs md:text-sm font-mono text-gold/80 tracking-wide flex items-center gap-2">
-            Currently Building: <strong className="text-gold font-semibold group-hover:text-indigo-200 transition-colors">Distributed Job Scheduler</strong>
+            Currently Building: <strong className="text-gold font-semibold group-hover:text-gold-muted transition-colors">DevLens (GitHub Project Analyzer)</strong>
             <ChevronRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
           </span>
         </motion.a>
 
         {/* Main Heading */}
-        <div className="flex flex-col gap-2">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter leading-[1.1]">
-            <span className="text-white">Engineering </span>
+        <div className="flex flex-col gap-2 items-center">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tighter leading-[1.1] text-white">
+            Ayush Kumar
+          </h1>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tighter leading-[1.1] mt-2">
             <span
               className="text-transparent"
               style={{
-                background: "linear-gradient(to right, #c9c3ff, #7c5cff)",
+                background: "linear-gradient(to right, #d4af37, #a38a2e)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              Reliability.
+              Engineering Reliability.
             </span>
-          </h1>
+          </h2>
         </div>
 
         {/* Typing subtitle */}

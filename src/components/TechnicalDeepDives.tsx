@@ -40,6 +40,24 @@ const projects = [
     github: "https://github.com/ayushkumarh078",
     gradient: "from-emerald-900/30 to-teal-900/20",
     accent: "#10b981",
+  },
+  {
+    num: "03",
+    title: "Self-Aiming Smart Trash Can",
+    overview: "Hardware and edge computing project combining computer vision with robotics to automatically center and catch thrown objects.",
+    problem: "Static waste bins require physical proximity. Integrating robotics and computer vision to track fast-moving objects on edge hardware is complex.",
+    solution: "A Raspberry Pi with a Pi Camera runs real-time waste detection using OpenCV and MobileNet SSD, driving servo motors to track and align with targets.",
+    architecture: "The camera feed is processed frame-by-frame on the Pi. Detection bounding boxes calculate the offset from the center, sending PWM signals to X/Y axis servo motors for instant correction.",
+    challenges: "Inference latency causing the motors to lag behind the object. Solved by optimizing the MobileNet SSD inference to hit 15+ FPS and tuning the PID controller for the servos.",
+    metrics: [
+      { label: "Inference Speed", value: "15 FPS" },
+      { label: "Power Draw", value: "<10W" },
+      { label: "Accuracy", value: "Tracking" }
+    ],
+    tech: ["Raspberry Pi", "OpenCV", "MobileNet SSD", "Robotics", "Python"],
+    github: "https://github.com/ayushkumarh078",
+    gradient: "from-amber-900/30 to-orange-900/20",
+    accent: "#d4af37",
   }
 ];
 
