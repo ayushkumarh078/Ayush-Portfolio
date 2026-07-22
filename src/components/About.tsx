@@ -13,10 +13,10 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             01 — Background
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">About Me</h2>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">About Me</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -33,16 +33,16 @@ export default function About() {
               Passionate about building scalable backend systems and reliable software.
             </p>
 
-            <div className="border-l-2 border-indigo-500/50 pl-6">
+            <div className="border-l-2 border-gold/50 pl-6">
               <h3 className="text-white font-bold text-lg mb-2">The QA Shift</h3>
               <p className="text-white/60 leading-relaxed">
-                My Software Testing Internship at <span className="text-indigo-300">FSSAI Headquarters</span> taught
+                My Software Testing Internship at <span className="text-gold">FSSAI Headquarters</span> taught
                 me how to <em>break</em> software—which fundamentally changed how I <em>build</em> it. I now write
                 code that anticipates edge cases before they reach production.
               </p>
             </div>
 
-            <div className="border-l-2 border-purple-500/50 pl-6">
+            <div className="border-l-2 border-gold-border/50 pl-6">
               <h3 className="text-white font-bold text-lg mb-2">Career Goal</h3>
               <p className="text-white/60 leading-relaxed">
                 Becoming a <span className="text-white font-semibold">Software Development Engineer</span> at a
@@ -69,7 +69,7 @@ export default function About() {
                 whileHover={{ scale: 1.03 }}
                 className="rounded-2xl p-6 border border-white/8 bg-white/[0.03] backdrop-blur-sm"
               >
-                <div className="text-4xl font-black text-transparent bg-clip-text"
+                <div className="text-4xl font-serif font-bold text-transparent bg-clip-text"
                   style={{ backgroundImage: "linear-gradient(135deg,#c9c3ff,#7c5cff)" }}>
                   {stat.value}
                 </div>

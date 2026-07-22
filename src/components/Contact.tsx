@@ -23,10 +23,10 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             09 — Next Steps
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight mb-6">
             Let's build something scalable.
           </h2>
           <p className="text-white/50 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
@@ -41,7 +41,7 @@ export function Contact() {
           className="relative rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md overflow-hidden max-w-2xl mx-auto p-8 md:p-12"
         >
           {/* Subtle Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-gold/10 rounded-full blur-[80px] pointer-events-none" />
           
           <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -51,7 +51,7 @@ export function Contact() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Name"
-                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
+                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-gold/60 transition-colors text-sm"
               />
               <input
                 type="email"
@@ -59,7 +59,7 @@ export function Contact() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Email address"
-                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors text-sm"
+                className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-gold/60 transition-colors text-sm"
               />
             </div>
             <textarea
@@ -68,7 +68,7 @@ export function Contact() {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="How can I help you?"
-              className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/60 transition-colors resize-none text-sm"
+              className="w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-gold/60 transition-colors resize-none text-sm"
             />
             
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-2">

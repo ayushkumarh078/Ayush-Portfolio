@@ -113,10 +113,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             03 — Work
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">Featured Projects</h2>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">Featured Projects</h2>
         </motion.div>
 
         <div className="space-y-20">
@@ -124,7 +124,7 @@ export default function Projects() {
             <TiltCard key={i} gradient={proj.gradient} accent={proj.accent}>
               <div className="p-8 md:p-12">
                 <div className="flex items-start justify-between mb-8">
-                  <span className="font-mono text-7xl font-black text-white/5 leading-none select-none">{proj.num}</span>
+                  <span className="font-mono text-7xl font-serif font-bold text-white/5 leading-none select-none">{proj.num}</span>
                   <div className="flex gap-3">
                     <motion.a
                       whileHover={{ scale: 1.05 }}
@@ -139,7 +139,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-black text-white mb-4 -mt-8 relative z-10" style={{ transform: "translateZ(40px)" }}>{proj.title}</h3>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 -mt-8 relative z-10" style={{ transform: "translateZ(40px)" }}>{proj.title}</h3>
                 <p className="text-lg text-white/65 leading-relaxed mb-8 max-w-2xl">{proj.overview}</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -158,7 +158,7 @@ export default function Projects() {
                   <div className="flex gap-8">
                     {proj.metrics.map((m, j) => (
                       <div key={j}>
-                        <div className="text-2xl font-black text-white">{m.value}</div>
+                        <div className="text-2xl font-serif font-bold text-white">{m.value}</div>
                         <div className="text-xs font-mono text-white/40 uppercase tracking-widest">{m.label}</div>
                       </div>
                     ))}

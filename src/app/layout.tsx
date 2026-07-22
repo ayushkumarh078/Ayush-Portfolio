@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dmsans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 import Cursor from "@/components/Cursor";
@@ -18,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
-      <body className="bg-black text-white font-sans antialiased selection:bg-purple-500/30">
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} scroll-smooth`}>
+      <body className="bg-[#0a0a0a] text-white font-sans antialiased selection:bg-[#d4af37]/30">
         <Cursor />
         {children}
       </body>

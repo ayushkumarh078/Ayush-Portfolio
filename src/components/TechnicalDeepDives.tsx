@@ -55,10 +55,10 @@ export default function TechnicalDeepDives() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             02 — Case Studies
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Technical Deep Dives</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">Technical Deep Dives</h2>
         </motion.div>
 
         <div className="space-y-16">
@@ -76,7 +76,7 @@ export default function TechnicalDeepDives() {
 
               <div className="p-8 md:p-12">
                 <div className="flex items-start justify-between mb-8">
-                  <span className="font-mono text-6xl md:text-7xl font-black text-white/5 leading-none select-none">{proj.num}</span>
+                  <span className="font-mono text-6xl md:text-7xl font-serif font-bold text-white/5 leading-none select-none">{proj.num}</span>
                   <div className="flex gap-3">
                     <a
                       href={proj.github}
@@ -89,7 +89,7 @@ export default function TechnicalDeepDives() {
                   </div>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-black text-white mb-4 -mt-8 relative z-10">{proj.title}</h3>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 -mt-8 relative z-10">{proj.title}</h3>
                 <p className="text-base md:text-lg text-white/70 leading-relaxed mb-8 max-w-3xl">{proj.overview}</p>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -146,7 +146,7 @@ export default function TechnicalDeepDives() {
                   <div className="flex gap-8">
                     {proj.metrics.map((m, j) => (
                       <div key={j}>
-                        <div className="text-2xl md:text-3xl font-black text-white">{m.value}</div>
+                        <div className="text-2xl md:text-3xl font-serif font-bold text-white">{m.value}</div>
                         <div className="text-[10px] md:text-xs font-mono text-white/40 uppercase tracking-widest mt-1">{m.label}</div>
                       </div>
                     ))}

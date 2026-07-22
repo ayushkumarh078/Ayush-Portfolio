@@ -24,10 +24,10 @@ export default function Skills() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             03 — Core Competencies
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Technical Arsenal</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">Technical Arsenal</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -38,10 +38,10 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: ci * 0.05 }}
-              className="bg-black/30 border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-indigo-500/30 transition-colors group"
+              className="bg-black/30 border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-gold/30 transition-colors group"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/10 group-hover:scale-110 transition-all border border-white/5">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gold group-hover:bg-gold/10 group-hover:scale-110 transition-all border border-white/5">
                   {cat.icon}
                 </div>
                 <h3 className="font-bold text-white tracking-tight">{cat.name}</h3>
@@ -49,7 +49,7 @@ export default function Skills() {
               <ul className="space-y-3">
                 {cat.skills.map((skill, si) => (
                   <li key={si} className="text-sm text-white/60 font-mono flex items-center gap-2 group-hover:text-white/80 transition-colors">
-                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-indigo-500 transition-colors" />
+                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-gold transition-colors" />
                     {skill}
                   </li>
                 ))}

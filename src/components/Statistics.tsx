@@ -42,7 +42,7 @@ export default function Statistics() {
                 transition={{ delay: i * 0.05 }}
               >
                 <div
-                  className="text-3xl md:text-4xl font-black text-transparent bg-clip-text mb-2"
+                  className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text mb-2"
                   style={{ backgroundImage: "linear-gradient(135deg, #fff, #c9c3ff)" }}
                 >
                   <Counter value={s.value} suffix={s.suffix} />

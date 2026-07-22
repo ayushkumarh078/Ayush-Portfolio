@@ -36,10 +36,10 @@ export default function Education() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-indigo-400 tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
             05 — Academics
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight">Education</h2>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">Education</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -50,7 +50,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-8 group hover:border-indigo-500/40 transition-colors overflow-hidden"
+              className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-8 group hover:border-gold/40 transition-colors overflow-hidden"
             >
               {edu.current && (
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
@@ -63,7 +63,7 @@ export default function Education() {
               {edu.score && (
                 <div className="mt-6 pt-4 border-t border-white/8 flex justify-between items-center">
                   <span className="font-mono text-xs text-white/30 uppercase tracking-widest">Score</span>
-                  <span className="font-bold text-indigo-400">{edu.score}</span>
+                  <span className="font-bold text-gold">{edu.score}</span>
                 </div>
               )}
             </motion.div>

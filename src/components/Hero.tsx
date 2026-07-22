@@ -51,20 +51,20 @@ export default function Hero() {
           transition={{ delay: 0.1, duration: 0.4 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="group flex items-center gap-3 px-4 py-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 backdrop-blur-md hover:bg-indigo-500/10 transition-colors cursor-pointer"
+          className="group flex items-center gap-3 px-4 py-2 rounded-full border border-gold/20 bg-gold/5 backdrop-blur-md hover:bg-gold/10 transition-colors cursor-pointer"
         >
-          <div className="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-500/20">
+          <div className="flex items-center justify-center w-5 h-5 rounded-full bg-gold/20">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
           </div>
-          <span className="text-xs md:text-sm font-mono text-indigo-300/80 tracking-wide flex items-center gap-2">
-            Currently Building: <strong className="text-indigo-300 font-semibold group-hover:text-indigo-200 transition-colors">Distributed Job Scheduler</strong>
+          <span className="text-xs md:text-sm font-mono text-gold/80 tracking-wide flex items-center gap-2">
+            Currently Building: <strong className="text-gold font-semibold group-hover:text-indigo-200 transition-colors">Distributed Job Scheduler</strong>
             <ChevronRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
           </span>
         </motion.a>
 
         {/* Main Heading */}
         <div className="flex flex-col gap-2">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1]">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter leading-[1.1]">
             <span className="text-white">Engineering </span>
             <span
               className="text-transparent"
@@ -83,9 +83,9 @@ export default function Hero() {
         {/* Typing subtitle */}
         <div className="h-8 flex items-center justify-center">
           <span className="text-xl md:text-2xl font-medium text-white/70 font-mono tracking-tight flex items-center gap-2">
-            <Terminal size={20} className="text-indigo-500/70" />
+            <Terminal size={20} className="text-gold-muted/70" />
             {displayed}
-            <span className="animate-pulse text-indigo-400 font-light">|</span>
+            <span className="animate-pulse text-gold font-light">|</span>
           </span>
         </div>
 
