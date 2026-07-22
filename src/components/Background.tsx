@@ -61,31 +61,31 @@ export default function CinematicBackground() {
         nodes: Array.from({ length: count }, () => ({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: (Math.random() - 0.5) * 0.6,
-          r: Math.random() * 2.5 + 1,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 2.0 + 1,
           phase: Math.random() * Math.PI * 2,
         })),
       };
     };
 
     const drawNeural = (alpha: number) => {
-      ctx.fillStyle = `rgba(2,8,20,0.12)`;
+      ctx.fillStyle = `rgba(10, 10, 10, 0.12)`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       const nodes = neural.nodes;
-      const maxD = 160;
+      const maxD = 180;
       nodes.forEach((n) => {
         n.x += n.vx; n.y += n.vy;
         if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
         if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
         const pulse = n.r + Math.sin(frame * 0.03 + n.phase) * 1.2;
         const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, pulse * 6);
-        g.addColorStop(0, `rgba(99,102,241,${alpha * 0.4})`);
-        g.addColorStop(1, `rgba(99,102,241,0)`);
+        g.addColorStop(0, `rgba(212, 175, 55, ${alpha * 0.3})`); // Gold glow
+        g.addColorStop(1, `rgba(212, 175, 55, 0)`);
         ctx.beginPath(); ctx.arc(n.x, n.y, pulse * 6, 0, Math.PI * 2);
         ctx.fillStyle = g; ctx.fill();
         ctx.beginPath(); ctx.arc(n.x, n.y, pulse, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(165,180,252,${alpha * 0.9})`; ctx.fill();
+        ctx.fillStyle = `rgba(212, 175, 55, ${alpha * 0.8})`; ctx.fill(); // Gold core
       });
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
@@ -96,62 +96,21 @@ export default function CinematicBackground() {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(99,102,241,${(1 - d / maxD) * alpha * 0.35})`;
+            ctx.strokeStyle = `rgba(212, 175, 55, ${(1 - d / maxD) * alpha * 0.25})`; // Gold connection lines
             ctx.lineWidth = 0.8; ctx.stroke();
           }
         }
       }
     };
 
-    // --- STARS ---
-    let stars: { list: { x: number; y: number; r: number; phase: number; speed: number }[]; nebula: { x: number; y: number } };
-    const initStars = () => {
-      stars = {
-        list: Array.from({ length: 250 }, () => ({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          r: Math.random() * 1.8 + 0.2,
-          phase: Math.random() * Math.PI * 2,
-          speed: Math.random() * 0.015 + 0.005,
-        })),
-        nebula: { x: window.innerWidth * 0.6, y: window.innerHeight * 0.4 },
-      };
-    };
-
-    const drawStars = (alpha: number) => {
-      ctx.fillStyle = `rgba(2,8,20,0.18)`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      const nb = ctx.createRadialGradient(stars.nebula.x, stars.nebula.y, 0, stars.nebula.x, stars.nebula.y, canvas.width * 0.55);
-      nb.addColorStop(0, `rgba(88,28,135,${alpha * 0.12})`);
-      nb.addColorStop(0.5, `rgba(49,46,129,${alpha * 0.06})`);
-      nb.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = nb; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      stars.list.forEach((s) => {
-        const twinkle = 0.4 + 0.6 * Math.sin(frame * s.speed + s.phase);
-        const grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3);
-        grd.addColorStop(0, `rgba(255,255,255,${alpha * twinkle})`);
-        grd.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = grd; ctx.fill();
-      });
-    };
-
-    const renderMode = (m: number, alpha: number) => {
-      if (alpha <= 0) return;
-      if (m === 0) drawMatrix(alpha);
-      else if (m === 1) drawNeural(alpha);
-      else drawStars(alpha);
-    };
-
     const tick = () => {
       frame++;
-      renderMode(0, 1);
+      drawNeural(1); // Use Neural Network mode instead of Matrix Rain
       animId = requestAnimationFrame(tick);
     };
 
     resize();
     initNeural();
-    initStars();
     tick();
     window.addEventListener("resize", resize, { passive: true });
 
@@ -162,7 +121,7 @@ export default function CinematicBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: "#020814" }}>
+    <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: "#0a0a0a" }}>
       <canvas
         ref={canvasRef}
         className="block w-full h-full opacity-60"

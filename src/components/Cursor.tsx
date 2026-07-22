@@ -47,18 +47,6 @@ export default function Cursor() {
         }}
         transition={{ type: "spring", stiffness: 500, damping: 28, mass: 0.5 }}
       />
-      <motion.div
-        className="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none z-40"
-        style={{
-          background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0) 70%)",
-        }}
-        animate={{
-          x: mousePosition.x - 192,
-          y: mousePosition.y - 192,
-          scale: isHovering ? 1.5 : 1,
-        }}
-        transition={{ type: "spring", stiffness: 250, damping: 40, mass: 1 }}
-      />
     </>
   );
 }
