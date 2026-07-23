@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase, Building } from "lucide-react";
+import { useRef } from "react";
 
 const experiences = [
   {
@@ -42,73 +43,86 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="experience" className="py-32 px-6 relative z-10">
+    <section id="experience" className="py-32 px-6 relative z-10 bg-background overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-24"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             04 — Career History
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">Experience</h2>
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground tracking-tight">Experience</h2>
         </motion.div>
 
-        <div className="relative pl-8 md:pl-0">
-          {/* Timeline Line */}
-          <div className="absolute left-[39px] md:left-[50%] top-0 bottom-0 w-px bg-gradient-to-b from-gold/50 via-white/10 to-transparent -translate-x-1/2" />
+        <div ref={containerRef} className="relative pl-8 md:pl-0">
+          {/* Scroll-Driven Glowing Timeline */}
+          <div className="absolute left-[39px] md:left-[50%] top-0 bottom-0 w-1 bg-border -translate-x-1/2 rounded-full overflow-hidden">
+            <motion.div 
+              className="absolute top-0 w-full bg-primary shadow-[0_0_15px_rgba(var(--primary-rgb),1)] rounded-full"
+              style={{ height: pathHeight }}
+            />
+          </div>
 
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative mb-16 last:mb-0 md:w-[calc(50%-40px)] ${i % 2 === 0 ? "md:ml-auto md:pl-10" : "md:mr-auto md:pr-10 md:text-right"}`}
+              transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
+              className={`relative mb-24 last:mb-0 md:w-[calc(50%-50px)] ${i % 2 === 0 ? "md:ml-auto md:pl-0" : "md:mr-auto md:pr-0 md:text-right"}`}
             >
               {/* Timeline dot */}
-              <div className={`absolute top-6 w-5 h-5 rounded-full bg-black border-4 border-gold shadow-[0_0_15px_rgba(99,102,241,0.5)] z-10 ${i % 2 === 0 ? "-left-[40px] md:-left-[60px]" : "-left-[40px] md:left-auto md:-right-[60px]"}`} />
+              <div className={`absolute top-6 w-6 h-6 rounded-full bg-background border-4 border-border z-10 transition-colors duration-500 hover:border-primary hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)] ${i % 2 === 0 ? "-left-[50px] md:-left-[62px]" : "-left-[50px] md:left-auto md:-right-[62px]"}`} />
 
-              {/* Liquid Glass Card */}
-              <div className="relative rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/[0.05] to-white/[0.01] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-8 transition-all hover:bg-white/[0.08] hover:border-gold/30 group">
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+              {/* Glassmorphic Card */}
+              <div className="relative rounded-2xl overflow-hidden bg-background/50 backdrop-blur-xl border border-border shadow-2xl p-8 transition-all hover:bg-border/30 hover:border-primary/50 group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 
                 <div className="relative z-10">
                   <div className={`flex flex-col gap-4 mb-6 ${i % 2 !== 0 ? "md:items-end" : ""}`}>
                     <div className={`flex items-center gap-3 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
-                      <span className="font-mono text-xs text-indigo-200 bg-gold/20 px-3 py-1 rounded-full border border-gold/30 shadow-inner">
+                      <span className="font-mono text-xs text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
                         {exp.date}
                       </span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white tracking-tight mb-2">{exp.role}</h3>
-                      <div className={`flex items-center gap-2 text-gold font-mono text-sm ${i % 2 !== 0 ? "md:justify-end" : ""}`}>
+                      <h3 className="text-2xl font-bold text-foreground tracking-tight mb-2">{exp.role}</h3>
+                      <div className={`flex items-center gap-2 text-primary-muted font-mono text-sm ${i % 2 !== 0 ? "md:justify-end" : ""}`}>
                         <Building size={14} /> {exp.company}
                       </div>
                       {exp.metrics && (
-                        <p className={`text-gold font-mono text-xs mt-3 bg-gold/10 inline-block px-2 py-1 rounded border border-emerald-400/20 ${i % 2 !== 0 ? "md:float-right" : ""}`}>
+                        <p className={`text-primary font-mono text-xs mt-3 bg-primary/10 inline-block px-2 py-1 rounded border border-primary/20 ${i % 2 !== 0 ? "md:float-right" : ""}`}>
                           {exp.metrics}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <ul className={`space-y-3 mb-8 text-left ${i % 2 !== 0 ? "md:text-right" : ""}`}>
+                  <ul className={`space-y-3 mb-8 text-left ${i % 2 !== 0 ? "md:text-right md:flex md:flex-col md:items-end" : ""}`}>
                     {exp.highlights.map((h, j) => (
-                      <li key={j} className={`flex items-start gap-3 text-white/70 text-sm leading-relaxed ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
-                        <span className="text-gold-muted mt-1 shrink-0">▹</span>
-                        {h}
+                      <li key={j} className={`flex items-start gap-3 text-text-secondary text-sm leading-relaxed max-w-[90%] ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
+                        <span className="text-primary mt-1 shrink-0">▹</span>
+                        <span>{h}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className={`flex flex-wrap gap-2 pt-6 border-t border-white/10 ${i % 2 !== 0 ? "md:justify-end" : ""}`}>
+                  <div className={`flex flex-wrap gap-2 pt-6 border-t border-border ${i % 2 !== 0 ? "md:justify-end" : ""}`}>
                     {exp.tags.map((tag, j) => (
-                      <span key={j} className="text-[11px] font-mono px-2.5 py-1 rounded bg-black/40 border border-white/5 text-white/50">
+                      <span key={j} className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-border/50 border border-border text-primary-muted group-hover:text-foreground transition-colors">
                         {tag}
                       </span>
                     ))}
