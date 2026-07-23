@@ -11,6 +11,7 @@ import Cursor from "@/components/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
 import { PerformanceMetrics } from "@/components/PerformanceMetrics";
+import { LoadingSequence } from "@/components/LoadingSequence";
 
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
@@ -32,6 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
           themes={["light", "dark", "midnight", "graphite"]}
         >
+          <LoadingSequence />
           <Cursor />
           <CommandPalette />
           <PerformanceMetrics />

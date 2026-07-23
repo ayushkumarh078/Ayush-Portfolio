@@ -87,3 +87,11 @@ body {
     cursor: none !important;
   }
 }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@theme {
+  --animate-shimmer: shimmer 2s infinite;
+}
