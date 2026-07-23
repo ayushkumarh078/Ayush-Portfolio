@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronRight, FileText, ArrowDown, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
+import { MagneticButton } from "./MagneticButton";
 
 const roles = ["Software Engineer", "AI Developer", "Backend Engineer", "Problem Solver", "System Designer"];
 

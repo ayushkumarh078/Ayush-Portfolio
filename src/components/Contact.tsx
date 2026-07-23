@@ -82,7 +82,7 @@ export function Contact() {
                 whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(124,92,255,0.3)" }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition-all text-sm"
+                className="w-full sm:w-auto px-8 py-3.5 bg-primary text-background font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 transition-all text-sm"
               >
                 Start a Conversation <Send size={16} />
               </motion.button>

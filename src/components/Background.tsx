@@ -14,7 +14,7 @@ export default function CinematicBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-[#020617]">
+    <div className="fixed inset-0 z-0 pointer-events-none bg-background">
       {/*
         IMPORTANT: Drop your generated video file (background.mp4) into
         the /public folder. The video should be an 8-second seamless loop
