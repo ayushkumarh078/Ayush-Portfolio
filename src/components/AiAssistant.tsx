@@ -43,20 +43,46 @@ export function AiAssistant() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMsg: Message = { id: Date.now().toString(), sender: "user", text: input };
+    const userQuery = input.trim();
+    const userMsg: Message = { id: Date.now().toString(), sender: "user", text: userQuery };
     setMessages(prev => [...prev, userMsg]);
     setInput("");
     setIsTyping(true);
 
-    // Simulate AI thinking time
+    // 1. Log the question to Ayush via Webhook (Discord / Formspree)
+    // Replace this URL with your actual Formspree endpoint or Discord Webhook!
+    const WEBHOOK_URL = process.env.NEXT_PUBLIC_CHAT_WEBHOOK_URL || "";
+    if (WEBHOOK_URL) {
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `**New Chat Query on Portfolio:**\n"${userQuery}"`
+          })
+        });
+      } catch (e) {
+        console.error("Failed to log chat");
+      }
+    }
+
+    // 2. Generate a smart contextual response
     setTimeout(() => {
       let responseText = KNOWLEDGE_BASE["default"];
-      const lowerInput = userMsg.text.toLowerCase();
+      const lowerInput = userQuery.toLowerCase();
       
-      if (lowerInput.includes("resume") || lowerInput.includes("experience") || lowerInput.includes("work")) responseText = KNOWLEDGE_BASE["resume"];
-      else if (lowerInput.includes("project") || lowerInput.includes("build") || lowerInput.includes("portfolio")) responseText = KNOWLEDGE_BASE["projects"];
-      else if (lowerInput.includes("contact") || lowerInput.includes("email") || lowerInput.includes("hire")) responseText = KNOWLEDGE_BASE["contact"];
-      else if (lowerInput.includes("skill") || lowerInput.includes("tech") || lowerInput.includes("language")) responseText = KNOWLEDGE_BASE["skills"];
+      if (lowerInput.includes("resume") || lowerInput.includes("experience") || lowerInput.includes("work") || lowerInput.includes("job") || lowerInput.includes("intern")) {
+        responseText = KNOWLEDGE_BASE["resume"];
+      }
+      else if (lowerInput.includes("project") || lowerInput.includes("build") || lowerInput.includes("portfolio") || lowerInput.includes("code")) {
+        responseText = KNOWLEDGE_BASE["projects"];
+      }
+      else if (lowerInput.includes("contact") || lowerInput.includes("email") || lowerInput.includes("hire") || lowerInput.includes("reach") || lowerInput.includes("linkedin")) {
+        responseText = KNOWLEDGE_BASE["contact"];
+      }
+      else if (lowerInput.includes("skill") || lowerInput.includes("tech") || lowerInput.includes("language") || lowerInput.includes("python") || lowerInput.includes("react") || lowerInput.includes("aws")) {
+        responseText = KNOWLEDGE_BASE["skills"];
+      }
 
       const aiMsg: Message = { id: (Date.now() + 1).toString(), sender: "ai", text: responseText };
       setMessages(prev => [...prev, aiMsg]);
