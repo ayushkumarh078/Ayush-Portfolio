@@ -36,10 +36,10 @@ export default function Education() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             05 — Academics
           </span>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">Education</h2>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-foreground tracking-tight">Education</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -50,20 +50,20 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-8 group hover:border-gold/40 transition-colors overflow-hidden"
+              className="relative rounded-2xl border border-border bg-border/30 p-8 group hover:border-primary/50 transition-colors overflow-hidden"
             >
               {edu.current && (
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
               )}
-              <div className="font-mono text-xs text-white/30 mb-4 uppercase tracking-widest">{edu.date}</div>
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-200 transition-colors leading-snug">
+              <div className="font-mono text-xs text-text-secondary opacity-30 mb-4 uppercase tracking-widest">{edu.date}</div>
+              <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors leading-snug">
                 {edu.school}
               </h3>
-              <p className="text-sm text-white/50">{edu.degree}</p>
+              <p className="text-sm text-text-secondary opacity-50">{edu.degree}</p>
               {edu.score && (
-                <div className="mt-6 pt-4 border-t border-white/8 flex justify-between items-center">
-                  <span className="font-mono text-xs text-white/30 uppercase tracking-widest">Score</span>
-                  <span className="font-bold text-gold">{edu.score}</span>
+                <div className="mt-6 pt-4 border-t border-border flex justify-between items-center">
+                  <span className="font-mono text-xs text-text-secondary opacity-30 uppercase tracking-widest">Score</span>
+                  <span className="font-bold text-primary">{edu.score}</span>
                 </div>
               )}
             </motion.div>

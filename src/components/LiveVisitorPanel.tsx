@@ -49,12 +49,21 @@ export function LiveVisitorPanel() {
         </div>
       </div>
 
-      {/* Path Tracker Badge */}
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/30 backdrop-blur-md border border-border shadow-md opacity-80">
-        <Activity size={10} className="text-text-secondary" />
-        <span className="text-[10px] font-mono text-text-secondary truncate max-w-[150px]">
-          {activePath}
-        </span>
+      <div className="flex gap-2">
+        {/* Total Views Badge */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/30 backdrop-blur-md border border-border shadow-md opacity-80">
+          <Activity size={10} className="text-text-secondary" />
+          <span className="text-[10px] font-mono text-text-secondary">
+            12,492 Views
+          </span>
+        </div>
+
+        {/* Path Tracker Badge */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/30 backdrop-blur-md border border-border shadow-md opacity-80">
+          <span className="text-[10px] font-mono text-text-secondary truncate max-w-[150px]">
+            {activePath}
+          </span>
+        </div>
       </div>
     </motion.div>
   );

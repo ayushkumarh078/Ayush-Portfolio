@@ -93,7 +93,7 @@ function TiltCard({ children, gradient, accent }: { children: React.ReactNode; g
       className="relative perspective-1000"
     >
       <div 
-        className={`relative rounded-3xl overflow-hidden bg-gradient-to-br ${gradient} border border-white/8 transition-all duration-300 hover:border-white/20`}
+        className={`relative rounded-3xl overflow-hidden bg-gradient-to-br ${gradient} border border-border transition-all duration-300 hover:border-border`}
         style={{ transform: "translateZ(30px)" }}
       >
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accent}80, transparent)` }} />
@@ -113,10 +113,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             03 — Work
           </span>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">Featured Projects</h2>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-foreground tracking-tight">Featured Projects</h2>
         </motion.div>
 
         <div className="space-y-20">
@@ -124,7 +124,7 @@ export default function Projects() {
             <TiltCard key={i} gradient={proj.gradient} accent={proj.accent}>
               <div className="p-8 md:p-12">
                 <div className="flex items-start justify-between mb-8">
-                  <span className="font-mono text-7xl font-serif font-bold text-white/5 leading-none select-none">{proj.num}</span>
+                  <span className="font-mono text-7xl font-serif font-bold text-text-secondary opacity-5 leading-none select-none">{proj.num}</span>
                   <div className="flex gap-3">
                     <motion.a
                       whileHover={{ scale: 1.05 }}
@@ -132,24 +132,24 @@ export default function Projects() {
                       href={proj.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm font-mono transition-all"
+                      className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-border/30 hover:bg-border/30 text-text-secondary opacity-70 hover:text-foreground text-sm font-mono transition-all"
                     >
                       <Code size={14} /> GitHub
                     </motion.a>
                   </div>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 -mt-8 relative z-10" style={{ transform: "translateZ(40px)" }}>{proj.title}</h3>
-                <p className="text-lg text-white/65 leading-relaxed mb-8 max-w-2xl">{proj.overview}</p>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 -mt-8 relative z-10" style={{ transform: "translateZ(40px)" }}>{proj.title}</h3>
+                <p className="text-lg text-text-secondary opacity-65 leading-relaxed mb-8 max-w-2xl">{proj.overview}</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div>
                     <h4 className="font-mono text-xs uppercase tracking-widest mb-2" style={{ color: proj.accent }}>Problem</h4>
-                    <p className="text-white/55 text-sm leading-relaxed">{proj.problem}</p>
+                    <p className="text-text-secondary opacity-55 text-sm leading-relaxed">{proj.problem}</p>
                   </div>
                   <div>
                     <h4 className="font-mono text-xs uppercase tracking-widest mb-2" style={{ color: proj.accent }}>Solution</h4>
-                    <p className="text-white/55 text-sm leading-relaxed">{proj.solution}</p>
+                    <p className="text-text-secondary opacity-55 text-sm leading-relaxed">{proj.solution}</p>
                   </div>
                 </div>
 
@@ -158,8 +158,8 @@ export default function Projects() {
                   <div className="flex gap-8">
                     {proj.metrics.map((m, j) => (
                       <div key={j}>
-                        <div className="text-2xl font-serif font-bold text-white">{m.value}</div>
-                        <div className="text-xs font-mono text-white/40 uppercase tracking-widest">{m.label}</div>
+                        <div className="text-2xl font-serif font-bold text-foreground">{m.value}</div>
+                        <div className="text-xs font-mono text-text-secondary opacity-40 uppercase tracking-widest">{m.label}</div>
                       </div>
                     ))}
                   </div>
@@ -167,7 +167,7 @@ export default function Projects() {
                   {/* Tech stack */}
                   <div className="flex flex-wrap gap-2">
                     {proj.tech.map((t, j) => (
-                      <span key={j} className="text-xs font-mono px-3 py-1.5 rounded-md bg-black/30 border border-white/10 text-white/60">
+                      <span key={j} className="text-xs font-mono px-3 py-1.5 rounded-md bg-background/80 border border-border text-text-secondary opacity-60">
                         {t}
                       </span>
                     ))}

@@ -51,10 +51,10 @@ export default function GithubActivity() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             07 — Open Source
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight flex items-center gap-4">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground tracking-tight flex items-center gap-4">
             <GitBranch size={40} /> GitHub Activity
           </h2>
         </motion.div>
@@ -67,9 +67,9 @@ export default function GithubActivity() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="bg-black/30 border border-white/10 rounded-3xl p-8 backdrop-blur-sm overflow-hidden"
+              className="bg-background/80 border border-border rounded-3xl p-8 backdrop-blur-sm overflow-hidden"
             >
-              <h3 className="text-xl font-bold text-white mb-6">Contributions</h3>
+              <h3 className="text-xl font-bold text-foreground mb-6">Contributions</h3>
               <div className="overflow-x-auto pb-4 custom-scrollbar">
                 <GitHubCalendar 
                   username="ayushkumarh078" 
@@ -86,35 +86,35 @@ export default function GithubActivity() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:bg-white/[0.04] transition-colors"
+                className="bg-border/30 border border-border rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:bg-border/30 transition-colors"
               >
-                <Users size={24} className="text-gold mb-3" />
-                <span className="text-3xl font-serif font-bold text-white">{userData?.followers || "-"}</span>
-                <span className="text-xs font-mono text-white/40 uppercase tracking-widest mt-1">Followers</span>
+                <Users size={24} className="text-primary mb-3" />
+                <span className="text-3xl font-serif font-bold text-foreground">{userData?.followers || "-"}</span>
+                <span className="text-xs font-mono text-text-secondary opacity-40 uppercase tracking-widest mt-1">Followers</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: 0.1 }}
-                className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:bg-white/[0.04] transition-colors"
+                className="bg-border/30 border border-border rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:bg-border/30 transition-colors"
               >
-                <BookOpen size={24} className="text-gold mb-3" />
-                <span className="text-3xl font-serif font-bold text-white">{userData?.public_repos || "-"}</span>
-                <span className="text-xs font-mono text-white/40 uppercase tracking-widest mt-1">Repositories</span>
+                <BookOpen size={24} className="text-primary mb-3" />
+                <span className="text-3xl font-serif font-bold text-foreground">{userData?.public_repos || "-"}</span>
+                <span className="text-xs font-mono text-text-secondary opacity-40 uppercase tracking-widest mt-1">Repositories</span>
               </motion.div>
             </div>
           </div>
 
           {/* Right Column: Recent Repos */}
           <div className="flex-1 lg:max-w-md">
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <GitCommit size={20} className="text-gold" /> Recent Activity
+            <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <GitCommit size={20} className="text-primary" /> Recent Activity
             </h3>
             <div className="space-y-4">
               {repos.length === 0 ? (
-                <div className="h-[400px] flex items-center justify-center border border-white/5 rounded-2xl bg-white/[0.01]">
-                  <span className="text-white/30 font-mono text-sm animate-pulse">Loading repositories...</span>
+                <div className="h-[400px] flex items-center justify-center border border-border rounded-2xl bg-border/30">
+                  <span className="text-text-secondary opacity-30 font-mono text-sm animate-pulse">Loading repositories...</span>
                 </div>
               ) : (
                 repos.map((repo, i) => (
@@ -127,18 +127,18 @@ export default function GithubActivity() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="block bg-black/40 border border-white/5 hover:border-gold/30 rounded-2xl p-5 hover:bg-white/[0.02] transition-all group"
+                    className="block bg-background/80 border border-border hover:border-primary/50 rounded-2xl p-5 hover:bg-border/30 transition-all group"
                   >
-                    <h4 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors">
+                    <h4 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {repo.name}
                     </h4>
-                    <p className="text-sm text-white/50 mb-4 line-clamp-2 leading-relaxed">
+                    <p className="text-sm text-text-secondary opacity-50 mb-4 line-clamp-2 leading-relaxed">
                       {repo.description || "No description provided."}
                     </p>
-                    <div className="flex items-center gap-4 text-xs font-mono text-white/40">
+                    <div className="flex items-center gap-4 text-xs font-mono text-text-secondary opacity-40">
                       {repo.language && (
                         <span className="flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-gold" /> {repo.language}
+                          <span className="w-2 h-2 rounded-full bg-primary" /> {repo.language}
                         </span>
                       )}
                       <span className="flex items-center gap-1"><Star size={14} /> {repo.stargazers_count}</span>

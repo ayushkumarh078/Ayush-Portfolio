@@ -31,7 +31,7 @@ export default function Statistics() {
   return (
     <section className="py-24 px-6 relative z-10">
       <div className="max-w-5xl mx-auto">
-        <div className="border border-white/5 rounded-3xl bg-white/[0.01] backdrop-blur-sm p-10">
+        <div className="border border-border rounded-3xl bg-border/30 backdrop-blur-sm p-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 text-center">
             {stats.map((s, i) => (
               <motion.div
@@ -47,7 +47,7 @@ export default function Statistics() {
                 >
                   <Counter value={s.value} suffix={s.suffix} />
                 </div>
-                <div className="text-[11px] font-mono text-white/40 uppercase tracking-widest leading-snug">
+                <div className="text-[11px] font-mono text-text-secondary opacity-40 uppercase tracking-widest leading-snug">
                   {s.label}
                 </div>
               </motion.div>

@@ -14,6 +14,7 @@ import { PerformanceMetrics } from "@/components/PerformanceMetrics";
 import { LoadingSequence } from "@/components/LoadingSequence";
 import { AiAssistant } from "@/components/AiAssistant";
 import { LiveVisitorPanel } from "@/components/LiveVisitorPanel";
+import { KonamiCode } from "@/components/KonamiCode";
 
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
@@ -41,6 +42,7 @@ export default function RootLayout({
           <PerformanceMetrics />
           <AiAssistant />
           <LiveVisitorPanel />
+          <KonamiCode />
           {children}
         </ThemeProvider>
       </body>

@@ -34,7 +34,7 @@ export function ReadmeModal({ isOpen, onClose, title, content, github }: ReadmeM
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm cursor-pointer"
           />
 
           {/* Modal Content */}

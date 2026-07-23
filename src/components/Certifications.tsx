@@ -37,10 +37,10 @@ export default function Certifications() {
           viewport={{ once: true }}
           className="md:w-1/3"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+          <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             05 — Credentials
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white tracking-tight">Certifications</h2>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground tracking-tight">Certifications</h2>
         </motion.div>
 
         <div className="md:w-2/3 flex flex-wrap gap-4">
@@ -55,11 +55,11 @@ export default function Certifications() {
               whileHover={{ scale: 1.02 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-4 py-3 px-5 rounded-full border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
+              className="flex items-center gap-4 py-3 px-5 rounded-full border border-border bg-border/30 hover:bg-border/30 transition-colors group"
             >
               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cert.color }} />
               <div>
-                <h3 className="text-sm font-bold text-white group-hover:text-gold transition-colors">
+                <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">
                   {cert.name}
                 </h3>
               </div>

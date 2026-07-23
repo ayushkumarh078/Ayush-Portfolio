@@ -41,12 +41,12 @@ export default function Blog() {
           className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
+            <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
               08 — Writing
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">Engineering Blog</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground tracking-tight">Engineering Blog</h2>
           </div>
-          <a href="#" className="flex items-center gap-2 text-sm font-mono text-white/50 hover:text-gold transition-colors group pb-2">
+          <a href="#" className="flex items-center gap-2 text-sm font-mono text-text-secondary opacity-50 hover:text-primary transition-colors group pb-2">
             View All Articles <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
@@ -60,20 +60,20 @@ export default function Blog() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex flex-col h-full bg-white/[0.02] border border-white/5 rounded-3xl p-8 hover:bg-white/[0.04] hover:border-gold/30 transition-all group cursor-pointer"
+              className="flex flex-col h-full bg-border/30 border border-border rounded-3xl p-8 hover:bg-border/30 hover:border-primary/50 transition-all group cursor-pointer"
             >
               <div className="mb-6">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-gold bg-gold/10 px-3 py-1.5 rounded-full border border-gold/20">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary bg-primary/20 px-3 py-1.5 rounded-full border border-primary/50">
                   {article.category}
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-gold transition-colors leading-snug">
+              <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors leading-snug">
                 {article.title}
               </h3>
-              <p className="text-sm text-white/50 leading-relaxed mb-8 flex-grow">
+              <p className="text-sm text-text-secondary opacity-50 leading-relaxed mb-8 flex-grow">
                 {article.excerpt}
               </p>
-              <div className="flex items-center justify-between text-xs font-mono text-white/40 pt-6 border-t border-white/5 mt-auto">
+              <div className="flex items-center justify-between text-xs font-mono text-text-secondary opacity-40 pt-6 border-t border-border mt-auto">
                 <span>{article.date}</span>
                 <span className="flex items-center gap-1.5"><Clock size={12} /> {article.readTime}</span>
               </div>

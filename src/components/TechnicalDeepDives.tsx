@@ -126,8 +126,8 @@ export default function TechnicalDeepDives() {
                   >
                     {/* Abstract Floating 3D Elements */}
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
-                    <motion.div animate={{ y: [-10, 10, -10] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="w-32 h-32 rounded-xl bg-indigo-500/30 backdrop-blur-md border border-white/10 shadow-xl absolute top-10 left-10" />
-                    <motion.div animate={{ y: [10, -10, 10] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="w-40 h-24 rounded-full bg-purple-500/20 backdrop-blur-md border border-white/10 shadow-xl absolute bottom-10 right-10" />
+                    <motion.div animate={{ y: [-10, 10, -10] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="w-32 h-32 rounded-xl bg-indigo-500/30 backdrop-blur-md border border-border shadow-xl absolute top-10 left-10" />
+                    <motion.div animate={{ y: [10, -10, 10] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="w-40 h-24 rounded-full bg-purple-500/20 backdrop-blur-md border border-border shadow-xl absolute bottom-10 right-10" />
                     <div className="z-10 text-center font-mono text-primary text-sm bg-background/80 p-4 rounded-lg backdrop-blur-md border border-border">
                       AWS_LAMBDA_INVOKE: SUCCESS<br/>
                       TOKENS_GENERATED: 4,092
