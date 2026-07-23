@@ -12,6 +12,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
 import { PerformanceMetrics } from "@/components/PerformanceMetrics";
 import { LoadingSequence } from "@/components/LoadingSequence";
+import { AiAssistant } from "@/components/AiAssistant";
+import { LiveVisitorPanel } from "@/components/LiveVisitorPanel";
 
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
@@ -37,6 +39,8 @@ export default function RootLayout({
           <Cursor />
           <CommandPalette />
           <PerformanceMetrics />
+          <AiAssistant />
+          <LiveVisitorPanel />
           {children}
         </ThemeProvider>
       </body>
