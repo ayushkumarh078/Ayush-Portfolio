@@ -8,6 +8,10 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 import Cursor from "@/components/Cursor";
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { CommandPalette } from "@/components/CommandPalette";
+import { PerformanceMetrics } from "@/components/PerformanceMetrics";
+
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
   description: "Portfolio of Ayush Kumar, Software Engineer",
@@ -19,10 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} scroll-smooth`}>
-      <body className="bg-[#0a0a0a] text-white font-sans antialiased selection:bg-[#d4af37]/30">
-        <Cursor />
-        {children}
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} scroll-smooth`} suppressHydrationWarning>
+      <body className="bg-background text-foreground font-sans antialiased transition-colors duration-500 selection:bg-primary/30">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+          themes={["light", "dark", "midnight", "graphite"]}
+        >
+          <Cursor />
+          <CommandPalette />
+          <PerformanceMetrics />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

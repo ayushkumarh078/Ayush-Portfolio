@@ -1,14 +1,58 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #cbd5e1;       /* Silver/Platinum */
-  --color-gold-muted: #94a3b8; /* Slate gray */
-  --color-gold-border: rgba(203, 213, 225, 0.2);
-  --color-bg-primary: #020617; /* Deepest slate */
-  --color-bg-secondary: #0f172a; /* Dark slate */
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-primary: var(--primary);
+  --color-primary-muted: var(--primary-muted);
+  --color-border: var(--border);
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-dmsans);
   --font-mono: var(--font-mono);
+}
+
+:root {
+  /* Light Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --text-primary: #09090b;
+  --text-secondary: #71717a;
+  --primary: #18181b;
+  --primary-muted: #a1a1aa;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Default Dark */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #171717;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --primary: #ffffff;
+  --primary-muted: #52525b;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+.midnight {
+  /* Midnight Blue */
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --primary: #38bdf8;
+  --primary-muted: #0ea5e9;
+  --border: rgba(56, 189, 248, 0.15);
+}
+
+.graphite {
+  /* Graphite/Slate */
+  --bg-primary: #1e293b;
+  --bg-secondary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --primary: #10b981;
+  --primary-muted: #059669;
+  --border: rgba(16, 185, 129, 0.15);
 }
 
 * {
@@ -20,21 +64,21 @@ html {
 }
 
 body {
-  background-color: var(--color-bg-primary);
-  color: #ededed;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg-primary); }
-::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 6px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-gold-muted); }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-muted); }
 
 /* Selection */
 ::selection {
-  background: rgba(203, 213, 225, 0.35);
-  color: #fff;
+  background: var(--primary);
+  color: var(--bg-primary);
 }
 
 /* Hide default cursor on desktop since we have a custom one */
@@ -42,14 +86,4 @@ body {
   * {
     cursor: none !important;
   }
-}
-
-@keyframes slow-pan {
-  0% { transform: scale(1.05) translate(0, 0); }
-  50% { transform: scale(1.15) translate(-1.5%, 1.5%); }
-  100% { transform: scale(1.05) translate(0, 0); }
-}
-
-.animate-slow-pan {
-  animation: slow-pan 60s ease-in-out infinite;
 }
