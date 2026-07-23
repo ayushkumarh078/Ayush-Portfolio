@@ -1,189 +1,279 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code, ExternalLink, ArrowRight, LayoutTemplate, Activity, Target, Cpu } from "lucide-react";
-import React, { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Code, ExternalLink, Terminal, Cpu, Database, FolderGit2, BookOpen } from "lucide-react";
+import React, { useState } from "react";
+import { ReadmeModal } from "./ReadmeModal";
 
-const projects = [
-  {
-    num: "01",
-    title: "AI Quiz Generator",
-    overview: "NLP-powered microservice architecture that parses unstructured documents and generates contextual quizzes using LLMs.",
-    problem: "Students and educators waste hours manually extracting key concepts from large textbooks to create flashcards.",
-    solution: "An automated NLP pipeline running on AWS Lambda that extracts key concepts and generates varied quiz formats instantly.",
-    architecture: "Event-driven serverless architecture. API Gateway routes requests to Lambda functions. Text extraction is handled by Python NLP workers, which then query OpenAI APIs. State is managed via Amazon RDS.",
-    challenges: "Handling rate limits from OpenAI and managing long-running extraction tasks. Solved by implementing an asynchronous job queue using SQS.",
-    metrics: [
-      { label: "Quizzes Generated", value: "500+" },
-      { label: "Prep Time Saved", value: "70%" },
-      { label: "Accuracy", value: "92%" }
-    ],
-    tech: ["Python", "Flask", "AWS Lambda", "SQS", "RDS", "OpenAI API"],
-    github: "https://github.com/ayushkumarh078/AI-Generated-Quiz",
-    gradient: "from-violet-900/30 to-blue-900/20",
-    accent: "#7c5cff",
-  },
-  {
-    num: "02",
-    title: "ATM Edge Security",
-    overview: "Real-time edge computing security system using computer vision and IoT sensors to detect physical ATM anomalies.",
-    problem: "Traditional ATM security relies on post-incident footage — doing nothing to prevent theft in progress.",
-    solution: "A Raspberry Pi edge system running optimized OpenCV models to detect forced entry, fire, and tampering with sub-second alert latency.",
-    architecture: "Edge device captures camera feed and sensor data. Frame differencing and Haar cascades run locally. Alerts are pushed via MQTT to a central monitoring dashboard.",
-    challenges: "Achieving high FPS on low-power ARM hardware. Solved by down-sampling frames and using lightweight models.",
-    metrics: [
-      { label: "Detection Accuracy", value: "95%" },
-      { label: "Alert Latency", value: "<1s" },
-      { label: "Power Draw", value: "5W" }
-    ],
-    tech: ["Python", "OpenCV", "IoT", "Raspberry Pi", "MQTT"],
-    github: "https://github.com/ayushkumarh078",
-    gradient: "from-emerald-900/30 to-teal-900/20",
-    accent: "#10b981",
-  },
-  {
-    num: "03",
-    title: "Self-Aiming Smart Trash Can",
-    overview: "Hardware and edge computing project combining computer vision with robotics to automatically center and catch thrown objects.",
-    problem: "Static waste bins require physical proximity. Integrating robotics and computer vision to track fast-moving objects on edge hardware is complex.",
-    solution: "A Raspberry Pi with a Pi Camera runs real-time waste detection using OpenCV and MobileNet SSD, driving servo motors to track and align with targets.",
-    architecture: "The camera feed is processed frame-by-frame on the Pi. Detection bounding boxes calculate the offset from the center, sending PWM signals to X/Y axis servo motors for instant correction.",
-    challenges: "Inference latency causing the motors to lag behind the object. Solved by optimizing the MobileNet SSD inference to hit 15+ FPS and tuning the PID controller for the servos.",
-    metrics: [
-      { label: "Inference Speed", value: "15 FPS" },
-      { label: "Power Draw", value: "<10W" },
-      { label: "Accuracy", value: "Tracking" }
-    ],
-    tech: ["Raspberry Pi", "OpenCV", "MobileNet SSD", "Robotics", "Python"],
-    github: "https://github.com/ayushkumarh078",
-    gradient: "from-amber-900/30 to-orange-900/20",
-    accent: "#d4af37",
-  }
-];
+const filters = ["All", "AI/ML", "Edge Computing", "Backend"];
 
 export default function TechnicalDeepDives() {
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [readmeOpen, setReadmeOpen] = useState(false);
+  const [activeReadme, setActiveReadme] = useState({ title: "", content: "", github: "" });
+
+  const openReadme = (title: string, content: string, github: string) => {
+    setActiveReadme({ title, content, github });
+    setReadmeOpen(true);
+  };
+
+  const project1Content = `
+    <h1>AI Quiz Generator</h1>
+    <p>NLP-powered microservice architecture that parses unstructured documents and generates contextual quizzes using LLMs.</p>
+    <h2>Architecture</h2>
+    <p>Event-driven serverless architecture. API Gateway routes requests to Lambda functions. Text extraction is handled by Python NLP workers, which then query OpenAI APIs. State is managed via Amazon RDS.</p>
+    <h2>Challenges</h2>
+    <p>Handling rate limits from OpenAI and managing long-running extraction tasks. Solved by implementing an asynchronous job queue using SQS.</p>
+  `;
+
+  const project2Content = `
+    <h1>ATM Edge Security</h1>
+    <p>Real-time edge computing security system using computer vision and IoT sensors to detect physical ATM anomalies.</p>
+    <h2>Architecture</h2>
+    <p>Edge device captures camera feed and sensor data. Frame differencing and Haar cascades run locally. Alerts are pushed via MQTT to a central monitoring dashboard.</p>
+  `;
+
+  const project3Content = `
+    <h1>Self-Aiming Smart Trash Can</h1>
+    <p>Hardware and edge computing project combining computer vision with robotics to automatically center and catch thrown objects.</p>
+    <h2>Architecture</h2>
+    <p>The camera feed is processed frame-by-frame on the Pi. Detection bounding boxes calculate the offset from the center, sending PWM signals to X/Y axis servo motors for instant correction.</p>
+  `;
 
   return (
-    <section id="technical-deep-dives" className="py-32 px-6 relative z-10">
-      <div className="max-w-5xl mx-auto">
+    <section id="projects" className="py-32 px-6 relative z-10 bg-background">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8"
         >
-          <span className="font-mono text-gold tracking-widest text-sm uppercase block mb-3">
-            02 — Case Studies
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">Technical Deep Dives</h2>
+          <div>
+            <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
+              02 — Engineering Showcase
+            </span>
+            <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground tracking-tight">Featured Projects</h2>
+          </div>
+
+          {/* Animated Filters */}
+          <div className="flex flex-wrap gap-2">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeFilter === filter ? "text-background" : "text-primary-muted hover:text-foreground"
+                }`}
+              >
+                {activeFilter === filter && (
+                  <motion.div
+                    layoutId="active-filter"
+                    className="absolute inset-0 bg-primary rounded-full z-0"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{filter}</span>
+              </button>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="space-y-16">
-          {projects.map((proj, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5 }}
-              className={`relative rounded-3xl overflow-hidden bg-gradient-to-br ${proj.gradient} border border-white/10`}
-            >
-              {/* Top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${proj.accent}, transparent)` }} />
-
-              <div className="p-8 md:p-12">
-                <div className="flex items-start justify-between mb-8">
-                  <span className="font-mono text-6xl md:text-7xl font-serif font-bold text-white/5 leading-none select-none">{proj.num}</span>
-                  <div className="flex gap-3">
-                    <a
-                      href={proj.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-black/40 hover:bg-white/10 text-white/70 hover:text-white text-xs font-mono transition-all"
+        <div className="space-y-24">
+          
+          {/* PROJECT 1: Floating 3D Card Style (AI Quiz Generator) */}
+          <AnimatePresence mode="popLayout">
+            {(activeFilter === "All" || activeFilter === "AI/ML" || activeFilter === "Backend") && (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col gap-6">
+                  <div className="flex items-center gap-3 text-primary-muted font-mono text-sm">
+                    <Database size={16} /> Backend Microservices
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">AI Quiz Generator</h3>
+                  <p className="text-text-secondary leading-relaxed">
+                    An NLP pipeline running on AWS Lambda that extracts key concepts from unstructured documents and generates varied quiz formats instantly using LLMs.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Python", "AWS Lambda", "SQS", "RDS", "OpenAI"].map(t => (
+                      <span key={t} className="px-3 py-1 rounded-md bg-border/50 text-xs font-mono text-foreground border border-border">{t}</span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4 mt-4">
+                    <button 
+                      onClick={() => openReadme("AI Quiz Generator", project1Content, "https://github.com/ayushkumarh078/AI-Generated-Quiz")}
+                      className="px-5 py-2.5 rounded-lg bg-primary text-background font-medium text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
                     >
-                      <Code size={14} /> GitHub
+                      <BookOpen size={16} /> README.md
+                    </button>
+                    <a href="https://github.com/ayushkumarh078/AI-Generated-Quiz" className="p-2.5 rounded-lg border border-border text-foreground hover:bg-border/50 transition-colors">
+                      <Code size={18} />
                     </a>
                   </div>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 -mt-8 relative z-10">{proj.title}</h3>
-                <p className="text-base md:text-lg text-white/70 leading-relaxed mb-8 max-w-3xl">{proj.overview}</p>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                  <div className="bg-black/30 rounded-2xl p-6 border border-white/5">
-                    <h4 className="flex items-center gap-2 text-sm font-bold text-white mb-3">
-                      <Target size={16} style={{ color: proj.accent }} /> The Problem
-                    </h4>
-                    <p className="text-white/60 text-sm leading-relaxed">{proj.problem}</p>
-                  </div>
-                  <div className="bg-black/30 rounded-2xl p-6 border border-white/5">
-                    <h4 className="flex items-center gap-2 text-sm font-bold text-white mb-3">
-                      <LayoutTemplate size={16} style={{ color: proj.accent }} /> The Solution
-                    </h4>
-                    <p className="text-white/60 text-sm leading-relaxed">{proj.solution}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {proj.tech.map((t, j) => (
-                    <span key={j} className="text-xs font-mono px-3 py-1.5 rounded-md bg-black/50 border border-white/10 text-white/60 shadow-inner">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Expanded Deep Dive Section */}
-                {expandedProject === i && (
+                <div className="lg:col-span-7 order-1 lg:order-2 perspective-1000">
                   <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="pt-8 border-t border-white/10 mt-8 space-y-8"
+                    whileHover={{ rotateY: -5, rotateX: 5, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    className="relative w-full aspect-video rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-border shadow-2xl overflow-hidden flex items-center justify-center transform-gpu"
                   >
-                    <div>
-                      <h4 className="flex items-center gap-2 text-lg font-bold text-white mb-3">
-                        <Cpu size={18} style={{ color: proj.accent }} /> Technical Architecture
-                      </h4>
-                      <p className="text-white/60 text-sm md:text-base leading-relaxed bg-black/20 p-5 rounded-xl border border-white/5">
-                        {proj.architecture}
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="flex items-center gap-2 text-lg font-bold text-white mb-3">
-                        <Activity size={18} style={{ color: proj.accent }} /> Key Challenges & Trade-offs
-                      </h4>
-                      <p className="text-white/60 text-sm md:text-base leading-relaxed bg-black/20 p-5 rounded-xl border border-white/5">
-                        {proj.challenges}
-                      </p>
+                    {/* Abstract Floating 3D Elements */}
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+                    <motion.div animate={{ y: [-10, 10, -10] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="w-32 h-32 rounded-xl bg-indigo-500/30 backdrop-blur-md border border-white/10 shadow-xl absolute top-10 left-10" />
+                    <motion.div animate={{ y: [10, -10, 10] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="w-40 h-24 rounded-full bg-purple-500/20 backdrop-blur-md border border-white/10 shadow-xl absolute bottom-10 right-10" />
+                    <div className="z-10 text-center font-mono text-primary text-sm bg-background/80 p-4 rounded-lg backdrop-blur-md border border-border">
+                      AWS_LAMBDA_INVOKE: SUCCESS<br/>
+                      TOKENS_GENERATED: 4,092
                     </div>
                   </motion.div>
-                )}
+                </div>
+              </motion.div>
+            )}
 
-                <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between pt-8 border-t border-white/10">
-                  {/* Metrics */}
-                  <div className="flex gap-8">
-                    {proj.metrics.map((m, j) => (
-                      <div key={j}>
-                        <div className="text-2xl md:text-3xl font-serif font-bold text-white">{m.value}</div>
-                        <div className="text-[10px] md:text-xs font-mono text-white/40 uppercase tracking-widest mt-1">{m.label}</div>
+            {/* PROJECT 2: Code Editor Preview Style (ATM Edge Security) */}
+            {(activeFilter === "All" || activeFilter === "Edge Computing" || activeFilter === "AI/ML") && (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-7 perspective-1000">
+                  <div className="relative w-full aspect-video rounded-xl bg-[#0d1117] border border-border shadow-2xl overflow-hidden flex flex-col font-mono text-xs">
+                    {/* Fake Window Header */}
+                    <div className="h-8 bg-[#161b22] border-b border-border flex items-center px-4 gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                        <div className="w-3 h-3 rounded-full bg-green-500/80" />
                       </div>
-                    ))}
+                      <span className="ml-4 text-[#8b949e]">detector.py — ATM_Edge</span>
+                    </div>
+                    {/* Fake Code Area */}
+                    <div className="p-4 text-[#e6edf3] flex-1 overflow-hidden relative">
+                      <div className="text-[#8b949e] absolute left-4 select-none text-right w-4">
+                        1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7
+                      </div>
+                      <div className="ml-8">
+                        <span className="text-[#ff7b72]">import</span> cv2<br/>
+                        <span className="text-[#ff7b72]">import</span> paho.mqtt.client <span className="text-[#ff7b72]">as</span> mqtt<br/>
+                        <br/>
+                        <span className="text-[#ff7b72]">def</span> <span className="text-[#d2a8ff]">detect_anomaly</span>(frame):<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;motion = cascade.detectMultiScale(gray, <span className="text-[#79c0ff]">1.1</span>, <span className="text-[#79c0ff]">4</span>)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#ff7b72]">return</span> <span className="text-[#79c0ff]">len</span>(motion) &gt; <span className="text-[#79c0ff]">0</span>
+                      </div>
+                      {/* Blinking cursor */}
+                      <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-4 bg-primary absolute top-20 left-[210px]" />
+                    </div>
                   </div>
-
-                  <button 
-                    onClick={() => setExpandedProject(expandedProject === i ? null : i)}
-                    className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm transition-colors flex items-center gap-2 border border-white/10"
-                  >
-                    {expandedProject === i ? "Hide Details" : "Read Case Study"} 
-                    <ArrowRight size={16} className={`transition-transform ${expandedProject === i ? 'rotate-90' : ''}`} />
-                  </button>
                 </div>
 
-              </div>
-            </motion.div>
-          ))}
+                <div className="lg:col-span-5 flex flex-col gap-6">
+                  <div className="flex items-center gap-3 text-primary-muted font-mono text-sm">
+                    <Cpu size={16} /> Edge IoT System
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">ATM Edge Security</h3>
+                  <p className="text-text-secondary leading-relaxed">
+                    Real-time edge computing security system using computer vision and IoT sensors to detect physical ATM anomalies with sub-second latency on Raspberry Pi.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Python", "OpenCV", "Raspberry Pi", "MQTT"].map(t => (
+                      <span key={t} className="px-3 py-1 rounded-md bg-border/50 text-xs font-mono text-foreground border border-border">{t}</span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4 mt-4">
+                    <button 
+                      onClick={() => openReadme("ATM Edge Security", project2Content, "https://github.com/ayushkumarh078")}
+                      className="px-5 py-2.5 rounded-lg bg-primary text-background font-medium text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
+                    >
+                      <BookOpen size={16} /> README.md
+                    </button>
+                    <a href="https://github.com/ayushkumarh078" className="p-2.5 rounded-lg border border-border text-foreground hover:bg-border/50 transition-colors">
+                      <Code size={18} />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* PROJECT 3: Dashboard/Terminal Style (Smart Trash Can) */}
+            {(activeFilter === "All" || activeFilter === "Edge Computing") && (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col gap-6">
+                  <div className="flex items-center gap-3 text-primary-muted font-mono text-sm">
+                    <Terminal size={16} /> Robotics & Vision
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Self-Aiming Smart Bin</h3>
+                  <p className="text-text-secondary leading-relaxed">
+                    Hardware and edge computing project combining computer vision with robotics to automatically center and catch thrown objects in real-time.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Raspberry Pi", "MobileNet SSD", "Robotics", "PID Controller"].map(t => (
+                      <span key={t} className="px-3 py-1 rounded-md bg-border/50 text-xs font-mono text-foreground border border-border">{t}</span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4 mt-4">
+                    <button 
+                      onClick={() => openReadme("Smart Trash Can", project3Content, "https://github.com/ayushkumarh078")}
+                      className="px-5 py-2.5 rounded-lg bg-primary text-background font-medium text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
+                    >
+                      <BookOpen size={16} /> README.md
+                    </button>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-7 order-1 lg:order-2">
+                  <div className="relative w-full aspect-video rounded-2xl bg-gradient-to-tr from-amber-500/10 to-orange-500/10 border border-border shadow-2xl p-6 flex items-center justify-center">
+                    <div className="grid grid-cols-2 gap-4 w-full h-full">
+                      {/* Fake Telemetry Dashboard */}
+                      <div className="bg-background/80 backdrop-blur-md rounded-xl border border-border p-4 flex flex-col justify-between">
+                        <span className="text-xs text-primary-muted font-mono">SERVO_X_POS</span>
+                        <div className="text-4xl font-sans font-bold text-foreground">124°</div>
+                        <div className="h-2 w-full bg-border rounded-full overflow-hidden">
+                          <motion.div animate={{ width: ["40%", "70%", "30%", "60%"] }} transition={{ duration: 2, repeat: Infinity }} className="h-full bg-amber-500" />
+                        </div>
+                      </div>
+                      <div className="bg-background/80 backdrop-blur-md rounded-xl border border-border p-4 flex flex-col justify-between">
+                        <span className="text-xs text-primary-muted font-mono">TARGET_LOCK</span>
+                        <div className="text-4xl font-sans font-bold text-foreground">98%</div>
+                        <div className="w-full flex items-center justify-center p-2 border border-green-500/30 rounded-lg text-green-500 text-xs font-mono bg-green-500/10">
+                          TRACKING ACTIVE
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
         </div>
       </div>
+
+      <ReadmeModal 
+        isOpen={readmeOpen} 
+        onClose={() => setReadmeOpen(false)} 
+        title={activeReadme.title} 
+        content={activeReadme.content}
+        github={activeReadme.github}
+      />
     </section>
   );
 }
