@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import { ChevronRight, FileText, ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
-import { MatrixRain } from "./MatrixRain";
-
 const roles = ["Software Engineer", "AI Developer", "Backend Engineer", "Problem Solver", "System Designer"];
 
 export default function Hero() {
@@ -39,9 +37,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 z-10 overflow-hidden">
-      
-      {/* Interactive Matrix Rain Background */}
-      <MatrixRain />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
