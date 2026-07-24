@@ -4,6 +4,7 @@ import About from "@/components/About";
 import CurrentlyBuilding from "@/components/CurrentlyBuilding";
 import TechnicalDeepDives from "@/components/TechnicalDeepDives";
 import Experience from "@/components/Experience";
+import Education from "@/components/Education";
 import Skills from "@/components/Skills";
 import GithubActivity from "@/components/GithubActivity";
 import Blog from "@/components/Blog";
@@ -31,6 +32,9 @@ export default function Home() {
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <Experience />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <Education />
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <Skills />

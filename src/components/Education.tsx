@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const education = [
   {
-    degree: "B.Tech — Computer Science",
+    degree: "B.Tech — Computer Science & Engineering",
     school: "VIT-AP University",
-    date: "Expected 2026",
-    score: null,
+    date: "2022 - 2026",
+    score: "7.8 CGPA",
     current: true,
   },
   {
