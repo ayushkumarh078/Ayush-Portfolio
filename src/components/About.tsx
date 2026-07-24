@@ -69,8 +69,7 @@ export default function About() {
                 whileHover={{ scale: 1.03 }}
                 className="rounded-2xl p-6 border border-border bg-border/30 backdrop-blur-sm"
               >
-                <div className="text-4xl font-serif font-bold text-transparent bg-clip-text"
-                  style={{ backgroundImage: "linear-gradient(135deg,#c9c3ff,#7c5cff)" }}>
+                <div className="text-4xl font-serif font-bold text-foreground">
                   {stat.value}
                 </div>
                 <div className="mt-1 text-foreground font-semibold text-base">{stat.label}</div>

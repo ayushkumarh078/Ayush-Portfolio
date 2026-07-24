@@ -41,7 +41,7 @@ export default function TechnicalDeepDives() {
   `;
 
   return (
-    <section id="projects" className="py-32 px-6 relative z-10 bg-background">
+    <section id="projects" className="py-32 px-6 relative z-10">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

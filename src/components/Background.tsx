@@ -19,11 +19,24 @@ export default function Background() {
     canvas.height = height;
 
     const currentTheme = theme === 'system' ? resolvedTheme : theme;
-    const isDark = currentTheme === "dark" || currentTheme === "midnight" || currentTheme === "graphite";
     
-    // Black and white theme as requested by the user
-    const textColor = isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)";
-    const bgColor = isDark ? "rgba(0, 0, 0, 0.05)" : "rgba(255, 255, 255, 0.05)";
+    let textColor = "rgba(255, 255, 255, 0.8)";
+    let bgColor = "rgba(0, 0, 0, 0.05)";
+
+    if (currentTheme === "light") {
+      textColor = "rgba(0, 0, 0, 0.8)";
+      bgColor = "rgba(255, 255, 255, 0.05)";
+    } else if (currentTheme === "midnight") {
+      textColor = "rgba(99, 102, 241, 0.8)"; // Indigo/Cyan
+      bgColor = "rgba(10, 10, 25, 0.05)";
+    } else if (currentTheme === "graphite") {
+      textColor = "rgba(255, 180, 50, 0.8)"; // Amber/Orange
+      bgColor = "rgba(20, 20, 20, 0.05)";
+    } else {
+      // Default dark theme (White matrix as requested previously)
+      textColor = "rgba(255, 255, 255, 0.8)";
+      bgColor = "rgba(0, 0, 0, 0.05)";
+    }
 
     // Matrix chars (Katakana + Latin + Numerals)
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン";
