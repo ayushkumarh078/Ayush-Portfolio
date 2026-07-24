@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import { Command } from "cmdk";
-import { useTheme } from "next-themes";
-import { Search, Moon, Sun, Palette, Monitor, Terminal } from "lucide-react";
+import { useThemeStore } from "@/store/themeStore";
+import { Search, Monitor, Palette, Terminal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
-  const { setTheme } = useTheme();
+  const { loadTheme, savedThemes } = useThemeStore();
 
   // Toggle the menu when ⌘K is pressed
   React.useEffect(() => {
@@ -69,22 +69,20 @@ export function CommandPalette() {
 
                 <Command.Separator className="h-px bg-border my-1" />
 
-                <Command.Group heading="Theme" className="px-2 py-1.5 text-xs font-medium text-primary-muted">
-                  <Command.Item onSelect={() => { setTheme("light"); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground">
-                    <Sun className="w-4 h-4" /> Light
-                  </Command.Item>
-                  <Command.Item onSelect={() => { setTheme("dark"); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground">
-                    <Moon className="w-4 h-4" /> Dark
-                  </Command.Item>
-                  <Command.Item onSelect={() => { setTheme("midnight"); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground">
-                    <Palette className="w-4 h-4" /> Midnight Blue
-                  </Command.Item>
-                  <Command.Item onSelect={() => { setTheme("graphite"); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground">
-                    <Palette className="w-4 h-4" /> Graphite
-                  </Command.Item>
-                  <Command.Item onSelect={() => { setTheme("system"); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground">
-                    <Monitor className="w-4 h-4" /> System
-                  </Command.Item>
+                <Command.Group heading="Saved Themes" className="px-2 py-1.5 text-xs font-medium text-primary-muted">
+                  {savedThemes.length === 0 ? (
+                    <div className="px-2 py-2 text-xs text-text-secondary opacity-60">No saved themes.</div>
+                  ) : (
+                    savedThemes.map((t) => (
+                      <Command.Item 
+                        key={t.name}
+                        onSelect={() => { loadTheme(t); setOpen(false); }} 
+                        className="flex items-center gap-2 px-2 py-2 text-sm rounded-md cursor-pointer aria-selected:bg-primary/10 aria-selected:text-primary text-foreground"
+                      >
+                        <Palette className="w-4 h-4" /> Load: {t.name}
+                      </Command.Item>
+                    ))
+                  )}
                 </Command.Group>
 
                 <Command.Separator className="h-px bg-border my-1" />

@@ -6,10 +6,8 @@ import { useEffect, useState } from "react";
 
 export function VisitorCounter() {
   const [visitors, setVisitors] = useState(0);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // Get current actual visits from local storage, defaulting to 0
     const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
     
@@ -25,8 +23,6 @@ export function VisitorCounter() {
     
     setVisitors(newVisits);
   }, []);
-
-  if (!mounted) return null;
 
   return (
     <motion.div
