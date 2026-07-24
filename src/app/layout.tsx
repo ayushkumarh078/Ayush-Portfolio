@@ -10,9 +10,7 @@ import Cursor from "@/components/Cursor";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
-import { PerformanceMetrics } from "@/components/PerformanceMetrics";
 import { LoadingSequence } from "@/components/LoadingSequence";
-import { AiAssistant } from "@/components/AiAssistant";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { VisitorCounter } from "@/components/VisitorCounter";
 import { KonamiCode } from "@/components/KonamiCode";
@@ -40,8 +38,6 @@ export default function RootLayout({
           <LoadingSequence />
           <Cursor />
           <CommandPalette />
-          <PerformanceMetrics />
-          <AiAssistant />
           <ThemeSwitcher />
           <VisitorCounter />
           <KonamiCode />

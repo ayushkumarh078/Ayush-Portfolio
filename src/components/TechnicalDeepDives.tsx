@@ -5,7 +5,7 @@ import { Code, ExternalLink, Terminal, Cpu, Database, FolderGit2, BookOpen } fro
 import React, { useState } from "react";
 import { ReadmeModal } from "./ReadmeModal";
 
-const filters = ["All", "AI/ML", "Edge Computing", "Backend"];
+const filters = ["All", "AI Quiz Generator", "ATM Edge Security", "Smart Bin Robotics"];
 
 export default function TechnicalDeepDives() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -83,7 +83,7 @@ export default function TechnicalDeepDives() {
           
           {/* PROJECT 1: Floating 3D Card Style (AI Quiz Generator) */}
           <AnimatePresence mode="popLayout">
-            {(activeFilter === "All" || activeFilter === "AI/ML" || activeFilter === "Backend") && (
+            {(activeFilter === "All" || activeFilter === "AI Quiz Generator") && (
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 40 }}
@@ -138,7 +138,7 @@ export default function TechnicalDeepDives() {
             )}
 
             {/* PROJECT 2: Code Editor Preview Style (ATM Edge Security) */}
-            {(activeFilter === "All" || activeFilter === "Edge Computing" || activeFilter === "AI/ML") && (
+            {(activeFilter === "All" || activeFilter === "ATM Edge Security") && (
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 40 }}
@@ -207,7 +207,7 @@ export default function TechnicalDeepDives() {
             )}
 
             {/* PROJECT 3: Dashboard/Terminal Style (Smart Trash Can) */}
-            {(activeFilter === "All" || activeFilter === "Edge Computing") && (
+            {(activeFilter === "All" || activeFilter === "Smart Bin Robotics") && (
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 40 }}

@@ -37,15 +37,37 @@ export default function Cursor() {
 
   return (
     <>
+      {/* Outer ring */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-primary rounded-full mix-blend-screen pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-primary pointer-events-none mix-blend-difference hidden md:block"
         animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
-          scale: isHovering ? 2 : 1,
-          opacity: isHovering ? 0.8 : 1,
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
+          scale: isHovering ? 1.5 : 1,
         }}
-        transition={{ type: "tween", duration: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 150,
+          damping: 15,
+          mass: 0.2
+        }}
+        style={{ zIndex: 9999 }}
+      />
+      {/* Inner dot */}
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-primary pointer-events-none mix-blend-difference hidden md:block"
+        animate={{
+          x: mousePosition.x - 4,
+          y: mousePosition.y - 4,
+          scale: isHovering ? 0 : 1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 25,
+          mass: 0.1
+        }}
+        style={{ zIndex: 9999 }}
       />
     </>
   );

@@ -12,14 +12,14 @@
 }
 
 :root {
-  /* Light Theme */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f4f4f5;
-  --text-primary: #09090b;
-  --text-secondary: #71717a;
-  --primary: #18181b;
-  --primary-muted: #a1a1aa;
-  --border: rgba(0, 0, 0, 0.1);
+  /* Cream / Latte Theme (Replaces White) */
+  --bg-primary: #fdfbf7;
+  --bg-secondary: #f4f0e6;
+  --text-primary: #2d2a26;
+  --text-secondary: #6b675f;
+  --primary: #c2410c; /* Warm orange accent */
+  --primary-muted: #ea580c;
+  --border: rgba(45, 42, 38, 0.1);
 }
 
 .dark {

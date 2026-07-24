@@ -99,21 +99,21 @@ export default function CurrentlyBuilding() {
 
                     <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
                       <div className="flex items-center justify-center w-6 h-6 rounded-full border border-border bg-background z-10 shrink-0">
-                        <Circle size={12} className="text-text-secondary opacity-20" />
+                        <Circle size={12} className="text-text-secondary opacity-50" />
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-border bg-border/30">
-                        <h5 className="font-bold text-text-secondary opacity-50 text-sm mb-1">Phase 2</h5>
-                        <p className="text-text-secondary opacity-30 text-xs">AI Understanding: Ask Repo, Code Explanations, Diagram Gen.</p>
+                        <h5 className="font-bold text-foreground opacity-90 text-sm mb-1">Phase 2</h5>
+                        <p className="text-text-secondary opacity-80 text-xs">AI Understanding: Ask Repo, Code Explanations, Diagram Gen.</p>
                       </div>
                     </div>
 
                     <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
                       <div className="flex items-center justify-center w-6 h-6 rounded-full border border-border bg-background z-10 shrink-0">
-                        <Circle size={12} className="text-text-secondary opacity-20" />
+                        <Circle size={12} className="text-text-secondary opacity-50" />
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-border bg-border/30">
-                        <h5 className="font-bold text-text-secondary opacity-50 text-sm mb-1">Phase 3</h5>
-                        <p className="text-text-secondary opacity-30 text-xs">Team Features: PR Reviews, CI/CD, Tech Debt Tracking.</p>
+                        <h5 className="font-bold text-foreground opacity-90 text-sm mb-1">Phase 3</h5>
+                        <p className="text-text-secondary opacity-80 text-xs">Team Features: PR Reviews, CI/CD, Tech Debt Tracking.</p>
                       </div>
                     </div>
                   </div>
