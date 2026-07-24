@@ -8,12 +8,12 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 import Cursor from "@/components/Cursor";
 
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
 import { LoadingSequence } from "@/components/LoadingSequence";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { VisitorCounter } from "@/components/VisitorCounter";
 import { KonamiCode } from "@/components/KonamiCode";
+import { ThemeApplier } from "@/components/ThemeApplier";
+import { ThemeStudioTrigger } from "@/components/ThemeStudio/ThemeStudioTrigger";
 
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
@@ -28,21 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="bg-transparent text-foreground font-sans antialiased transition-colors duration-500 selection:bg-primary/30">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange={false}
-          themes={["light", "dark", "midnight", "graphite"]}
-        >
-          <LoadingSequence />
-          <Cursor />
-          <CommandPalette />
-          <ThemeSwitcher />
-          <VisitorCounter />
-          <KonamiCode />
-          {children}
-        </ThemeProvider>
+        <ThemeApplier />
+        <LoadingSequence />
+        <Cursor />
+        <CommandPalette />
+        <ThemeStudioTrigger />
+        <VisitorCounter />
+        <KonamiCode />
+        {children}
       </body>
     </html>
   );

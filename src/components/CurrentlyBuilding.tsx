@@ -93,7 +93,7 @@ export default function CurrentlyBuilding() {
                       </div>
                       <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2rem)] p-4 rounded-xl border border-primary/50 bg-primary/20 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)]">
                         <h5 className="font-bold text-foreground text-sm mb-1">Phase 1 (MVP)</h5>
-                        <p className="text-primary-muted/70 text-xs">Repo Intelligence (No LLMs). Detect structure, architecture, dependencies.</p>
+                        <p className="text-foreground opacity-90 text-xs">Repo Intelligence (No LLMs). Detect structure, architecture, dependencies.</p>
                       </div>
                     </div>
 
