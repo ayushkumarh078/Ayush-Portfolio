@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, FileText, ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
-import { TerminalDesk3D } from "./TerminalDesk3D";
+import { CherryTree } from "./CherryTree";
 
 const roles = ["Software Engineer", "AI Developer", "Backend Engineer", "Problem Solver", "System Designer"];
 
@@ -38,23 +38,17 @@ export default function Hero() {
   }, [displayed, typing, roleIdx]);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 z-10">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 z-10 overflow-hidden">
+      
+      {/* Interactive Cherry Tree Background */}
+      <CherryTree />
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
-        className="flex flex-col items-center gap-8 max-w-5xl w-full"
+        className="flex flex-col items-center gap-8 max-w-5xl w-full relative z-10"
       >
-        
-        {/* Interactive 3D Hacker Desk replacing the Photo/Particles */}
-        <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 2.8, duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-3xl mx-auto mb-4"
-        >
-          <TerminalDesk3D />
-        </motion.div>
 
         {/* Main Heading */}
         <div className="flex flex-col gap-2 items-center">
