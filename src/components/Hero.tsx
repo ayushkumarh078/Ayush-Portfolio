@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { ChevronRight, FileText, ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
+import { ResumeModal } from "./ResumeModal";
+
 const roles = ["Software Engineer", "AI Developer", "Backend Engineer", "Problem Solver", "System Designer"];
 
 export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [typing, setTyping] = useState(true);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   useEffect(() => {
     const target = roles[roleIdx];
@@ -37,6 +40,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 z-10 overflow-hidden">
+      
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -76,14 +81,13 @@ export default function Hero() {
             </a>
           </MagneticButton>
           <MagneticButton>
-            <a
-              href="/resume.pdf"
-              target="_blank"
+            <button
+              onClick={() => setIsResumeOpen(true)}
               className="group relative inline-flex items-center justify-center gap-2 bg-border/50 text-foreground border border-border px-8 py-4 rounded-full font-bold text-sm tracking-wide hover:bg-border transition-colors w-full sm:w-auto backdrop-blur-md"
             >
               <FileText size={16} className="group-hover:-translate-y-0.5 transition-transform" />
               <span>View Resume</span>
-            </a>
+            </button>
           </MagneticButton>
         </div>
 
