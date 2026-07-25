@@ -8,27 +8,30 @@ export function VisitorCounter() {
   const [visitors, setVisitors] = useState(0);
 
   useEffect(() => {
-    // Try to get global hit counter
-    fetch('https://api.counterapi.dev/v1/ayushkumarh078/portfolio/up')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.count) {
-          setVisitors(data.count);
-        }
-      })
-      .catch(err => {
-        console.error("Counter API failed, falling back to local storage", err);
-        // Fallback
-        const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
-        const sessionCounted = sessionStorage.getItem("session_counted");
-        let newVisits = currentVisits;
-        if (!sessionCounted) {
-          newVisits += 1;
-          localStorage.setItem("actual_visits", newVisits.toString());
-          sessionStorage.setItem("session_counted", "true");
-        }
-        setVisitors(newVisits);
-      });
+    const sessionCounted = sessionStorage.getItem("session_counted");
+    
+    if (!sessionCounted) {
+      // Fetch global hit counter
+      fetch('https://abacus.jasoncameron.dev/hit/ayushkumarh078/portfolio')
+        .then(res => res.json())
+        .then(data => {
+          if (data && typeof data.value === 'number') {
+            setVisitors(data.value);
+            sessionStorage.setItem("session_counted", "true");
+            localStorage.setItem("actual_visits", data.value.toString());
+          }
+        })
+        .catch(err => {
+          console.error("Counter API failed", err);
+          // Fallback to local
+          const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
+          setVisitors(currentVisits + 1);
+        });
+    } else {
+      // If already counted this session, just load from local storage
+      const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
+      setVisitors(currentVisits);
+    }
   }, []);
 
   return (

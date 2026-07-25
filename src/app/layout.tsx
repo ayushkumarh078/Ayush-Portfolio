@@ -10,7 +10,6 @@ import Cursor from "@/components/Cursor";
 
 import { CommandPalette } from "@/components/CommandPalette";
 import { LoadingSequence } from "@/components/LoadingSequence";
-import { WelcomeSequence } from "@/components/WelcomeSequence";
 import { VisitorCounter } from "@/components/VisitorCounter";
 import { KonamiCode } from "@/components/KonamiCode";
 import { ThemeApplier } from "@/components/ThemeApplier";
@@ -31,7 +30,6 @@ export default function RootLayout({
       <body className="bg-transparent text-foreground font-sans antialiased transition-colors duration-500 selection:bg-primary/30">
         <ThemeApplier />
         <LoadingSequence />
-        <WelcomeSequence />
         <Cursor />
         <CommandPalette />
         <ThemeStudioTrigger />
