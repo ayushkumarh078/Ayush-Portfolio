@@ -8,20 +8,27 @@ export function VisitorCounter() {
   const [visitors, setVisitors] = useState(0);
 
   useEffect(() => {
-    // Get current actual visits from local storage, defaulting to 0
-    const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
-    
-    // Check if this specific session has been counted to avoid incrementing on refresh
-    const sessionCounted = sessionStorage.getItem("session_counted");
-    
-    let newVisits = currentVisits;
-    if (!sessionCounted) {
-      newVisits += 1;
-      localStorage.setItem("actual_visits", newVisits.toString());
-      sessionStorage.setItem("session_counted", "true");
-    }
-    
-    setVisitors(newVisits);
+    // Try to get global hit counter
+    fetch('https://api.counterapi.dev/v1/ayushkumarh078/portfolio/up')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.count) {
+          setVisitors(data.count);
+        }
+      })
+      .catch(err => {
+        console.error("Counter API failed, falling back to local storage", err);
+        // Fallback
+        const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
+        const sessionCounted = sessionStorage.getItem("session_counted");
+        let newVisits = currentVisits;
+        if (!sessionCounted) {
+          newVisits += 1;
+          localStorage.setItem("actual_visits", newVisits.toString());
+          sessionStorage.setItem("session_counted", "true");
+        }
+        setVisitors(newVisits);
+      });
   }, []);
 
   return (
@@ -29,6 +36,7 @@ export function VisitorCounter() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
+      id="tour-visitor-counter"
       className="fixed top-24 right-0 z-50 pointer-events-none"
     >
       <div className="flex items-center gap-2 px-4 py-3 rounded-l-xl bg-background/50 backdrop-blur-lg border border-r-0 border-border shadow-2xl">

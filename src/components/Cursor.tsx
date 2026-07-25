@@ -51,7 +51,7 @@ export default function Cursor() {
         ease: "linear",
         duration: 0
       }}
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 2147483647 }}
     />
   );
 }

@@ -90,6 +90,7 @@ export default function Hero() {
 
         {/* Social Links */}
         <motion.div 
+          id="tour-contact-links"
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ delay: 1 }}

@@ -17,6 +17,7 @@ export function ThemeStudioTrigger() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(true)}
+        id="tour-theme-studio"
         className="fixed bottom-6 left-6 z-[60] w-12 h-12 rounded-full bg-background/60 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-center text-primary transition-all hover:border-primary/40 hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.25)] group"
         title="Open Theme Studio"
       >
