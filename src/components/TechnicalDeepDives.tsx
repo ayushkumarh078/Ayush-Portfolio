@@ -11,6 +11,25 @@ export default function TechnicalDeepDives() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [readmeOpen, setReadmeOpen] = useState(false);
   const [activeReadme, setActiveReadme] = useState({ title: "", content: "", github: "" });
+  const [servoPos, setServoPos] = useState(124);
+  const [servoWidth, setServoWidth] = useState("60%");
+
+  React.useEffect(() => {
+    const sequence = [
+      { deg: 80, w: "30%" },
+      { deg: 135, w: "80%" },
+      { deg: 95, w: "40%" },
+      { deg: 124, w: "60%" },
+      { deg: 110, w: "50%" }
+    ];
+    let i = 0;
+    const interval = setInterval(() => {
+      i = (i + 1) % sequence.length;
+      setServoPos(sequence[i].deg);
+      setServoWidth(sequence[i].w);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
 
   const openReadme = (title: string, content: string, github: string) => {
     setActiveReadme({ title, content, github });
@@ -231,11 +250,14 @@ export default function TechnicalDeepDives() {
                   </div>
                   <div className="flex items-center gap-4 mt-4">
                     <button 
-                      onClick={() => openReadme("Smart Trash Can", project3Content, "https://github.com/ayushkumarh078")}
+                      onClick={() => openReadme("Smart Trash Can", project3Content, "https://github.com/ayushkumarh078/Self-Aiming-Trash-Bin")}
                       className="px-5 py-2.5 rounded-lg bg-primary text-background font-medium text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
                     >
                       <BookOpen size={16} /> README.md
                     </button>
+                    <a href="https://github.com/ayushkumarh078/Self-Aiming-Trash-Bin" className="p-2.5 rounded-lg border border-border text-foreground hover:bg-border/50 transition-colors">
+                      <Code size={18} />
+                    </a>
                   </div>
                 </div>
 
@@ -245,9 +267,9 @@ export default function TechnicalDeepDives() {
                       {/* Fake Telemetry Dashboard */}
                       <div className="bg-background/80 backdrop-blur-md rounded-xl border border-border p-4 flex flex-col justify-between">
                         <span className="text-xs text-primary-muted font-mono">SERVO_X_POS</span>
-                        <div className="text-4xl font-sans font-bold text-foreground">124°</div>
+                        <div className="text-4xl font-sans font-bold text-foreground transition-all duration-500">{servoPos}°</div>
                         <div className="h-2 w-full bg-border rounded-full overflow-hidden">
-                          <motion.div animate={{ width: ["40%", "70%", "30%", "60%"] }} transition={{ duration: 2, repeat: Infinity }} className="h-full bg-amber-500" />
+                          <motion.div animate={{ width: servoWidth }} transition={{ duration: 1.2, ease: "easeInOut" }} className="h-full bg-amber-500" />
                         </div>
                       </div>
                       <div className="bg-background/80 backdrop-blur-md rounded-xl border border-border p-4 flex flex-col justify-between">

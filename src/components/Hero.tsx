@@ -63,8 +63,7 @@ export default function Hero() {
 
         {/* Positioning statement */}
         <p className="text-base md:text-lg text-text-secondary max-w-2xl leading-relaxed font-light">
-          CS undergraduate at VIT-AP building scalable backend systems and AI applications.
-          Former QA intern at FSSAI, certified in AWS &amp; Azure cloud architecture.
+          Computer Science graduate from VIT-AP focused on building scalable backend systems and AI applications. Former QA Intern at FSSAI, with expertise in cloud technologies across AWS and Azure
         </p>
 
         {/* CTAs */}

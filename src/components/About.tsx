@@ -28,24 +28,20 @@ export default function About() {
             className="space-y-8"
           >
             <p className="text-xl text-text-secondary leading-relaxed">
-              I'm a Computer Science undergraduate at{" "}
-              <span className="text-foreground font-semibold">VIT-AP University</span>, graduating in 2026.
-              Passionate about building scalable backend systems and reliable software.
+              I'm a <span className="text-foreground font-semibold">Computer Science graduate from VIT-AP University</span> who enjoys building backend systems, working with AI, and figuring out how things work under the hood.
             </p>
 
             <div className="border-l-2 border-primary/50 pl-6">
               <h3 className="text-foreground font-bold text-lg mb-2">The QA Shift</h3>
               <p className="text-text-secondary leading-relaxed">
-                My Software Testing Internship at <span className="text-primary">FSSAI Headquarters</span> taught
-                me how to <em>break</em> software—which fundamentally changed how I <em>build</em> it. I now write
-                code that anticipates edge cases before they reach production.
+                During my Software Testing Internship at <span className="text-primary">FSSAI Headquarters</span>, I spent a lot of time looking for things that could go wrong. That experience changed the way I write software. I also started paying more attention to edge cases, reliability, and the small details that are easy to overlook.
               </p>
             </div>
 
             <div className="border-l-2 border-primary/50 pl-6">
               <h3 className="text-foreground font-bold text-lg mb-2">Currently Building</h3>
               <p className="text-text-secondary leading-relaxed">
-                <span className="text-foreground font-semibold">DevLens</span> — An in-progress GitHub repository intelligence tool that extracts architecture and dependencies without AI hallucinations, utilizing AST parsing and Python backends.
+                <span className="text-foreground font-semibold">DevLens</span> — A project I'm currently working on to understand GitHub repositories more deeply. It uses AST parsing and Python to analyze code, architecture, and dependencies without relying blindly on AI-generated answers.
               </p>
             </div>
           </motion.div>
