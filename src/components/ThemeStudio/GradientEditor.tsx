@@ -102,7 +102,12 @@ export function GradientEditor() {
 
       {/* Apply Button */}
       <button
-        onClick={() => updateTheme({ backgroundType: "Linear Gradient" })}
+        onClick={() => {
+          const isGradient = currentTheme.backgroundType === "Linear Gradient" || 
+                             currentTheme.backgroundType === "Radial Gradient" || 
+                             currentTheme.backgroundType === "Animated Gradient";
+          updateTheme({ backgroundType: isGradient ? currentTheme.backgroundType : "Linear Gradient" });
+        }}
         className="w-full py-3 rounded-xl bg-primary text-background font-semibold text-sm hover:opacity-90 transition-opacity"
       >
         Apply This Gradient as Background

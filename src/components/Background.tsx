@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useThemeStore } from "@/store/themeStore";
 
 const CHAR_SETS: Record<string, string> = {
@@ -20,8 +20,14 @@ const CHAR_SETS: Record<string, string> = {
 export default function Background() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const themeStore = useThemeStore();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -100,6 +106,7 @@ export default function Background() {
       window.removeEventListener("resize", handleResize);
     };
   }, [
+    mounted,
     themeStore.currentTheme.matrixColor,
     themeStore.currentTheme.matrixEnabled,
     themeStore.currentTheme.matrixSpeed,
@@ -108,6 +115,11 @@ export default function Background() {
     themeStore.currentTheme.matrixCharSet,
     themeStore.livePreviewState,
   ]);
+
+  if (!mounted) {
+    // Avoid hydration mismatch by rendering a safe default on the server
+    return <div className="fixed inset-0 z-0 pointer-events-none" style={{ backgroundColor: "#0a0a0a" }} />;
+  }
 
   const activeTheme = themeStore.livePreviewState || themeStore.currentTheme;
 
@@ -152,8 +164,23 @@ export default function Background() {
     };
   }
 
+  // Handle CSS noise implementation based on noiseAmount
+  const noiseOpacity = activeTheme.noiseAmount > 0 ? (activeTheme.noiseAmount / 100) * 0.5 : 0;
+  const svgNoise = encodeURIComponent(`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg>`);
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-700" style={bgStyle}>
+      {/* Noise overlay */}
+      {noiseOpacity > 0 && (
+        <div 
+          className="absolute inset-0 w-full h-full pointer-events-none opacity-[var(--noise-op)] mix-blend-overlay"
+          style={{ 
+            backgroundImage: `url("data:image/svg+xml,${svgNoise}")`,
+            '--noise-op': noiseOpacity
+          } as React.CSSProperties}
+        />
+      )}
+
       {/* Matrix Rain canvas */}
       {activeTheme.matrixEnabled && (
         <canvas
