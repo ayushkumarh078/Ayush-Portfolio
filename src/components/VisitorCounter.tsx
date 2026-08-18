@@ -15,14 +15,13 @@ export function VisitorCounter() {
     fetchedRef.current = true;
 
     // Fetch fresh global hit counter on every page load
-    fetch('https://abacus.jasoncameron.dev/hit/ayushkumarh078/portfolio', {
-      cache: "no-store", // Ensure we bypass all browser/fetch caching
-      headers: {
-        'Pragma': 'no-cache',
-        'Cache-Control': 'no-cache'
-      }
+    fetch(`https://abacus.jasoncameron.dev/hit/ayushkumarh078/portfolio?t=${Date.now()}`, {
+      cache: "no-store"
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then(data => {
         if (data && typeof data.value === 'number') {
           // Adjust by +234 baseline as requested
