@@ -24,9 +24,9 @@ export function Contact() {
           className="text-center mb-16"
         >
           <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
-            09 — Next Steps
+            07 — Next Steps
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground tracking-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground tracking-tight mb-6">
             Let's build something scalable.
           </h2>
           <p className="text-text-secondary opacity-50 text-base md:text-lg max-w-xl mx-auto leading-relaxed">

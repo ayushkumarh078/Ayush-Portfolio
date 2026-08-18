@@ -52,9 +52,9 @@ export default function GithubActivity() {
           className="mb-16"
         >
           <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
-            07 — Open Source
+            06 — Open Source
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground tracking-tight flex items-center gap-4">
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground tracking-tight flex items-center gap-4">
             <GitBranch size={40} /> GitHub Activity
           </h2>
         </motion.div>

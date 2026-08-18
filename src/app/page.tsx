@@ -1,15 +1,11 @@
 import Background from "@/components/Background";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import CurrentlyBuilding from "@/components/CurrentlyBuilding";
 import TechnicalDeepDives from "@/components/TechnicalDeepDives";
+import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
-import Skills from "@/components/Skills";
 import GithubActivity from "@/components/GithubActivity";
-import Blog from "@/components/Blog";
-import Certifications from "@/components/Certifications";
-import Statistics from "@/components/Statistics";
 import { Contact, Footer } from "@/components/Contact";
 
 export default function Home() {
@@ -25,10 +21,10 @@ export default function Home() {
       <About />
       
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <CurrentlyBuilding />
-      
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <TechnicalDeepDives />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <Skills />
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <Experience />
@@ -37,18 +33,7 @@ export default function Home() {
       <Education />
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <Skills />
-
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <GithubActivity />
-
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <Blog />
-
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <Certifications />
-
-      <Statistics />
       
       <Contact />
       <Footer />

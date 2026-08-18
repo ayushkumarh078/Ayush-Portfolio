@@ -16,7 +16,7 @@ export default function About() {
           <span className="font-mono text-primary tracking-widest text-sm uppercase block mb-3">
             01 — Background
           </span>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-foreground tracking-tight">About Me</h2>
+          <h2 className="text-5xl md:text-6xl font-sans font-bold text-foreground tracking-tight">About Me</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -27,7 +27,7 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <p className="text-xl text-text-secondary opacity-70 leading-relaxed">
+            <p className="text-xl text-text-secondary leading-relaxed">
               I'm a Computer Science undergraduate at{" "}
               <span className="text-foreground font-semibold">VIT-AP University</span>, graduating in 2026.
               Passionate about building scalable backend systems and reliable software.
@@ -35,18 +35,17 @@ export default function About() {
 
             <div className="border-l-2 border-primary/50 pl-6">
               <h3 className="text-foreground font-bold text-lg mb-2">The QA Shift</h3>
-              <p className="text-text-secondary opacity-60 leading-relaxed">
+              <p className="text-text-secondary leading-relaxed">
                 My Software Testing Internship at <span className="text-primary">FSSAI Headquarters</span> taught
                 me how to <em>break</em> software—which fundamentally changed how I <em>build</em> it. I now write
                 code that anticipates edge cases before they reach production.
               </p>
             </div>
 
-            <div className="border-l-2 border-primary-border/50 pl-6">
-              <h3 className="text-foreground font-bold text-lg mb-2">Career Goal</h3>
-              <p className="text-text-secondary opacity-60 leading-relaxed">
-                Becoming a <span className="text-foreground font-semibold">Software Development Engineer</span> at a
-                forward-thinking company where I can solve complex problems and build systems that scale.
+            <div className="border-l-2 border-primary/50 pl-6">
+              <h3 className="text-foreground font-bold text-lg mb-2">Currently Building</h3>
+              <p className="text-text-secondary leading-relaxed">
+                <span className="text-foreground font-semibold">DevLens</span> — An in-progress GitHub repository intelligence tool that extracts architecture and dependencies without AI hallucinations, utilizing AST parsing and Python backends.
               </p>
             </div>
           </motion.div>
@@ -73,7 +72,7 @@ export default function About() {
                   {stat.value}
                 </div>
                 <div className="mt-1 text-foreground font-semibold text-base">{stat.label}</div>
-                <div className="text-xs text-text-secondary opacity-40 font-mono mt-1">{stat.sub}</div>
+                <div className="text-xs text-text-secondary font-mono mt-1">{stat.sub}</div>
               </motion.div>
             ))}
           </motion.div>

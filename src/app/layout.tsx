@@ -7,7 +7,7 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dmsans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 import Cursor from "@/components/Cursor";
-
+import Navbar from "@/components/Navbar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { LoadingSequence } from "@/components/LoadingSequence";
 import { VisitorCounter } from "@/components/VisitorCounter";
@@ -17,7 +17,13 @@ import { ThemeStudioTrigger } from "@/components/ThemeStudio/ThemeStudioTrigger"
 
 export const metadata: Metadata = {
   title: "Ayush Kumar | Software Engineer",
-  description: "Portfolio of Ayush Kumar, Software Engineer",
+  description: "Portfolio of Ayush Kumar, Software Engineer building scalable backend systems, AI applications, and optimized cloud infrastructure.",
+  keywords: ["Software Engineer", "Backend Developer", "AI Developer", "Ayush Kumar", "Portfolio"],
+  openGraph: {
+    title: "Ayush Kumar | Software Engineer",
+    description: "Portfolio of Ayush Kumar, Software Engineer",
+    type: "website",
+  }
 };
 
 export default function RootLayout({
@@ -27,10 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} scroll-smooth`} suppressHydrationWarning>
-      <body className="bg-transparent text-foreground font-sans antialiased transition-colors duration-500 selection:bg-primary/30">
+      <body className="bg-background text-foreground font-sans antialiased transition-colors duration-500 selection:bg-primary/30">
         <ThemeApplier />
         <LoadingSequence />
         <Cursor />
+        <Navbar />
         <CommandPalette />
         <ThemeStudioTrigger />
         <VisitorCounter />
