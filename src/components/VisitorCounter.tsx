@@ -2,36 +2,40 @@
 
 import { motion } from "framer-motion";
 import { UserPlus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function VisitorCounter() {
-  const [visitors, setVisitors] = useState(0);
+  const [visitors, setVisitors] = useState<number | null>(null);
+  const [failed, setFailed] = useState(false);
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
-    const sessionCounted = sessionStorage.getItem("session_counted");
-    
-    if (!sessionCounted) {
-      // Fetch global hit counter
-      fetch('https://abacus.jasoncameron.dev/hit/ayushkumarh078/portfolio')
-        .then(res => res.json())
-        .then(data => {
-          if (data && typeof data.value === 'number') {
-            setVisitors(data.value);
-            sessionStorage.setItem("session_counted", "true");
-            localStorage.setItem("actual_visits", data.value.toString());
-          }
-        })
-        .catch(err => {
-          console.error("Counter API failed", err);
-          // Fallback to local
-          const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
-          setVisitors(currentVisits + 1);
-        });
-    } else {
-      // If already counted this session, just load from local storage
-      const currentVisits = parseInt(localStorage.getItem("actual_visits") || "0", 10);
-      setVisitors(currentVisits);
-    }
+    // Prevent double-fetching in React Strict Mode
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+
+    // Fetch fresh global hit counter on every page load
+    fetch('https://abacus.jasoncameron.dev/hit/ayushkumarh078/portfolio', {
+      cache: "no-store", // Ensure we bypass all browser/fetch caching
+      headers: {
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.value === 'number') {
+          // Adjust by +234 baseline as requested
+          // This adds 234 to the ACTUAL backend count precisely once per display
+          setVisitors(data.value + 234);
+        } else {
+          setFailed(true);
+        }
+      })
+      .catch(err => {
+        console.error("Counter API failed", err);
+        setFailed(true);
+      });
   }, []);
 
   return (
@@ -45,8 +49,8 @@ export function VisitorCounter() {
       <div className="flex items-center gap-2 px-4 py-3 rounded-l-xl bg-background/50 backdrop-blur-lg border border-r-0 border-border shadow-2xl">
         <UserPlus size={16} className="text-primary" />
         <div className="flex flex-col">
-          <span className="text-xs font-mono font-semibold text-foreground leading-none">
-            {visitors.toLocaleString()}
+          <span className="text-xs font-mono font-semibold text-foreground leading-none min-w-[30px]">
+            {visitors !== null ? visitors.toLocaleString() : (failed ? "---" : "...")}
           </span>
           <span className="text-[9px] uppercase tracking-wider text-text-secondary leading-none mt-1">
             Total Visits
